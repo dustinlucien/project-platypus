@@ -1,16 +1,20 @@
 <grails>
   <resources>
     <resource>org.grails.appengine.AppEngineReloadController</resource>
+    <resource>FacebookConnectService</resource>
+    <resource>FacebookTagLib</resource>
     <resource>BootStrap</resource>
     <resource>BuildConfig</resource>
     <resource>Config</resource>
     <resource>DataSource</resource>
+    <resource>FacebookConnectConfig</resource>
     <resource>resources</resource>
     <resource>UrlMappings</resource>
     <resource>com.platypus.domain.User</resource>
   </resources>
   <plugins>
     <plugin>AppEngineGrailsPlugin</plugin>
+    <plugin>FacebookConnectGrailsPlugin</plugin>
     <plugin>GormJpaGrailsPlugin</plugin>
   </plugins>
 </grails>

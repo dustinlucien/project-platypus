@@ -5,11 +5,11 @@
     <resource>BuildConfig</resource>
     <resource>Config</resource>
     <resource>DataSource</resource>
-    <resource>FacebookConnectConfig</resource>
     <resource>resources</resource>
     <resource>UrlMappings</resource>
     <resource>com.platypus.domain.User</resource>
-    <resource>com.platypus.facebook.FacebookConnectServiceService</resource>
+    <resource>com.platypus.facebook.FacebookConnectService</resource>
+    <resource>FacebookTagLib</resource>
   </resources>
   <plugins>
     <plugin>AppEngineGrailsPlugin</plugin>

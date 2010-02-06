@@ -81,5 +81,9 @@ log4j = {
     warn   'org.mortbay.log'
 }
 
-
+facebookConnect {
+	//These two values need to be grabbed from facebook when you create your application there.	
+	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
+	secretKey = "e744ffd356f89324044fcb0083467ced"
+}
      

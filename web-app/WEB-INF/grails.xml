@@ -7,9 +7,12 @@
     <resource>DataSource</resource>
     <resource>resources</resource>
     <resource>UrlMappings</resource>
+    <resource>com.platypus.ImagesController</resource>
+    <resource>com.platypus.UploadController</resource>
+    <resource>com.platypus.domain.Image</resource>
     <resource>com.platypus.domain.User</resource>
     <resource>com.platypus.facebook.FacebookConnectService</resource>
-    <resource>com.platypus.facebook.FacebookConnectServiceService</resource>
+    <resource>com.platypus.google.BlobstoreService</resource>
     <resource>FacebookTagLib</resource>
   </resources>
   <plugins>

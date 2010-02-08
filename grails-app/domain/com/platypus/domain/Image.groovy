@@ -4,19 +4,23 @@ package com.platypus.domain
 
 import javax.persistence.*;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.blobstore.BlobKey;
 
 @Entity
-class User implements Serializable {
+class Image implements Serializable {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Key id
 
 	@Basic
-	String firstname
+	Key owner
 	
 	@Basic
-	String lastname
+	BlobKey data
+	
+	@Basic 
+	String title
 	
     static constraints = {
     	id visible:false

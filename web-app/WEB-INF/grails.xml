@@ -13,6 +13,8 @@
     <resource>com.platypus.domain.User</resource>
     <resource>com.platypus.facebook.FacebookConnectService</resource>
     <resource>com.platypus.google.BlobstoreService</resource>
+    <resource>com.platypus.ImageService</resource>
+    <resource>com.platypus.UserService</resource>
     <resource>FacebookTagLib</resource>
   </resources>
   <plugins>

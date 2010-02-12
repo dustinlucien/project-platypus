@@ -3,6 +3,7 @@ package com.platypus.facebook
 import org.springframework.beans.factory.InitializingBean
 import java.security.MessageDigest
 import javax.servlet.http.HttpServletRequest
+
 import com.google.code.facebookapi.FacebookJsonRestClient
 
 import org.springframework.beans.factory.InitializingBean;
@@ -28,10 +29,16 @@ class FacebookConnectService implements InitializingBean {
 		}
 	}
 	
-    FacebookJsonRestClient getFacebookClient() {
+    FacebookJsonRestClient getFacebookClient(def request = null) {
 		
 		if (!client) {
-	    	client = new FacebookJsonRestClient(apiKey, secretKey, sessionId)
+			
+			if (request && isLoggedIn(request)) {
+	    		client = new FacebookJsonRestClient(apiKey, secretKey, sessionId)
+			} else {
+				log.error "user has not logged in to facebook.  no session"
+				client = null
+			}
 		}
 		
     	return client
@@ -70,7 +77,7 @@ class FacebookConnectService implements InitializingBean {
 
     	return isCorrectFacebookSignature
     }
-    
+	
     private boolean validateSignupParams(Map params) {
     	def paramValues = getFacebookParamValues(params)+"${grailsApplication.config.facebookConnect.secret}"
     	log.info("validating facebook signature from signature: ${paramValues}")

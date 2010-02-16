@@ -3,7 +3,7 @@ package com.platypus
 class ImagesController {	
 	def show = {
 		if (params?.image) {
-			def image = Image.findById(params.image);
+			def image = Image.get(params.image);
 			
 			if (image) {
 	     		//replace with s3

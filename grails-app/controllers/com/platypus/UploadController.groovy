@@ -2,26 +2,13 @@ package com.platypus
 
 class UploadController {
 
-	def blobstoreService
 	def imageService
 	def userService
 	
     def upload = { 
-		def uploadUrl = blobstoreService.createUploadUrl("/upload/success")
-		
-		log.debug "${uploadUrl}"
-		
-		[uploadUrl:uploadUrl]
 	}
 	
 	def success = {
-		log.debug "we're in success"
-		
-		def blobs = blobstoreService.getUploadedBlobs(request)
-		
-		log.debug "blobs returned from blobstore service : ${blobs}"
-		
-		redirect(uri:"/")
 	}
 	
 	/*

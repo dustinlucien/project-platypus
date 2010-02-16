@@ -1,25 +1,8 @@
 package com.platypus.domain
 
-
-
-import javax.persistence.*;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.blobstore.BlobKey;
-
-@Entity
-class Image implements Serializable {
-
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Key id
-
-	@Basic
-	Key owner
+class Image {
+	def belongsTo = [owner:User]
 	
-	@Basic
-	BlobKey data
-	
-	@Basic 
 	String title
 	
     static constraints = {

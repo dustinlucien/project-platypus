@@ -1,6 +1,5 @@
 <grails>
   <resources>
-    <resource>org.grails.appengine.AppEngineReloadController</resource>
     <resource>BootStrap</resource>
     <resource>BuildConfig</resource>
     <resource>com.platypus.filters.DebuggingFilters</resource>
@@ -19,7 +18,5 @@
     <resource>FacebookTagLib</resource>
   </resources>
   <plugins>
-    <plugin>AppEngineGrailsPlugin</plugin>
-    <plugin>GormJpaGrailsPlugin</plugin>
   </plugins>
 </grails>

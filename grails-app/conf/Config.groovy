@@ -45,7 +45,7 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://project-platypus.appspot.com"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -64,8 +64,11 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
-
-
+	/*
+	debug  'com.platypus',
+		   'grails.app'
+		   additive:false
+	*/	
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
 	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
@@ -74,9 +77,7 @@ log4j = {
 	       'org.codehaus.groovy.grails.commons', // core / classloading
 	       'org.codehaus.groovy.grails.plugins', // plugins
 	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-	       'org.springframework',
-	       'org.hibernate',
-           'net.sf.ehcache.hibernate'
+	       'org.springframework'
 
     warn   'org.mortbay.log'
 }

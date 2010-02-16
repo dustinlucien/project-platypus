@@ -4,6 +4,6 @@ Created-By: 14.3-b01-101 (Apple Inc.)
 
 Name: Grails Application
 Implementation-Title: project-platypus
-Implementation-Version: 1
-Grails-Version: 1.2.0
+Implementation-Version: 2
+Grails-Version: 1.2.1
 

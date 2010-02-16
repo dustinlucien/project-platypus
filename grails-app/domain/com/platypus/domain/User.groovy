@@ -4,10 +4,6 @@ class User {
 	String firstname
 	
 	String lastname
-		
-	String username
-	
-	String password
 	
 	Long facebookUid = -1
 		
@@ -15,7 +11,5 @@ class User {
     	id visible:false
 		firstname nullable:true
 		lastname nullable:true
-		username nullable:true
-		password nullable:true
 	}
 }

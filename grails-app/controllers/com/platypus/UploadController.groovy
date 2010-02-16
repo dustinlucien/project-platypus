@@ -7,9 +7,24 @@ class UploadController {
 	def userService
 	
     def upload = { 
-		[uploadUrl:blobstoreService.createUploadUrl("/upload/success")]
+		def uploadUrl = blobstoreService.createUploadUrl("/upload/success")
+		
+		log.debug "${uploadUrl}"
+		
+		[uploadUrl:uploadUrl]
 	}
 	
+	def success = {
+		log.debug "we're in success"
+		
+		def blobs = blobstoreService.getUploadedBlobs(request)
+		
+		log.debug "blobs returned from blobstore service : ${blobs}"
+		
+		redirect(uri:"/")
+	}
+	
+	/*
 	def success = {
         def blobs = blobstoreService.getUploadedBlobs(request)
         
@@ -31,4 +46,5 @@ class UploadController {
 			}
         }
     }
+	*/
 }

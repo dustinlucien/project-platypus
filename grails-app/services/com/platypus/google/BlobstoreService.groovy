@@ -13,7 +13,7 @@ class BlobstoreService {
 	
 	def service = com.google.appengine.api.blobstore.BlobstoreServiceFactory.getBlobstoreService();
 
-    def createUploadUrl(String successPath = '/upload/success') {
+    def createUploadUrl(String successPath = null) {
 		return service.createUploadUrl(successPath);
     }
 

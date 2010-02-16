@@ -3,6 +3,7 @@
     <resource>org.grails.appengine.AppEngineReloadController</resource>
     <resource>BootStrap</resource>
     <resource>BuildConfig</resource>
+    <resource>com.platypus.filters.DebuggingFilters</resource>
     <resource>Config</resource>
     <resource>DataSource</resource>
     <resource>resources</resource>

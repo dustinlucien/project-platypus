@@ -1,5 +1,6 @@
 package com.platypus
 
+import com.platypus.domain.User;
 import com.google.appengine.api.datastore.Key;
 
 class UserService {

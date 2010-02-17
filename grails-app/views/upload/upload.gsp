@@ -5,9 +5,8 @@
     </head>
     <body>
         <form action="${uploadUrl}" method="post" enctype="multipart/form-data">
-            <input type="text" name="filename">
             <input type="file" name="file">
             <input type="submit" value="Submit">
-        </form>
+        <form>
     </body>
 </html>

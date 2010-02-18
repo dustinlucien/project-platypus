@@ -46,9 +46,24 @@ grails.spring.bean.packages = []
 environments {
     production {
         grails.serverURL = "http://project-platypus.appspot.com"
+		platypus.imageStorageBucket = "project-platypus-production"
+
+		amazonaws {
+			apiKey = ""
+			secretKey = ""
+
+		}
+		
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
+		platypus.imageStorageBucket = "project-platypus-dev"
+
+		amazonaws {
+			apiKey = ""
+			secretKey = ""
+		}
+
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -87,4 +102,3 @@ facebookConnect {
 	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
 	secretKey = "e744ffd356f89324044fcb0083467ced"
 }
-     

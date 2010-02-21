@@ -42,43 +42,14 @@ grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
-// set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-        grails.serverURL = "http://project-platypus.appspot.com"
-		platypus.imageStorageBucket = "project-platypus-production"
-
-		amazonaws {
-			apiKey = ""
-			secretKey = ""
-
-		}
-		
-    }
-    development {
-        grails.serverURL = "http://localhost:8080/${appName}"
-		platypus.imageStorageBucket = "project-platypus-dev"
-
-		amazonaws {
-			apiKey = ""
-			secretKey = ""
-		}
-
-    }
-    test {
-        grails.serverURL = "http://localhost:8080/${appName}"
-    }
-
-}
-
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console
     // appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    }
 	
 	debug  'com.platypus',
 		   'grails.app'
@@ -101,4 +72,40 @@ facebookConnect {
 	//These two values need to be grabbed from facebook when you create your application there.	
 	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
 	secretKey = "e744ffd356f89324044fcb0083467ced"
+}
+
+// set per-environment serverURL stem for creating absolute links
+environments {
+    production {
+        grails.serverURL = "http://project-platypus.appspot.com"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "http://project-platypus.s3.amazonaws.com"
+		}
+		
+    }
+ 
+    development {
+        grails.serverURL = "http://localhost:8080/${appName}"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "http://project-platypus-development.s3.amazonaws.com"
+		}
+
+    }
+
+    test {
+        grails.serverURL = "http://localhost:8080/${appName}"
+    }
+
 }

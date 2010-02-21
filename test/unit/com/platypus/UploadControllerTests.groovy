@@ -11,7 +11,7 @@ class UploadControllerTests extends ControllerUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
+    void testUpload() {
+		
     }
 }

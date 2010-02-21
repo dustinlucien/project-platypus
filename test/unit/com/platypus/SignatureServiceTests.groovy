@@ -1,20 +1,24 @@
-package com.platypus.security
+package com.platypus
 
 import grails.test.*
 
-class SecurityServiceTests extends GrailsUnitTestCase {
+class SignatureServiceTests extends GrailsUnitTestCase {
+	
+	def signatureService
+	
     protected void setUp() {
         super.setUp()
+
+		signatureService = new SignatureService()
     }
 
     protected void tearDown() {
         super.tearDown()
+
+		signatureService = null
     }
 
-    void testSign() {
-	
-		def securityService = new SecurityService();
-		
+    void testSign() {		
 		def policy = '''\
 			"{"expiration": "2009-01-01T00:00:00Z",
 			  "conditions": [ 
@@ -29,7 +33,7 @@ class SecurityServiceTests extends GrailsUnitTestCase {
 			
 		def secret = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
 		
-		def results = securityService.sign(policy, secret)
+		def results = signatureService.sign(policy, secret)
 		
 		print "${results}"
     }

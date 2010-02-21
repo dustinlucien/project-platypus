@@ -1,10 +1,10 @@
-package com.platypus.security
+package com.platypus
 
 import sun.misc.BASE64Encoder;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-class SecurityService {
+class SignatureService {
 
     boolean transactional = false
 

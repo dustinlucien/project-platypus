@@ -53,7 +53,6 @@ log4j = {
 	
 	debug  'com.platypus',
 		   'grails.app'
-		   additive:false
 	
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -85,7 +84,7 @@ environments {
 		}
 		
 		platypus {
-			imageBucket = "http://project-platypus.s3.amazonaws.com"
+			imageBucket = "project-platypus"
 		}
 		
     }
@@ -99,13 +98,23 @@ environments {
 		}
 		
 		platypus {
-			imageBucket = "http://project-platypus-development.s3.amazonaws.com"
+			imageBucket = "project-platypus-development"
 		}
 
     }
 
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "project-platypus-development"
+		}
+
     }
 
 }

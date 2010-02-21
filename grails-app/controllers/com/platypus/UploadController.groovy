@@ -1,52 +1,68 @@
 package com.platypus
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.DateTimeZone
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder;
+import com.platypus.domain.Image
+import com.platypus.domain.User
 
 class UploadController {
 
+	/*
+	Why do i have to do this?
+	*/
+	def signatureService = new SignatureService()
 	def imageService
-	def userService
-	def securityService
-	
+		
     def upload = {
 	
-		def expiration = new DateTime().plusMinutes(30);
+		log.info "services available : signature -> ${signatureService}, image -> ${imageService}"
+				
+		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(30);
 		
-		def formatter = DateTimeFormat.forPattern("dd/MMM/yyyy:HH:mm:ss Z");
+		def apiKey = grailsApplication.config.amazonaws.apiKey
+		def secretKey = grailsApplication.config.amazonaws.secretKey
+		def bucket = grailsApplication.config.platypus.imageBucket
 		
-		def s3Bucket = ConfigurationHolder.config.platypus.imageBucket;
-		
-		def successUrl = ConfigurationHolder.config.grails.serverURL + "/" + controller + "/success";
+		def successUrl = grailsApplication.config.grails.serverURL + "/upload/success";
 		
 		log.info "successUrl = ${successUrl}"
 		
+		def key = imageService.buildUniqueImageKey();
+		
 		def policy = """\
-		{"expiration": ${formatter.print(expiration)}",
+		{"expiration": "${timestamp.toString()}",
 		  "conditions": [ 
-		    {"bucket": "${s3Bucket}"}, 
+		    {"bucket": "${bucket}"},
 		    ["starts-with", "\$key", ""],
-		    {"acl": "private"},
-		    ["starts-with", "\$success_action_redirect", "${successUrl}"],
-		    ["starts-with", "\$Content-Type", ""],
-		    ["content-length-range", 0, 1048576]
+		    {"acl": "public-read"},
+		    {"success_action_redirect": "${successUrl}"}
 		  ]
-		};""";
+		}"""
 		
 		log.info "policy : ${policy}"
+				
+		def results = signatureService.sign(policy, secretKey)
 		
-		def secretKey = ConfigurationHolder.config.amazonaws.secretKey;
+		log.debug "Base64 Policy : ${results['signed']}"
+		log.debug "Signature : ${results['signature']}"
 		
-		def results = securityService.sign(policy, secretKey)
-		
-		log.info "Base64 Policy : ${results['signed']}"
-		log.info "Signature : ${results['signature']}"
+		return [bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
 	
 	def success = {
+		def image = new Image()
+		
+		image.etag   = params.etag
+		image.key    = params.key
+		image.bucket = params.bucket
+		
+		image.save()
+		
+		log.debug "${image.errors}"
+		
+		return [image : image]
 	}
 	
 	/*

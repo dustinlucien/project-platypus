@@ -1,8 +1,9 @@
-package com.platypus
+package com.platypus.controller
 
 import grails.test.*
+import groovy.util.GroovyTestCase
 
-class ImagesControllerTests extends ControllerUnitTestCase {
+class ImageControllerTests extends GroovyTestCase {
     protected void setUp() {
         super.setUp()
     }

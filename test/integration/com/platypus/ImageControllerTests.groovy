@@ -1,13 +1,18 @@
-package com.platypus.domain
+package com.platypus
 
 import grails.test.*
+import groovy.util.GroovyTestCase
 
-class UserTests extends GrailsUnitTestCase {
+class ImageControllerTests extends GroovyTestCase {
     protected void setUp() {
         super.setUp()
     }
 
     protected void tearDown() {
         super.tearDown()
+    }
+
+    void testSomething() {
+
     }
 }

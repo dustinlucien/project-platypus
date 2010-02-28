@@ -1,4 +1,4 @@
-package com.platypus
+package com.platypus.controller
 
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -12,12 +12,13 @@ class UploadController {
 	/*
 	Why do i have to do this?
 	*/
-	def signatureService = new SignatureService()
+	def securityService
 	def imageService
-		
+	def userService
+	
     def upload = {
 	
-		log.info "services available : signature -> ${signatureService}, image -> ${imageService}"
+		log.info "services available : signature -> ${securityService}, image -> ${imageService}, user -> ${userService}"
 				
 		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(30);
 		
@@ -43,7 +44,7 @@ class UploadController {
 		
 		log.info "policy : ${policy}"
 				
-		def results = signatureService.sign(policy, secretKey)
+		def results = securityService.sign(policy, secretKey)
 		
 		log.debug "Base64 Policy : ${results['signed']}"
 		log.debug "Signature : ${results['signature']}"
@@ -52,13 +53,11 @@ class UploadController {
 	}
 	
 	def success = {
-		def image = new Image()
+		def image = new Image(params)
 		
-		image.etag   = params.etag
-		image.key    = params.key
-		image.bucket = params.bucket
+		image.owner = userService.getCurrentUser(request);
 		
-		image.save()
+		image.save(flush:true)
 		
 		log.debug "${image.errors}"
 		

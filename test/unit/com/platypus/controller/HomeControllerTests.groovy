@@ -1,8 +1,8 @@
-package com.platypus
+package com.platypus.controller
 
 import grails.test.*
 
-class UploadControllerTests extends ControllerUnitTestCase {
+class HomeControllerTests extends ControllerUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

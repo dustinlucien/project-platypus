@@ -12,13 +12,6 @@
             <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Spinner" />
         </div>
         <div id="grailsLogo" class="logo"><a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a></div>
-		
-		<fb:login-button autologoutlink="true"></fb:login-button>
-		  <br/>
-		<fb:name uid="loggedinuser" useyou="false"></fb:name>
-		<fb:profile-pic uid="loggedinuser" size="normal" />
-		
         <g:layoutBody />
-		<g:facebookConnectJavascript  />
     </body>
 </html>

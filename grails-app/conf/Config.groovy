@@ -42,39 +42,24 @@ grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
-// set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-        grails.serverURL = "http://project-platypus.appspot.com"
-    }
-    development {
-        grails.serverURL = "http://localhost:8080/${appName}"
-    }
-    test {
-        grails.serverURL = "http://localhost:8080/${appName}"
-    }
-
-}
-
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console
     // appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    }
 	
 	debug  'com.platypus',
 		   'grails.app'
-		   additive:false
 	
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+		   'org.codehaus.groovy.grails.commons', // core / classloading
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
 	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
 	       'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
 	       'org.codehaus.groovy.grails.web.mapping', // URL mapping
-	       'org.codehaus.groovy.grails.commons', // core / classloading
 	       'org.codehaus.groovy.grails.plugins', // plugins
 	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
 	       'org.springframework'
@@ -87,4 +72,49 @@ facebookConnect {
 	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
 	secretKey = "e744ffd356f89324044fcb0083467ced"
 }
-     
+
+// set per-environment serverURL stem for creating absolute links
+environments {
+    production {
+        grails.serverURL = "http://project-platypus.appspot.com"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "project-platypus"
+		}
+		
+    }
+ 
+    development {
+        grails.serverURL = "http://localhost:8080/${appName}"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "project-platypus-development"
+		}
+
+    }
+
+    test {
+        grails.serverURL = "http://localhost:8080/${appName}"
+
+		amazonaws {
+			apiKey = "1CVPFRPBE5NB36ZVWHR2"
+			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+		
+		platypus {
+			imageBucket = "project-platypus-development"
+		}
+
+    }
+
+}

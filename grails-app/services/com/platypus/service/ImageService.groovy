@@ -1,4 +1,6 @@
-package com.platypus
+package com.platypus.service
+
+import com.platypus.domain.Image
 
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -24,4 +26,21 @@ class ImageService {
 		
 		return key;
 	}
+	
+	def listMostRecent(def params = [limit:5,offset:0,page:1]) {
+		params["sort"] = "createTime"
+		params["order"] = "desc"
+		
+		return Image.list(params)
+	}
+	
+	/*
+	def listMostPopular(def params = [limit:5,offset:0,page:1]) {
+		
+	}
+	
+	def listHighestRated(def params = [limit:5,offset:0,page:1]) {
+		
+	}
+	*/
 }

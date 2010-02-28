@@ -97,6 +97,18 @@
 	              <g:each var="c" in="${grailsApplication.controllerClasses}">
 	                    <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
 	              </g:each>
+				</ul>
+				<h2>Available Services:</h2>
+				<ul>
+	              <g:each var="s" in="${grailsApplication.serviceClasses}">
+	                    <li class="service">${s.fullName}</li>
+	              </g:each>	
+	            </ul>
+				<h2>Available Domains:</h2>
+				<ul>
+	              <g:each var="d" in="${grailsApplication.domainClasses}">
+	                    <li class="domain">${d.fullName}</li>
+	              </g:each>	
 	            </ul>
 	        </div>
 		</div>

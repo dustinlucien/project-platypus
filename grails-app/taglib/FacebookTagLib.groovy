@@ -1,3 +1,5 @@
+import com.platypus.service.FacebookConnectService
+
 class FacebookTagLib {
 	
 	def facebookConnectService

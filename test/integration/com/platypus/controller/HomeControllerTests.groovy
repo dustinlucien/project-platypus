@@ -1,13 +1,17 @@
-package com.platypus.domain
+package com.platypus.controller
 
 import grails.test.*
 
-class UserTests extends GrailsUnitTestCase {
+class HomeControllerTests extends ControllerUnitTestCase {
     protected void setUp() {
         super.setUp()
     }
 
     protected void tearDown() {
         super.tearDown()
+    }
+
+    void testSomething() {
+
     }
 }

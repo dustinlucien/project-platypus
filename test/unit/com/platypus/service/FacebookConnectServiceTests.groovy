@@ -1,8 +1,8 @@
-package com.platypus.domain
+package com.platypus.service
 
 import grails.test.*
 
-class UserTests extends GrailsUnitTestCase {
+class FacebookConnectServiceTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

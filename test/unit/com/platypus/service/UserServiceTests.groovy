@@ -43,6 +43,10 @@ class UserServiceTests extends GrailsUnitTestCase {
 	
     void testGetCurrentUser() {
 		mockDomain(User)
+		mockLogging(User)
+		
+		mockLogging(UserService)
+		mockLogging(FacebookConnectService)
 		
 		HttpServletRequest mockRequest = new MockHttpServletRequest()
 

@@ -7,6 +7,8 @@ import org.joda.time.format.DateTimeFormat
 import org.joda.time.DateTimeZone
 import java.util.UUID
 
+import com.platypus.util.BaseConverterUtil
+
 class ImageService {
 
     boolean transactional = false
@@ -22,13 +24,15 @@ class ImageService {
 		
 		def key = format.print(date) + uuid
 		
-		log.debug "generated this unique key " + key;
+		if (log.isDebugEnabled()) {
+			log.debug "generated this unique key " + key;
+		}
 		
 		return key;
 	}
 	
 	def listMostRecent(def params = [limit:5,offset:0,page:1]) {
-		params["sort"] = "createTime"
+		params["sort"] = "dateCreated"
 		params["order"] = "desc"
 		
 		return Image.list(params)

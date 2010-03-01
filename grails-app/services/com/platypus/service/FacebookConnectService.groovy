@@ -29,7 +29,7 @@ class FacebookConnectService implements InitializingBean {
 		}
 	}
 	
-    FacebookJsonRestClient getFacebookClient(HttpServletRequest request = null) {
+    FacebookJsonRestClient getFacebookClient(def request = null) {
 		
 		if (!client) {
 			if (request && isLoggedIn(request)) {
@@ -52,7 +52,7 @@ class FacebookConnectService implements InitializingBean {
 	}
 	
     //Sample usage: facebookConnectService.isLoggedIn(request)
-	def isLoggedIn(HttpServletRequest request) {
+	def isLoggedIn(def request) {
     	boolean isCorrectFacebookSignature = validateSignature(request)
     	
     	if(isCorrectFacebookSignature) {
@@ -78,7 +78,7 @@ class FacebookConnectService implements InitializingBean {
     }
 	
     private boolean validateSignupParams(Map params) {
-    	def paramValues = getFacebookParamValues(params)+"${grailsApplication.config.facebookConnect.secret}"
+    	def paramValues = getFacebookParamValues(params)+"${secretKey}"
     	log.info("validating facebook signature from signature: ${paramValues}")
     	
     	def md = MessageDigest.getInstance("MD5")
@@ -100,9 +100,9 @@ class FacebookConnectService implements InitializingBean {
     	else false
     }
 	
-    private boolean validateSignature(HttpServletRequest request) {
+    private boolean validateSignature(def request) {
     	
-    	def cookieValues = getFacebookCookieValues(request, facebookConnectConfig.facebookConnect.APIKey)+"${facebookConnectConfig.facebookConnect.SecretKey}"
+    	def cookieValues = getFacebookCookieValues(request, apiKey)+"${secretKey}"
     	
     	log.info("validating facebook signature from cookie: ${cookieValues}")
 
@@ -118,14 +118,14 @@ class FacebookConnectService implements InitializingBean {
     	}
 
     	
-    	def signature = request.cookies.find {it.name == facebookConnectConfig.facebookConnect.APIKey}?.value
+    	def signature = request.cookies.find {it.name == apiKey}?.value
 
     	if(signature == hexString.toString())
     		return true
     	else false
     }
     
-    private String getFacebookCookieValues(HttpServletRequest request, String cookieName){
+    private String getFacebookCookieValues(def request, String cookieName){
     	def cookies = new TreeMap()
     	request.cookies.findAll {
     		if(it.name.startsWith("${cookieName}_")) {

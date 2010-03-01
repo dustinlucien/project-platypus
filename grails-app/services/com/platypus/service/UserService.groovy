@@ -57,6 +57,11 @@ class UserService {
 				log.debug "created a new user with a facebookUID : ${facebookUid}"
 				log.debug "${user}"
 			}
+			
+			/*
+			Be sure to put this user into the session
+			*/
+			session.user = user.id
 		}
 		
 		return user

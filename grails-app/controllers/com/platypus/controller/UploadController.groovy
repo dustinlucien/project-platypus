@@ -46,8 +46,10 @@ class UploadController {
 				
 		def results = securityService.sign(policy, secretKey)
 		
-		log.debug "Base64 Policy : ${results['signed']}"
-		log.debug "Signature : ${results['signature']}"
+		if (log.isDebugEnabled()) {
+			log.debug "Base64 Policy : ${results['signed']}"
+			log.debug "Signature : ${results['signature']}"
+		}
 		
 		return [bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
@@ -55,7 +57,14 @@ class UploadController {
 	def success = {
 		def image = new Image(params)
 		
-		image.owner = userService.getCurrentUser(request);
+		def user = userService.getCurrentUser(request)
+		
+		if (user == null) {
+			log.error "NULL User returned from ggetCurrentUser()"
+			throw new RuntimeException()
+		}
+		
+		image.owner = user;
 		
 		image.save(flush:true)
 		

@@ -9,9 +9,6 @@ import com.platypus.domain.User
 
 class UploadController {
 
-	/*
-	Why do i have to do this?
-	*/
 	def securityService
 	def imageService
 	def userService

@@ -9,27 +9,15 @@ class UserService {
     boolean transactional = false
 
 	def facebookConnectService
-	
-	def createUser(def params = null) {
-		def user = null
-		if (!params) {
-			//create a default user.
-			user = new User();
-			user.save()
-			
-			if (user.errors) {
-				log.error "Errors saving new User : ${user.errors}"
-			}
-		} else {
-			//populate from current params
-			user = new User(params);
-			user.save()
-			
-			if (user.errors) {
-				log.error "Errors saving new User : ${user.errors}"
-			}
-		}
 		
+	def createUser(def params = null) {
+		def user = new User(params);
+		user.save()
+		
+		if (user.errors) {
+			log.error "Errors saving new User : ${user.errors}"
+		}
+				
 		return user
 	}
 	
@@ -38,31 +26,57 @@ class UserService {
 		def session = request.getSession();
 		
 		def user = null
+
 		if (session.user) {
 			user = User.findById(session.user)
-		} else {
-			//returns null if user not logged in or cannot determine user
-			def facebookApi = facebookConnectService.getFacebookClient(request)
 			
-			if (!facebookApi) {
-				user = this.createUser()
-				log.debug "created a new user because facebook API returned NULL"
-				log.debug "${user}"
-				
+			if (!user) {
+				session.user = null
+				log.error "wtf? unkown user in session.  cleaning session."
 			} else {
-				def facebookUid = facebookApi.user_getLoggedInUser()
-				//get some more information about the user once this works
-				
-				user = this.createUser([facebookUid:facebookUid])
-				log.debug "created a new user with a facebookUID : ${facebookUid}"
-				log.debug "${user}"
+				if (user.facebookUid == -1 && facebookConnectService.isLoggedIn(request)) {
+					/*
+						Update existing user with facebookUid
+					*/
+					def facebookApi = facebookConnectService.getFacebookClient(request)
+					user.facebookUid = facebookApi.user_getLoggedInUser()
+					user.save()
+
+					if (user.errors) {
+						log.error "Errors updating User with FacebookUID : ${user.errors}"
+					} else {		
+						log.debug "created a new user with a facebookUID : ${facebookUid}"
+						log.debug "${user}"
+					}
+				}
 			}
-			
-			/*
-			Be sure to put this user into the session
-			*/
+		}
+		
+		if (!user) {
+			if (facebookConnectService.isLoggedIn(request)) {
+				def facebookApi = facebookConnectService.getFacebookClient(request)			
+				def facebookUid = facebookApi.user_getLoggedInUser();
+				
+				user = User.findByFacebookUid(facebookUid)
+
+				if (!user) {
+					log.info "creating a new user with facebookUid : ${facebookUid}"
+					user = this.createUser([facebookUid : facebookUid])
+				}
+			}
+ 		}
+				
+
+		/*
+		Be sure to put this user into the session
+		*/
+		if (user) {
 			session.user = user.id
 		}
+
+		if (log.isDebugEnabled()) {
+			log.debug "USER : ${user}"
+		}		
 		
 		return user
 	}

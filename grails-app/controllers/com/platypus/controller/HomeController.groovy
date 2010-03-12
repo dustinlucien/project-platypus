@@ -3,6 +3,7 @@ package com.platypus.controller
 
 class HomeController {
 
+	def userService
 	def imageService
 	
 	def index = {
@@ -10,6 +11,9 @@ class HomeController {
 	}
 	
 	def list = {
-		[images : imageService.listMostRecent()]
+		def user = userService.getCurrentUser()
+		
+		[ images : imageService.listMostRecent() ]
 	}
+	
 }

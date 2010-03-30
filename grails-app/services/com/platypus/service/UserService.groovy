@@ -12,8 +12,8 @@ class UserService {
 		
 	def createUser(def params = null) {
 		def user = new User(params);
-		user.save()
-		
+
+		user.save(flush:true)
 		if (user.errors) {
 			log.error "Errors saving new User : ${user.errors}"
 		}
@@ -22,6 +22,11 @@ class UserService {
 	}
 	
 	def getCurrentUser(def request) {
+		
+		if (request == null) {
+			log.error "passed in a null request"
+			throw new RuntimeException("passed in a null request")
+		}
 		
 		def session = request.getSession();
 		
@@ -62,7 +67,12 @@ class UserService {
 				if (!user) {
 					log.info "creating a new user with facebookUid : ${facebookUid}"
 					user = this.createUser([facebookUid : facebookUid])
+					
+					log.info "user ${user} with facebookUid of ${user.facebookUid} created"
 				}
+			} else {
+				log.info "creating a new user with no facebook information"
+				user = this.createUser()
 			}
  		}
 				

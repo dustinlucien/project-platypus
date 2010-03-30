@@ -4,6 +4,9 @@ class User {
 	String firstname
 	String lastname
 
+	/*
+	I think I need my own user id with a decent length for this class
+	*/
 	Long facebookUid
 	
     static constraints = {

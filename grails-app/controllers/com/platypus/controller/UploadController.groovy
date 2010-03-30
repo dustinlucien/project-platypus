@@ -57,8 +57,8 @@ class UploadController {
 		def user = userService.getCurrentUser(request)
 		
 		if (user == null) {
-			log.error "NULL User returned from ggetCurrentUser()"
-			throw new RuntimeException()
+			log.error "NULL User returned from getCurrentUser()"
+			throw new RuntimeException("NULL User returned from getCurrentUser()")
 		}
 		
 		image.owner = user;

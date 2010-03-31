@@ -82,8 +82,8 @@ class UserServiceTests extends GrailsUnitTestCase {
 		/*
 			Use GMock for this since we need to mock the constructor
 		*/
-		def facebookRestMock = mock(FacebookJsonRestClient, constructor("apikey", "secretkey"))
-		facebookRestMock.user_getLoggedInUser().returns("AXBN6754")
+		def facebookRestMock = mock(FacebookJsonRestClient)
+		facebookRestMock.user_getLoggedInUser().returns(12345678L)
 		
 		def connectService = mock(FacebookConnectService)
 		connectService.isLoggedIn(mockRequest).returns(true)
@@ -99,7 +99,7 @@ class UserServiceTests extends GrailsUnitTestCase {
 			print "${user.facebookUid}"
 			
 			assert user != null
-			assert user.facebookUid == "AXBN6754"		
+			assert user.facebookUid == 12345678L
 		}
     }
 }

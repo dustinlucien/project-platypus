@@ -21,6 +21,34 @@ class UserService {
 		return user
 	}
 	
+	def updateFacebookLoginInformation(def request) {
+		def session = request.getSession();
+		
+		def user = null
+
+		if (session.user) {
+			user = User.findById(session.user)
+			
+			if (!user) {
+				session.user = null
+				log.error "wtf? unkown user in session.  cleaning session."
+			} else {
+				if (user.facebookUid == -1 && facebookConnectService.isLoggedIn(request)) {
+					/*
+						Update existing user with facebookUid
+					*/
+					def facebookApi = facebookConnectService.getFacebookClient(request)
+					user.facebookUid = facebookApi.user_getLoggedInUser()
+					user.save()
+
+					if (user.errors) {
+						log.error "Errors updating User with FacebookUID : ${user.errors}"
+					}
+				}
+			}
+		}
+	}
+	
 	def getCurrentUser(def request) {
 		
 		if (request == null) {
@@ -49,9 +77,6 @@ class UserService {
 
 					if (user.errors) {
 						log.error "Errors updating User with FacebookUID : ${user.errors}"
-					} else {		
-						log.debug "created a new user with a facebookUID : ${facebookUid}"
-						log.debug "${user}"
 					}
 				}
 			}

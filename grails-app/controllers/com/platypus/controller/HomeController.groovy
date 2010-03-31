@@ -11,8 +11,6 @@ class HomeController {
 	}
 	
 	def list = {
-		def user = userService.getCurrentUser(request)
-		
 		[ images : imageService.listMostRecent() ]
 	}
 	

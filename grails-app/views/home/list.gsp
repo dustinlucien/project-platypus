@@ -42,15 +42,18 @@
 	</div>
 	<div class="span-8" id="mini gallery">
 		<h2>Recent Rednecks</h2>
-		<div class="span-8 last">
-			<h3>Image 1</h3>
-		</div>
-		<div class="span-8 last">
-			<h3>Image 2</h3>
-		</div>
-		<div class="span-8 last ">
-			<h3>Image 3</h3>
-		</div>
+		<g:if test="${images != null && images.size() > 0}">
+			<g:each in="${images}" var="image">
+				<div class="span-8 last">
+					<image src="http://${image.bucket}.s3.amazonaws.com/${image.key}" />
+				</div>
+			</g:each>
+		</g:if>
+		<g:else>
+			<div class"span-8 last">
+				No images uploaded yet
+			</div>
+		</g:else>
 	</div>
 	<div class="span-16 last" id="main">
 		<h1>

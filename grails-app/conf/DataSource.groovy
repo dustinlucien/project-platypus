@@ -4,6 +4,7 @@ dataSource {
 	username = "sa"
 	password = ""
 }
+
 hibernate {
     cache.use_second_level_cache=true
     cache.use_query_cache=true
@@ -25,8 +26,12 @@ environments {
 	}
 	production {
 		dataSource {
+			pooled = false
 			dbCreate = "update"
-			url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+			driverClassName = "com.mysql.jdbc.Driver"
+			username ="tomcat"
+			password = "pl@typu5"
+			url = "jdbc:mysql://localhost/platypus"
 		}
 	}
 }

@@ -4,8 +4,8 @@
 		<meta name="layout" content="main" />
     </head>
   <body>
-	Successfully upload an image to Amazon S3
-	<a href="http://${image.bucket}.s3.amazonaws.com/${image.key}">http://${image.bucket}.s3.amazonaws.com/${image.key}</a>
-	<img src="http://${image.bucket}.s3.amazonaws.com/${image.key}" />
+	Successfully uploaded an image to Amazon S3
+	<a href="${image.getImageUrl()}">${image.getImageUrl()}</a>
+	<img src="${image.getImageUrl()}" />
   </body>
 </html>

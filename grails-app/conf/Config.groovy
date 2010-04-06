@@ -42,42 +42,53 @@ grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
-// log4j configuration
-log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    }
-	
-	debug  'com.platypus',
-		   'grails.app'
-	
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-		   'org.codehaus.groovy.grails.commons', // core / classloading
-	       'org.codehaus.groovy.grails.web.pages', //  GSP
-	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-	       'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-	       'org.codehaus.groovy.grails.web.mapping', // URL mapping
-	       'org.codehaus.groovy.grails.plugins', // plugins
-	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-	       'org.springframework'
-
-    warn   'org.mortbay.log'
-}
-
 facebookConnect {
 	//These two values need to be grabbed from facebook when you create your application there.	
 	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
 	secretKey = "e744ffd356f89324044fcb0083467ced"
 }
 
+tomcat.deploy.username="tomcat"
+tomcat.deploy.password="pl@typu5"
+tomcat.deploy.url="http://project-platypus.dyndns.org:8080/manager"
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://project-platypus.appspot.com"
+        grails.serverURL = "http://project-platypus.dyndns.org"
 
+        def catalinaBase = System.properties.getProperty('catalina.base')
+        if (!catalinaBase) catalinaBase = '.'   // just in case
+        def logDirectory = "${catalinaBase}/logs"
+
+		log4j = {
+		    // Example of changing the log pattern for the default console
+		    // appender:
+		    //
+			appenders {
+				rollingFile name:"debugFile", file:"${logDirectory}/${appName}.log"
+		    }
+
+			root {
+				error 'debugFile'
+				additivity = true
+			}
+
+			debug  'com.platypus',
+				   'grails.app',
+				   'org.hibernate'
+
+		    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+				   'org.codehaus.groovy.grails.commons', // core / classloading
+			       'org.codehaus.groovy.grails.web.pages', //  GSP
+			       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+			       'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+			       'org.codehaus.groovy.grails.web.mapping', // URL mapping
+			       'org.codehaus.groovy.grails.plugins', // plugins
+			       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+			       'org.springframework'
+		}
+		
 		amazonaws {
 			apiKey = "1CVPFRPBE5NB36ZVWHR2"
 			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
@@ -86,12 +97,38 @@ environments {
 		platypus {
 			imageBucket = "project-platypus"
 		}
-		
     }
  
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
 
+		log4j = {
+		    // Example of changing the log pattern for the default console
+		    // appender:
+		    //
+			appenders {
+		        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+				rollingFile name:'debugFile', file:'logs/platypus-development.log'
+		    }
+
+			root {
+				error 'debugFile','stdout'
+				additivity = true
+			}
+
+			debug  'com.platypus',
+				   'grails.app'
+
+		    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+				   'org.codehaus.groovy.grails.commons', // core / classloading
+			       'org.codehaus.groovy.grails.web.pages', //  GSP
+			       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+			       'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+			       'org.codehaus.groovy.grails.web.mapping', // URL mapping
+			       'org.codehaus.groovy.grails.plugins', // plugins
+			       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+			       'org.springframework'
+		}
 		amazonaws {
 			apiKey = "1CVPFRPBE5NB36ZVWHR2"
 			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
@@ -100,7 +137,6 @@ environments {
 		platypus {
 			imageBucket = "project-platypus-development"
 		}
-
     }
 
     test {
@@ -114,7 +150,6 @@ environments {
 		platypus {
 			imageBucket = "project-platypus-development"
 		}
-
     }
 
 }

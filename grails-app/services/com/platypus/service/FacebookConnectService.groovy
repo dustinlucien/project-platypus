@@ -57,7 +57,7 @@ class FacebookConnectService implements InitializingBean {
     	
     	if(isCorrectFacebookSignature) {
     		def facebookUserId = request.cookies.find{it.name == "${apiKey}_user"}.value
-    		sessionId = request.cookies.find{it.name == "${secretKey}_session_key"}.value
+    		sessionId = request.cookies.find{it.name == "${secretKey}session_key"}.value
     		log.info("facebook user login.  Facebook user id: ${facebookUserId} sessionId: ${sessionId}")
     	}
 

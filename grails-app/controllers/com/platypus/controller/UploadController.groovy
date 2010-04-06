@@ -9,6 +9,7 @@ import com.platypus.domain.User
 
 class UploadController {
 
+	def facebookConnectService
 	def securityService
 	def imageService
 	def userService
@@ -48,7 +49,24 @@ class UploadController {
 			log.debug "Signature : ${results['signature']}"
 		}
 		
-		return [bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
+		
+		log.info "looking into some Facebook shit"
+		def fbLoggedIn = false
+		def fbPhotos = null
+		if (facebookConnectService.isLoggedIn(request)) {
+			fbLoggedIn = true
+			
+			//get the photos
+			def apiClient = facebookConnectService.getFacebookClient()
+			
+			fbPhotos = apiClient.photos_get(apiClient.users_getLoggedInUser())
+			
+			if (log.isDebugEnabled()) {
+				log.debug "Photos retreived from Facebook : ${photos}"
+			}
+		}
+		
+		return [fbLoggedIn: fbLoggedIn, fbPhotos: fbPhotos, bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
 	
 	def success = {

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Redneckify</title>
+        <title>Redneckify!</title>
 		<meta name="layout" content="main" />
     </head>
   <body>
@@ -19,7 +19,7 @@
 				<h3><a href="${createLink(controller:'shop')}">Merchandise</a></h3>
 			</div>
 			<div class="span-4 last">
-				<h3><a href="${createLink(uri:'/aboutus')}">About Us</a></h3>
+				<h3><a href="${resource(uri:'/aboutus')}">About Us</a></h3>
 			</div>
 		</div>
 		<div class="span-24 last" id="l2 navigation">
@@ -45,13 +45,13 @@
 		<g:if test="${images != null && images.size() > 0}">
 			<g:each in="${images}" var="image">
 				<div class="span-8 last">
-					<image src="http://${image.bucket}.s3.amazonaws.com/${image.key}" />
+					<img height="120" width="80" src="${image.getImageUrl()}" />
 				</div>
 			</g:each>
 		</g:if>
 		<g:else>
 			<div class"span-8 last">
-				No images uploaded yet
+				<p>No images uploaded yet</p>
 			</div>
 		</g:else>
 	</div>

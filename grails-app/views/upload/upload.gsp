@@ -4,7 +4,51 @@
 		<meta name="layout" content="main" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
-  <body> 
+  <body>
+	<div class="span-24 last" id="navigation">
+		<div class="span-24 last" id="l1 navigation">
+			<div class="span-8">
+				<h1>Redneckify</h1>
+			</div>
+			<div class="span-4">
+				<h3><b>Redneckify Me!</b></h3>
+			</div>
+			<div class="span-4">
+				<h3><a href="${createLink(controller:'gallery')}">Gallery</a></h3>
+			</div>
+			<div class="span-4">
+				<h3><a href="${createLink(controller:'shop')}">Merchandise</a></h3>
+			</div>
+			<div class="span-4 last">
+				<h3><a href="${resource(uri:'/aboutus')}">About Us</a></h3>
+			</div>
+		</div>
+		<div class="span-24 last" id="l2 navigation">
+			<div class="span-6">
+				<h2>Empty Space</h2>
+			</div>
+			<div class="span-6">
+				<h2><b>Upload Yer Picture</b></h2>
+			</div>
+			<div class="span-6">
+				<h2>Redneckify It!</h2>
+			</div>
+			<div class="span-6 last">
+				<h2>Share It!</h2>
+			</div>
+		</div>
+		<div class="span-24 last" id="login banner">
+			<g:if test="${fbLoggedIn != true }">
+				<fb:login-button v="2" size="medium" autologoutlink="true" onlogin="window.location.reload(true);" />
+			</g:if>
+			<g:else>
+				<div class"span-8 last">
+					<p>Images from your Facebook account will be here once i figure out how to grab them</p>
+				</div>
+			</g:else>			
+		</div>
+	</div>
+
     <form action="http://${bucket}.s3.amazonaws.com" method="post" enctype="multipart/form-data">
       <input type="hidden" name="key" value="${key}">
       <input type="hidden" name="AWSAccessKeyId" value="${apiKey}"> 

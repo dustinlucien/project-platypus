@@ -6,7 +6,7 @@ class Image {
 	User owner
 	
 	String etag
-	String key
+	String chiave
 	String bucket
 		
 	Date dateCreated
@@ -14,5 +14,9 @@ class Image {
 	
 	static constraints = {
     	id visible:false
+	}
+	
+	def getImageUrl() {
+		return "http://${bucket}.s3.amazonaws.com/${chiave}"
 	}
 }

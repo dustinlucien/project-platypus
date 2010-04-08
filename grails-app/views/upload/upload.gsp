@@ -43,7 +43,12 @@
 			</g:if>
 			<g:else>
 				<div class"span-8 last">
-					<p>Images from your Facebook account will be here once i figure out how to grab them</p>
+					<g:if test="${fbImages != null}">
+						
+					</g:if>
+					<g:else>
+						<p>No Facebook Images</p>
+					</g:else>
 				</div>
 			</g:else>			
 		</div>

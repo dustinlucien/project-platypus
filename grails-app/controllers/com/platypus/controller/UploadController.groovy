@@ -57,12 +57,12 @@ class UploadController {
 			fbLoggedIn = true
 			
 			//get the photos
-			def apiClient = facebookConnectService.getFacebookClient()
+			def apiClient = facebookConnectService.getFacebookClient(request)
 			
-			fbPhotos = apiClient.photos_get(apiClient.users_getLoggedInUser())
+			fbPhotos = apiClient.photos_get(facebookConnectService.getUserId(request))
 			
 			if (log.isDebugEnabled()) {
-				log.debug "Photos retreived from Facebook : ${photos}"
+				log.debug "Photos retreived from Facebook : ${fbPhotos}"
 			}
 		}
 		

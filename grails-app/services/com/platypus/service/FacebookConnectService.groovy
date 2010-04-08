@@ -9,12 +9,15 @@ import com.google.code.facebookapi.FacebookJsonRestClient
 import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 
+import java.lang.Long
+
 class FacebookConnectService implements InitializingBean {
 
     boolean transactional = false
     
     private FacebookJsonRestClient client
-    private String sessionId
+	private Long cachedUserId
+    private String cachedSessionId
     private String apiKey
 	private String secretKey
 	
@@ -27,13 +30,17 @@ class FacebookConnectService implements InitializingBean {
 			log.error "FacebookConnect won't work.  No application setup included in config"
 			throw new RuntimeException("Unable to continue.  No FacebookConnect config")
 		}
+		
+		cachedUserId = -1L
+		cachedSessionId = null
 	}
 	
-    FacebookJsonRestClient getFacebookClient(def request = null) {
+    FacebookJsonRestClient getFacebookClient(def request) {
+		assert request != null
 		
 		if (!client) {
 			if (request && isLoggedIn(request)) {
-	    		client = new FacebookJsonRestClient(apiKey, secretKey, sessionId)
+	    		client = new FacebookJsonRestClient(apiKey, secretKey, cachedSessionId)
 			} else {
 				log.error "user has not logged in to facebook.  no session"
 				client = null
@@ -56,9 +63,9 @@ class FacebookConnectService implements InitializingBean {
     	boolean isCorrectFacebookSignature = validateSignature(request)
     	
     	if(isCorrectFacebookSignature) {
-    		def facebookUserId = request.cookies.find{it.name == "${apiKey}_user"}.value
-    		sessionId = request.cookies.find{it.name == "${secretKey}session_key"}.value
-    		log.info("facebook user login.  Facebook user id: ${facebookUserId} sessionId: ${sessionId}")
+    		cachedUserId = Long.decode(request.cookies.find{it.name == "${apiKey}_user"}.value)
+    		cachedSessionId = request.cookies.find{it.name == "${apiKey}_session_key"}.value
+    		log.info("facebook user login.  Facebook user id: ${cachedUserId} sessionId: ${cachedSessionId}")
     	}
 
     	return isCorrectFacebookSignature
@@ -69,13 +76,27 @@ class FacebookConnectService implements InitializingBean {
     	boolean isCorrectFacebookSignature = validateSignupParams(params)
     	
     	if(isCorrectFacebookSignature) {
-    		def facebookUserId = params.fb_sig_user
-    		sessionId = params.fb_sig_session_key
-    		log.info("facebook user sign up.  Facebook user id: ${facebookUserId} sessionId: ${sessionId}")
+    		cachedUserId = Long.decode(params.fb_sig_user)
+    		cachedSessionId = params.fb_sig_session_key
+    		log.info("facebook user sign up.  Facebook user id: ${cachedUserId} sessionId: ${cachedSessionId}")
     	}
 
     	return isCorrectFacebookSignature
     }
+	
+	def getSessionId(def request) {
+		if (cachedSessionId == NULL) {
+			cachedSessionId = request.cookies.find{it.name == "${apiKey}_session_key"}.value
+		}
+		return cachedSessionId
+	}
+	
+	def getUserId(def request) {
+		if (cachedUserId == -1) {
+			cachedUserId = Long.decode(request.cookies.find{it.name == "${apiKey}_user"}.value)
+		}
+		return cachedUserId
+	}
 	
     private boolean validateSignupParams(Map params) {
     	def paramValues = getFacebookParamValues(params)+"${secretKey}"
@@ -124,7 +145,7 @@ class FacebookConnectService implements InitializingBean {
     		return true
     	else false
     }
-    
+   
     private String getFacebookCookieValues(def request, String cookieName){
     	def cookies = new TreeMap()
     	request.cookies.findAll {

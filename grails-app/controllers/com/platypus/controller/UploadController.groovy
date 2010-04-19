@@ -16,6 +16,8 @@ class UploadController {
 	
     def upload = {
 	
+		def user = userService.getCurrentUser(request)
+		
 		log.info "services available : signature -> ${securityService}, image -> ${imageService}, user -> ${userService}"
 				
 		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(30);
@@ -28,7 +30,7 @@ class UploadController {
 		
 		log.info "successUrl = ${successUrl}"
 		
-		def key = imageService.buildUniqueImageKey();
+		def chiave = imageService.buildUniqueImageKey();
 		
 		def policy = """\
 		{"expiration": "${timestamp.toString()}",
@@ -62,30 +64,21 @@ class UploadController {
 			fbPhotos = apiClient.photos_get(facebookConnectService.getUserId(request))
 			
 			if (log.isDebugEnabled()) {
-				log.debug "Photos retreived from Facebook : ${fbPhotos}"
+				if (fbPhotos) {
+					fbPhotos.each {
+					  log.debug "fbPhoto : ${it}"
+					}
+				}
 			}
 		}
 		
-		return [fbLoggedIn: fbLoggedIn, fbPhotos: fbPhotos, bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
+		return [fbLoggedIn: fbLoggedIn, fbPhotos: fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
 	
 	def success = {
-		def image = new Image(params)
-		
 		def user = userService.getCurrentUser(request)
-		
-		if (user == null) {
-			log.error "NULL User returned from getCurrentUser()"
-			throw new RuntimeException("NULL User returned from getCurrentUser()")
-		}
-		
-		image.owner = user;
-		
-		image.save(flush:true)
-		
-		log.debug "${image.errors}"
-		
-		return [image : image]
+		def image = imageService.saveNewImage(params, user)
+		redirect(controller:'shop',action:'show')
 	}
 	
 	/*

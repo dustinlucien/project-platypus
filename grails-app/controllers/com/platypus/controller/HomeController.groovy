@@ -7,7 +7,7 @@ class HomeController {
 	def imageService
 	
 	def index = {
-		redirect(action:"list", params:params)
+		redirect(action:'list', params:params)
 	}
 	
 	def list = {

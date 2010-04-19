@@ -43,8 +43,12 @@
 			</g:if>
 			<g:else>
 				<div class"span-8 last">
-					<g:if test="${fbImages != null}">
-						
+					<g:if test="${fbPhotos != null}">
+						<g:set var="numPhotos" value="${fbPhotos.length()}" />
+						<g:set var="num" value="${0}" />
+						<g:while test="${num < numPhotos}">
+							<img src="${fbPhotos.get(num++).src}" />
+						</g:while>
 					</g:if>
 					<g:else>
 						<p>No Facebook Images</p>
@@ -55,7 +59,7 @@
 	</div>
 
     <form action="http://${bucket}.s3.amazonaws.com" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="key" value="${chiave}">
       <input type="hidden" name="AWSAccessKeyId" value="${apiKey}"> 
       <input type="hidden" name="acl" value="public-read"> 
       <input type="hidden" name="success_action_redirect" value="${createLink(action:'success', absolute : true)}">

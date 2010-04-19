@@ -55,7 +55,7 @@ tomcat.deploy.url="http://project-platypus.dyndns.org:8080/manager"
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://project-platypus.dyndns.org"
+        grails.serverURL = "http://project-platypus.dyndns.org:8080/${appName}"
 
         def catalinaBase = System.properties.getProperty('catalina.base')
         if (!catalinaBase) catalinaBase = '.'   // just in case
@@ -98,7 +98,7 @@ environments {
 			imageBucket = "project-platypus"
 		}
     }
- 
+
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
 

@@ -40,28 +40,30 @@
 			<fb:login-button v="2" size="medium" autologoutlink="true" onlogin="window.location.reload(true);" />
 		</div>
 	</div>
-	<div class="span-8" id="mini gallery">
-		<h2>Recent Rednecks</h2>
-		<g:if test="${images != null && images.size() > 0}">
-			<g:each in="${images}" var="image">
-				<div class="span-8 last">
-					<img height="120" width="80" src="${image.getImageUrl()}" />
+	<div class="span-24 last" id="wrapper">
+		<div class="span-8" id="mini gallery">
+			<h2>Recent Rednecks</h2>
+			<g:if test="${images != null && images.size() > 0}">
+				<g:each in="${images}" var="image">
+					<div class="span-8 last">
+						<img height="120" width="80" src="${image.getImageUrl()}" />
+					</div>
+				</g:each>
+			</g:if>
+			<g:else>
+				<div class"span-8 last">
+					<p>No images uploaded yet</p>
 				</div>
-			</g:each>
-		</g:if>
-		<g:else>
-			<div class"span-8 last">
-				<p>No images uploaded yet</p>
-			</div>
-		</g:else>
-	</div>
-	<div class="span-16 last" id="main">
-		<h1>
-			Main content section
-		</h1>
-		<h2>
-			Git 'er done <a href="${createLink(controller:'upload', action:'upload')}">here</a>
-		</h2>
+			</g:else>
+		</div>
+		<div class="span-16 last" id="main">
+			<h1>
+				Main content section
+			</h1>
+			<h2>
+				Git 'er done <a href="${createLink(controller:'upload', action:'upload')}">here</a>
+			</h2>
+		</div>
 	</div>
   </body>
 </html>

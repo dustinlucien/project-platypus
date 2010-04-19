@@ -72,11 +72,21 @@ class UserService {
 						Update existing user with facebookUid
 					*/
 					def facebookApi = facebookConnectService.getFacebookClient(request)
-					user.facebookUid = facebookApi.user_getLoggedInUser()
-					user.save()
-
-					if (user.errors) {
-						log.error "Errors updating User with FacebookUID : ${user.errors}"
+					def facebookUid = facebookApi.users_getLoggedInUser()
+					
+					def existingUser = User.findByFacebookUid(facebookUid)
+					
+					if (existingUser) {
+						imageService.mergeUsers(existingUser, user)
+						user.delete()
+						user = existingUser
+					} else {
+						user.facebookUid = facebookUid
+						if (!user.save()) {
+							user.errors.allErrors.each {
+								log.error "${it}"
+							}
+						}
 					}
 				}
 			}
@@ -85,7 +95,7 @@ class UserService {
 		if (!user) {
 			if (facebookConnectService.isLoggedIn(request)) {
 				def facebookApi = facebookConnectService.getFacebookClient(request)			
-				def facebookUid = facebookApi.user_getLoggedInUser();
+				def facebookUid = facebookApi.users_getLoggedInUser();
 				
 				user = User.findByFacebookUid(facebookUid)
 

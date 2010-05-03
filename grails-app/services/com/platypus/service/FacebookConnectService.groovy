@@ -20,12 +20,12 @@ class FacebookConnectService implements InitializingBean {
     private String cachedSessionId
     private String apiKey
 	private String secretKey
-	
+	private String appId
 	
 	void afterPropertiesSet() {
-		apiKey = ConfigurationHolder.config.facebookConnect.apiKey
-		secretKey = ConfigurationHolder.config.facebookConnect.secretKey
-		
+		apiKey = ConfigurationHolder.config.facebook.apiKey
+		secretKey = ConfigurationHolder.config.facebook.secretKey
+		appId = ConfigurationHolder.config.facebook.appId
 		if (!apiKey || !secretKey) {
 			log.error "FacebookConnect won't work.  No application setup included in config"
 			throw new RuntimeException("Unable to continue.  No FacebookConnect config")
@@ -58,6 +58,10 @@ class FacebookConnectService implements InitializingBean {
 		return secretKey
 	}
 	
+	String getAppId() {
+		return appId
+	}
+	
     //Sample usage: facebookConnectService.isLoggedIn(request)
 	def isLoggedIn(def request) {
     	boolean isCorrectFacebookSignature = validateSignature(request)
@@ -86,6 +90,7 @@ class FacebookConnectService implements InitializingBean {
 	
 	def getSessionId(def request) {
 		if (cachedSessionId == NULL) {
+			assert isLoggedIn(request)
 			cachedSessionId = request.cookies.find{it.name == "${apiKey}_session_key"}.value
 		}
 		return cachedSessionId
@@ -93,9 +98,28 @@ class FacebookConnectService implements InitializingBean {
 	
 	def getUserId(def request) {
 		if (cachedUserId == -1) {
+			assert isLoggedIn(request)
 			cachedUserId = Long.decode(request.cookies.find{it.name == "${apiKey}_user"}.value)
 		}
 		return cachedUserId
+	}
+	
+	def getPhotos(def request) {
+		def userId = getUserId(request)
+		
+		def fbClient = getFacebookClient(request)
+		
+		def fbPhotos = fbClient.photos_get(userId)
+		
+		if (log.isDebugEnabled()) {
+			if (fbPhotos) {
+				fbPhotos.each {
+				  log.debug "fbPhoto : ${it}"
+				}
+			}
+		}
+		
+		return fbPhotos
 	}
 	
     private boolean validateSignupParams(Map params) {

@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div class="span-24 last" id="login banner">
-			<fb:login-button v="2" size="medium" autologoutlink="true" onlogin="window.location.reload(true);" />
+			<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos"/>
 		</div>
 	</div>
 	<div class="span-24 last" id="wrapper">

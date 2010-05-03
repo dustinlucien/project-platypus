@@ -38,26 +38,11 @@
 			</div>
 		</div>
 		<div class="span-24 last" id="login banner">
-			<g:if test="${fbLoggedIn != true }">
 				<fb:login-button v="2" size="medium" autologoutlink="true" onlogin="window.location.reload(true);" />
-			</g:if>
-			<g:else>
-				<div class"span-8 last">
-					<g:if test="${fbPhotos != null}">
-						<g:set var="numPhotos" value="${fbPhotos.length()}" />
-						<g:set var="num" value="${0}" />
-						<g:while test="${num < numPhotos}">
-							<img src="${fbPhotos.get(num++).src}" />
-						</g:while>
-					</g:if>
-					<g:else>
-						<p>No Facebook Images</p>
-					</g:else>
-				</div>
-			</g:else>			
 		</div>
 	</div>
 
+	<div class="span-12" id="upload">
     <form action="http://${bucket}.s3.amazonaws.com" method="post" enctype="multipart/form-data">
       <input type="hidden" name="key" value="${chiave}">
       <input type="hidden" name="AWSAccessKeyId" value="${apiKey}"> 
@@ -66,10 +51,26 @@
       <input type="hidden" name="policy" value="${policyBase64}">
       <input type="hidden" name="signature" value="${signature}">
 
-      File to upload to S3: 
+      <h3>Upload a file from locally:</h3> 
       <input name="file" type="file"> 
       <br> 
       <input type="submit" value="Upload File to S3"> 
-    </form> 
+    </form>
+	</div>
+	<div class="span-12 last" id="facebook">
+		<g:if test="${fbPhotos != null}">
+			<g:set var="numPhotos" value="${fbPhotos.length()}" />
+			<g:set var="num" value="${0}" />
+			<g:while test="${num < numPhotos}">
+				<img src="${fbPhotos.get(num++).src}" />
+			</g:while>
+		</g:if>
+		<g:else>
+			<g:if test="${!fbLoggedIn}">
+				<h3>You're not logged into Facebook</h3>
+				<fb:login-button v="2" size="medium" autologoutlink="true" onlogin="window.location.reload(true);">Login to use your photos</fb:login-button>
+			</g:if>
+		</g:else>
+	</div>
   </body>
 </html>

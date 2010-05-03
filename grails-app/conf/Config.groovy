@@ -42,11 +42,6 @@ grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
-facebookConnect {
-	//These two values need to be grabbed from facebook when you create your application there.	
-	apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
-	secretKey = "e744ffd356f89324044fcb0083467ced"
-}
 
 tomcat.deploy.username="tomcat"
 tomcat.deploy.password="pl@typu5"
@@ -55,7 +50,7 @@ tomcat.deploy.url="http://project-platypus.dyndns.org:8080/manager"
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://project-platypus.dyndns.org:8080/${appName}"
+        grails.serverURL = "http://project-platypus.dyndns.org"
 
         def catalinaBase = System.properties.getProperty('catalina.base')
         if (!catalinaBase) catalinaBase = '.'   // just in case
@@ -94,6 +89,13 @@ environments {
 			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
 		}
 		
+		facebook {
+			//These two values need to be grabbed from facebook when you create your application there.	
+			apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
+			secretKey = "e744ffd356f89324044fcb0083467ced"
+			appId = "314398985906"
+		}
+		
 		platypus {
 			imageBucket = "project-platypus"
 		}
@@ -129,10 +131,18 @@ environments {
 			       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
 			       'org.springframework'
 		}
+		
 		amazonaws {
 			apiKey = "1CVPFRPBE5NB36ZVWHR2"
 			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
 		}
+		
+		facebook {
+			apiKey = "8000f0fcf8dcd9594bf19c010b9c723d"
+			secretKey = "1434dc650e4dddd3585b59ac956724d3"
+			appId = "122941727717546"
+		}
+		
 		
 		platypus {
 			imageBucket = "project-platypus-development"
@@ -145,6 +155,12 @@ environments {
 		amazonaws {
 			apiKey = "1CVPFRPBE5NB36ZVWHR2"
 			secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+		}
+
+		facebook {
+			apiKey = "8000f0fcf8dcd9594bf19c010b9c723d"
+			secretKey = "1434dc650e4dddd3585b59ac956724d3"
+			appId = "122941727717546"
 		}
 		
 		platypus {

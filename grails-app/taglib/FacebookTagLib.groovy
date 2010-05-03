@@ -11,27 +11,30 @@ class FacebookTagLib {
 		out << '''\n'''
 		out << '''\n'''
 		out << '''\n'''
-		out << '''<!-- BEGIN: Javascript for facebook connect -->'''
+		out << '''<!-- BEGIN: Javascript for facebook graph api -->'''
 		out << '''\n'''
 		
-		if(attrs['secure'])
-			out << '''<script type="text/javascript" src="https://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"></script>'''
-		else out << '''<script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"></script>'''
-		
+		out << '''<div id="fb-root"></div>'''
 		out << '''\n'''
-		out << "<script type=\"text/javascript\">"
-		out << "FB.init(\"${facebookConnectService.getApiKey()}\", \"${attrs['base']?attrs['base']:""}"
 		
-		if(attrs['secure'])
-			out << "${g.createLinkTo(dir:"${pluginContextPath}", file:"xd_receiver_ssl.htm")}\");"
-		else out << "${g.createLinkTo(dir:"${pluginContextPath}", file:"xd_receiver.htm")}\");"
+		out << """<script>
+		      window.fbAsyncInit = function() {
+		          FB.init({appId: '${facebookConnectService.getAppId()}', status: true, cookie: true, xfbml: true});
+		      };
+		      (function() {
+		        var e = document.createElement('script');
+		        e.type = 'text/javascript';
+		        e.src = document.location.protocol +
+		          '//connect.facebook.net/en_US/all.js';
+		        e.async = true;
+		        document.getElementById('fb-root').appendChild(e);
+		      }());
+		    </script>"""
 		
-		out << "</script>"
 		out << '''\n'''
 		out << '''<!-- END: Javascript for facebook connect -->'''
 		out << '''\n'''
 		out << '''\n'''
 		out << '''\n'''
 	}
-	
 }

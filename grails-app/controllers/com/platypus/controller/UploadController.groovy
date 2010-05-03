@@ -26,7 +26,16 @@ class UploadController {
 		def secretKey = grailsApplication.config.amazonaws.secretKey
 		def bucket = grailsApplication.config.platypus.imageBucket
 		
-		def successUrl = grailsApplication.config.grails.serverURL + "/upload/success";
+		/*
+		Why is it it so hard to generate a proper URL inside the controller?
+		*/
+		def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+
+		def successUrl = taglib.createLink(controller:'upload', action:'success', absolute:'true')
+		
+		/*
+			def successUrl = grailsApplication.config.grails.serverURL + "/upload/success";
+		*/
 		
 		log.info "successUrl = ${successUrl}"
 		
@@ -51,28 +60,14 @@ class UploadController {
 			log.debug "Signature : ${results['signature']}"
 		}
 		
-		
-		log.info "looking into some Facebook shit"
-		def fbLoggedIn = false
+		def fbLoggedIn = facebookConnectService.isLoggedIn(request)
 		def fbPhotos = null
-		if (facebookConnectService.isLoggedIn(request)) {
-			fbLoggedIn = true
-			
-			//get the photos
-			def apiClient = facebookConnectService.getFacebookClient(request)
-			
-			fbPhotos = apiClient.photos_get(facebookConnectService.getUserId(request))
-			
-			if (log.isDebugEnabled()) {
-				if (fbPhotos) {
-					fbPhotos.each {
-					  log.debug "fbPhoto : ${it}"
-					}
-				}
-			}
+		
+		if (fbLoggedIn) {
+			fbPhotos = facebookConnectService.getPhotos(request)
 		}
 		
-		return [fbLoggedIn: fbLoggedIn, fbPhotos: fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
+		return [fbLoggedIn : fbLoggedIn, fbPhotos : fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
 	
 	def success = {

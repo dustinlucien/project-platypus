@@ -76,27 +76,5 @@ class UploadController {
 		redirect(controller:'shop',action:'show')
 	}
 	
-	/*
-	def success = {
-        def blobs = blobstoreService.getUploadedBlobs(request)
-        
-		def blobKey = blobs["imagefile"]
 
-        if (blobKey == null) {
-			log.error "successfully uploaded an image to blobstore, but no blobkey found"
-            redirect('/');
-        } else {
-			def user = userService.getCurrentUser(request)
-			
-			if (user) {
-				def image = imageService.createImage(blobKey, user)
-
-	            redirect(controller:"images", action:"show", params:[image:image.id])
-			} else {
-				log.error "couldn't find the current user.  probably just orphaned that image"
-				//redirect(controller:"user", action:"login")
-			}
-        }
-    }
-	*/
 }

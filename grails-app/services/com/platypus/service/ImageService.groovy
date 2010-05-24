@@ -65,15 +65,12 @@ class ImageService {
 		}
 		
 		def image = new Image(params)
-		
+				
 		image.owner = user;
-		
-		image.save()
-		
 		if (image.save()) {
 			return image;
 		} else {
-			log.errors.allErrors.each {
+			image.errors.allErrors.each {
 				println it
 			}
 			return null;

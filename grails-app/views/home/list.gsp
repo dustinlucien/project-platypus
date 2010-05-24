@@ -4,49 +4,39 @@
 		<meta name="layout" content="main" />
     </head>
   <body>
-	<div class="span-24 last" id="navigation">
-		<div class="span-24 last" id="l1 navigation">
-			<div class="span-8">
-				<h1>Redneckify</h1>
-			</div>
-			<div class="span-4">
-				<h3><b>Redneckify Me!</b></h3>
-			</div>
-			<div class="span-4">
-				<h3><a href="${createLink(controller:'gallery')}">Gallery</a></h3>
-			</div>
-			<div class="span-4">
-				<h3><a href="${createLink(controller:'shop')}">Merchandise</a></h3>
-			</div>
-			<div class="span-4 last">
-				<h3><a href="${resource(uri:'/aboutus')}">About Us</a></h3>
-			</div>
-		</div>
-		<div class="span-24 last" id="l2 navigation">
-			<div class="span-6">
-				<h2>Empty Space</h2>
-			</div>
-			<div class="span-6">
-				<h2><b>Upload Yer Picture</b></h2>
-			</div>
-			<div class="span-6">
-				<h2>Redneckify It!</h2>
-			</div>
-			<div class="span-6 last">
-				<h2>Share It!</h2>
-			</div>
-		</div>
-		<div class="span-24 last" id="login banner">
-			<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos"/>
-		</div>
+	
+      <div id="header" class="span-23 prepend-1">
+        <a href="#" class="span-7" id="logoheader"><span class="hidden">Redneckify</span></a>
+
+        <div id="mainNav">
+          <a href="${createLink(controller:'home')}" class="span-5" id="redneskifyMe"><span class="hidden">Redneckify Me</span></a>
+          <a href="${createLink(controller:'gallery')}" class="span-3" id="gallery"><span class="hidden">Redneckify Me</span></a>
+          <a href="${createLink(controller:'shop')}" class="span-3" id="merch"><span class="hidden">Redneckify Me</span></a>
+          <a href="${resource(uri:'/aboutus')}" class="span-4 last" id="aboutUs"><span class="hidden">Redneckify Me</span></a>
+        </div>
+
+      </div>
+		
+      <div id="midNav" class="span-24">
+        <a href="#" class="span-10" id="subh1"></a>
+        <a href="#" class="span-7" id="subh2"></a>
+        <a href="#" class="span-6" id="subh3"></a>
+      </div>
+		
+	<div class="span-24 last" id="login banner">
+		<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos"/>
 	</div>
-	<div class="span-24 last" id="wrapper">
-		<div class="span-8" id="mini gallery">
+
+
+	<div id="content" class="span-24">
+		<div class="span-7 prepend-1" id="leftContent">
 			<h2>Recent Rednecks</h2>
 			<g:if test="${images != null && images.size() > 0}">
 				<g:each in="${images}" var="image">
-					<div class="span-8 last">
-						<img height="120" width="80" src="${image.getImageUrl()}" />
+					<div class="pics">
+						<div class="span-8 last">
+							<img height="120" width="80" src="${image.getImageUrl()}" />
+						</div>
 					</div>
 				</g:each>
 			</g:if>
@@ -56,14 +46,11 @@
 				</div>
 			</g:else>
 		</div>
-		<div class="span-16 last" id="main">
-			<h1>
-				Main content section
-			</h1>
-			<h2>
-				Git 'er done <a href="${createLink(controller:'upload', action:'upload')}">here</a>
-			</h2>
-		</div>
+
+        <div class="span-14  prepend-1 last" id="rightContent">
+          <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
+		  <p>Git 'er done <a href="${createLink(controller:'upload', action:'upload')}" class="blue">here</a></p>
+        </div>
 	</div>
   </body>
 </html>

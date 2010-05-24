@@ -1,14 +1,11 @@
-package com.platypus.filters
+package project.platypus
 
-class LoginFilters {
+class SecurityFilters {
 
-	def userService
-	def facebookConnectService
-	
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-	
+                
             }
             after = {
                 

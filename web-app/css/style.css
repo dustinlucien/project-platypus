@@ -63,9 +63,6 @@ a#logofooter{ background: url(../images/logo_footer.png) no-repeat; height: 48px
 #footer ul a:hover{ text-decoration: underline;}
 #footer ul{ list-style-type: none;}
 
-
-
-
 .blue{color:#07748b; font-weight: bold;}
 span.hidden{ visibility: hidden; }
 

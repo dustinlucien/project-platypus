@@ -9,15 +9,15 @@ import com.platypus.domain.User
 
 class UploadController {
 
-	/*
-	Why do i have to do this?
-	*/
+	def facebookConnectService
 	def securityService
 	def imageService
 	def userService
 	
     def upload = {
 	
+		def user = userService.getCurrentUser(request)
+		
 		log.info "services available : signature -> ${securityService}, image -> ${imageService}, user -> ${userService}"
 				
 		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(30);
@@ -26,11 +26,20 @@ class UploadController {
 		def secretKey = grailsApplication.config.amazonaws.secretKey
 		def bucket = grailsApplication.config.platypus.imageBucket
 		
-		def successUrl = grailsApplication.config.grails.serverURL + "/upload/success";
+		/*
+		Why is it it so hard to generate a proper URL inside the controller?
+		*/
+		def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+
+		def successUrl = taglib.createLink(controller:'upload', action:'success', absolute:'true')
+		
+		/*
+			def successUrl = grailsApplication.config.grails.serverURL + "/upload/success";
+		*/
 		
 		log.info "successUrl = ${successUrl}"
 		
-		def key = imageService.buildUniqueImageKey();
+		def chiave = imageService.buildUniqueImageKey();
 		
 		def policy = """\
 		{"expiration": "${timestamp.toString()}",
@@ -51,49 +60,21 @@ class UploadController {
 			log.debug "Signature : ${results['signature']}"
 		}
 		
-		return [bucket : bucket, key : key, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
-	}
-	
-	def success = {
-		def image = new Image(params)
+		def fbLoggedIn = facebookConnectService.isLoggedIn(request)
+		def fbPhotos = null
 		
-		def user = userService.getCurrentUser(request)
-		
-		if (user == null) {
-			log.error "NULL User returned from ggetCurrentUser()"
-			throw new RuntimeException()
+		if (fbLoggedIn) {
+			fbPhotos = facebookConnectService.getPhotos(request)
 		}
 		
-		image.owner = user;
-		
-		image.save(flush:true)
-		
-		log.debug "${image.errors}"
-		
-		return [image : image]
+		return [fbLoggedIn : fbLoggedIn, fbPhotos : fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
 	}
 	
-	/*
 	def success = {
-        def blobs = blobstoreService.getUploadedBlobs(request)
-        
-		def blobKey = blobs["imagefile"]
+		def user = userService.getCurrentUser(request)
+		def image = imageService.saveNewImage(params, user)
+		redirect(controller:'shop',action:'show')
+	}
+	
 
-        if (blobKey == null) {
-			log.error "successfully uploaded an image to blobstore, but no blobkey found"
-            redirect('/');
-        } else {
-			def user = userService.getCurrentUser(request)
-			
-			if (user) {
-				def image = imageService.createImage(blobKey, user)
-
-	            redirect(controller:"images", action:"show", params:[image:image.id])
-			} else {
-				log.error "couldn't find the current user.  probably just orphaned that image"
-				//redirect(controller:"user", action:"login")
-			}
-        }
-    }
-	*/
 }

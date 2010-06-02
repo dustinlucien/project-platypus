@@ -14,6 +14,7 @@ class DebuggingFilters {
             }
             after = {
                 log.debug "leaving controller : ${controllerName}"
+				log.debug "leaving action     : ${actionName}"
             }
             afterView = {
                 

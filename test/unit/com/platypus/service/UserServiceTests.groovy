@@ -4,6 +4,7 @@ import grails.test.*
 
 import com.platypus.service.UserService
 import com.platypus.service.FacebookConnectService
+import com.google.code.facebookapi.FacebookJsonRestClient
 
 import com.platypus.domain.User
 import com.platypus.domain.Image
@@ -16,6 +17,10 @@ import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.mock.web.MockHttpSession
 
+import org.gmock.*
+import static org.hamcrest.Matchers.*
+
+@WithGMock
 class UserServiceTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
@@ -41,18 +46,60 @@ class UserServiceTests extends GrailsUnitTestCase {
 		assert user.lastname == "lucien"
 	}
 	
-    void testGetCurrentUser() {
+    void testGetCurrentUserNotLoggedInToFacebook() {
 		mockDomain(User)
 		mockLogging(User)
 		
 		mockLogging(UserService)
-		mockLogging(FacebookConnectService)
-		
+
 		HttpServletRequest mockRequest = new MockHttpServletRequest()
 
-		def userService = new UserService()
-		userService.facebookConnectService = new FacebookConnectService()
+		/*
+			Use GMock for this since we need to mock the constructor
+		*/
+		def connectService = mock(FacebookConnectService)
+		connectService.isLoggedIn(mockRequest).returns(false)
 		
-		def user = userService.getCurrentUser(mockRequest)
+		def userService = new UserService()
+		userService.facebookConnectService = connectService
+
+		play {
+			def user = userService.getCurrentUser(mockRequest)
+
+			print "${user}"		
+			assert user != null
+		}
+    }
+    
+	void testGetCurrentUserLoggedInToFacebook() {
+		mockDomain(User)
+		mockLogging(User)
+		
+		mockLogging(UserService)
+
+		HttpServletRequest mockRequest = new MockHttpServletRequest()
+
+		/*
+			Use GMock for this since we need to mock the constructor
+		*/
+		def facebookRestMock = mock(FacebookJsonRestClient)
+		facebookRestMock.user_getLoggedInUser().returns(12345678L)
+		
+		def connectService = mock(FacebookConnectService)
+		connectService.isLoggedIn(mockRequest).returns(true)
+		connectService.getFacebookClient(mockRequest).returns(facebookRestMock)
+		
+		def userService = new UserService()
+		userService.facebookConnectService = connectService
+
+		play {
+			def user = userService.getCurrentUser(mockRequest)
+
+			print "${user}"
+			print "${user.facebookUid}"
+			
+			assert user != null
+			assert user.facebookUid == 12345678L
+		}
     }
 }

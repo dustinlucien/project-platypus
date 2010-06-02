@@ -32,10 +32,66 @@ class ImageService {
 	}
 	
 	def listMostRecent(def params = [limit:5,offset:0,page:1]) {
+		assert params != null
+		assert params.limit > 0
+		
 		params["sort"] = "dateCreated"
 		params["order"] = "desc"
 		
 		return Image.list(params)
+	}
+	
+	def listMostRecentByOwner(def user, def params = [limit:5,offset:0,page:1]) {
+		assert user != null
+		assert params != null
+		assert params.limit > 0
+		
+		params["sort"] = "dateCreated"
+		params["order"] = "desc"
+		
+		return Image.findAllByOwner(user, params)
+	}
+	
+	
+	def saveNewImage(def params, def user) {
+		assert params != null
+		assert user != null
+		
+		if (params?.key) {
+			/*
+				move the S3 key into the chiave field we're using to store the key
+			*/
+			params.chiave = params.key
+		}
+		
+		def image = new Image(params)
+				
+		image.owner = user;
+		if (image.save()) {
+			return image;
+		} else {
+			image.errors.allErrors.each {
+				println it
+			}
+			return null;
+		}
+	}
+	
+	def mergeOwners(def primary, def secondary) {
+		assert primary != null
+		assert secondary != null
+		
+		def images = Image.findAllByOwner(secondary)
+		
+		if (images) {
+			images.each {
+				it.owner = primary
+				it.save()
+			}
+			return images.size()
+		} else {
+			return 0
+		}
 	}
 	
 	/*

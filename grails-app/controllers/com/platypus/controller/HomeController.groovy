@@ -3,13 +3,15 @@ package com.platypus.controller
 
 class HomeController {
 
+	def userService
 	def imageService
 	
 	def index = {
-		redirect(action:"list", params:params)
+		redirect(action:'list', params:params)
 	}
 	
 	def list = {
-		[images : imageService.listMostRecent()]
+		[ images : imageService.listMostRecent() ]
 	}
+	
 }

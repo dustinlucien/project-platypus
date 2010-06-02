@@ -1,43 +1,43 @@
-body{background: url(images/bg_body.jpg); }
+body{background: url(../images/bg_body.jpg); }
 
 
 /************************ header *********************** */
-#header{background: url(images/bg_header.jpg) no-repeat;  height: 149px;}
+#header{background: url(../images/bg_header.jpg) no-repeat;  height: 149px;}
 #header a{ text-decoration: none; height: 36px;}
 
 /************************ mainNav *********************** */
 #mainNav{ margin-top: 80px; position: relative;}
-a#logoheader{ background: url(images/logo_header.png) no-repeat; height: 93px; margin-top: 20px;}
-a#redneskifyMe{ background: url(images/redneckifyMe_bg.png) no-repeat top right; }
-a#gallery{ background: url(images/gallery_bg.png) no-repeat top right; }
-a#merch{ background: url(images/merch_bg.png) no-repeat top right; }
-a#aboutUs{ background: url(images/aboutUs_bg.png) no-repeat top right; }
+a#logoheader{ background: url(../images/logo_header.png) no-repeat; height: 93px; margin-top: 20px;}
+a#redneskifyMe{ background: url(../images/redneckifyMe_bg.png) no-repeat top right; }
+a#gallery{ background: url(../images/gallery_bg.png) no-repeat top right; }
+a#merch{ background: url(../images/merch_bg.png) no-repeat top right; }
+a#aboutUs{ background: url(../images/aboutUs_bg.png) no-repeat top right; }
 
-*html a#logoheader{ background: transparent ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/logo_header.png', sizingMethod='crop');}
-*html a#redneskifyMe{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/redneckifyMe_bg.png');}
-*html a#gallery{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/gallery_bg.png', sizingMethod='image ');}
-*html a#merch{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/merch_bg.png', sizingMethod='image');}
-*html a#aboutUs{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/aboutUs_bg.png', sizingMethod='image');}
+*html a#logoheader{ background: transparent ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/logo_header.png', sizingMethod='crop');}
+*html a#redneskifyMe{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/redneckifyMe_bg.png');}
+*html a#gallery{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/gallery_bg.png', sizingMethod='image ');}
+*html a#merch{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/merch_bg.png', sizingMethod='image');}
+*html a#aboutUs{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg.png', sizingMethod='image');}
 
-a#redneskifyMe:hover{ background: url(images/redneckifyMe_bg_h.png) no-repeat top right; }
-a#gallery:hover{ background: url(images/gallery_bg_h.png) no-repeat top right; }
-a#merch:hover{ background: url(images/merch_bg_h.png) no-repeat top right; }
-a#aboutUs:hover{ background: url(images/aboutUs_bg_h.png) no-repeat top right; }
+a#redneskifyMe:hover{ background: url(../images/redneckifyMe_bg_h.png) no-repeat top right; }
+a#gallery:hover{ background: url(../images/gallery_bg_h.png) no-repeat top right; }
+a#merch:hover{ background: url(../images/merch_bg_h.png) no-repeat top right; }
+a#aboutUs:hover{ background: url(../images/aboutUs_bg_h.png) no-repeat top right; }
 
-*html a#redneskifyMe:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/redneckifyMe_bg_h.png');}
-*html a#gallery:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/gallery_bg_h.png', sizingMethod='image ');}
-*html a#merch:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/merch_bg_h.png', sizingMethod='image');}
-*html a#aboutUs:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/aboutUs_bg_h.png', sizingMethod='image');}
+*html a#redneskifyMe:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/redneckifyMe_bg_h.png');}
+*html a#gallery:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/gallery_bg_h.png', sizingMethod='image ');}
+*html a#merch:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/merch_bg_h.png', sizingMethod='image');}
+*html a#aboutUs:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg_h.png', sizingMethod='image');}
 
 /************************ midNav *********************** */
 #midNav{background: #371d00; height: 94px;}
 #midNav a {height: 94px;}
-a#subh1{background: url(images/subh1.jpg);}
-a#subh2{background: url(images/subh2.jpg);}
-a#subh3{background: url(images/subh3.jpg);}
-a#subh1:hover{background: url(images/subh1_hover.jpg);}
-a#subh2:hover{background: url(images/subh2_hover.jpg);}
-a#subh3:hover{background: url(images/subh3_hover.jpg);}
+a#subh1{background: url(../images/subh1.jpg);}
+a#subh2{background: url(../images/subh2.jpg);}
+a#subh3{background: url(../images/subh3.jpg);}
+a#subh1:hover{background: url(../images/subh1_hover.jpg);}
+a#subh2:hover{background: url(../images/subh2_hover.jpg);}
+a#subh3:hover{background: url(../images/subh3_hover.jpg);}
 
 /************************ content *********************** */
 div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;}
@@ -45,7 +45,7 @@ div#content a{ margin: 0; }
 
 /************************ leftcontent *********************** */
 div#leftContent{ border-right: 1px dashed #aa9073;}
-div#pickYrR{ height: 54px; background: url(images/pickYrR_bg.jpg) no-repeat; }
+div#pickYrR{ height: 54px; background: url(../images/pickYrR_bg.jpg) no-repeat; }
 a.sex{ text-decoration: none; font-size: 16px; font-weight: bold; color: #371d00;}
 a.sex:hover{color: #07748b;}
 div.pics img{ border: 5px solid #f9e4ca;}
@@ -57,8 +57,8 @@ div#rightContent a{ text-decoration: none;}
 div#rightContent a:hover{ color:#07748b;}
 /************************ footer *********************** */
 #footer{ height: 118px;  padding: 20px 0 0 10px; color: #fff;}
-a#logofooter{ background: url(images/logo_footer.png) no-repeat; height: 48px; }
-*html a#logofooter{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/logo_footer.png', sizingMethod='image');}
+a#logofooter{ background: url(../images/logo_footer.png) no-repeat; height: 48px; }
+*html a#logofooter{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/logo_footer.png', sizingMethod='image');}
 #footer a{ color: #fff; text-decoration: none;}
 #footer ul a:hover{ text-decoration: underline;}
 #footer ul{ list-style-type: none;}

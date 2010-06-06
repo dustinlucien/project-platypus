@@ -39,6 +39,6 @@
 	        </ul>
 	      </div>
 	   </div>
-	  <g:facebookConnectJavascript  />
+	  <g:facebookConnectJavascript />
     </body>
 </html>

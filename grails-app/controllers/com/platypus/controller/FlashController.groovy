@@ -29,7 +29,7 @@ class FlashController {
 		def successUrl = taglib.createLink(controller:'flash', action:'postfinish', absolute:'true') + "?etoken=" + session.etoken
 		
 		def imageKey = imageService.buildUniqueImageKey();
-		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(10);
+		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(20);
 		
 		def stringToSign = "POST\n\n\n" + timestamp.getMillis() + "\n" + "/" + bucket + "/" + imageKey;
 		

@@ -4,9 +4,6 @@ class FacebookTagLib {
 	
 	def facebookConnectService
 	
-	//Example: <g:facebookConnectJavascript base="http://example.com" secure="true"/>
-	//Base attribute is optional.
-	//Secure attribute is optional.  You should set it to true if your site uses ssl
 	def facebookConnectJavascript = { attrs, body ->
 		out << '''\n'''
 		out << '''\n'''

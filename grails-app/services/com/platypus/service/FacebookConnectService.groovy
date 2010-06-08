@@ -4,10 +4,11 @@ import org.springframework.beans.factory.InitializingBean
 import java.security.MessageDigest
 import javax.servlet.http.HttpServletRequest
 
-import com.google.code.facebookapi.FacebookJsonRestClient
-
 import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
+
+import com.restfb.FacebookClient
+import com.restfb.DefaultFacebookClient
 
 import java.lang.Long
 
@@ -15,49 +16,16 @@ class FacebookConnectService implements InitializingBean {
 
     boolean transactional = false
     
-    private FacebookJsonRestClient client
+    private FacebookClient client
 	private Long cachedUserId
     private String cachedSessionId
-    private String apiKey
-	private String secretKey
 	private String appId
 	
 	void afterPropertiesSet() {
-		apiKey = ConfigurationHolder.config.facebook.apiKey
-		secretKey = ConfigurationHolder.config.facebook.secretKey
 		appId = ConfigurationHolder.config.facebook.appId
-		if (!apiKey || !secretKey) {
-			log.error "FacebookConnect won't work.  No application setup included in config"
-			throw new RuntimeException("Unable to continue.  No FacebookConnect config")
-		}
-		
-		cachedUserId = -1L
-		cachedSessionId = null
+		assert appId != null
 	}
-	
-    FacebookJsonRestClient getFacebookClient(def request) {
-		assert request != null
-		
-		if (!client) {
-			if (request && isLoggedIn(request)) {
-	    		client = new FacebookJsonRestClient(apiKey, secretKey, cachedSessionId)
-			} else {
-				log.error "user has not logged in to facebook.  no session"
-				client = null
-			}
-		}
-		
-    	return client
-    }
 
-	String getApiKey() {
-		return apiKey
-	}
-	
-	String getSecretKey() {
-		return secretKey
-	}
-	
 	String getAppId() {
 		return appId
 	}

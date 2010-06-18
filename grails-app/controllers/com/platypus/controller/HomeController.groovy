@@ -14,7 +14,9 @@ class HomeController {
   
   def list = {
               
-    facebookConnectService.listPhotos()
+    if (facebookConnectService.isLoggedIn()) {
+      facebookConnectService.listPhotos()
+    }
     
     [ images : imageService.listMostRecent() ]
   }

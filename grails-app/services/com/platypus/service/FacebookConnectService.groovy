@@ -121,8 +121,7 @@ class FacebookConnectService implements InitializingBean {
     
     log.debug photos
     log.debug albums
-    
-    
+
   }
   
   def listPhotoAlbums(def offset=0, def limit=-1) {

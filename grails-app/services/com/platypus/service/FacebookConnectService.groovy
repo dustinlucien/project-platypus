@@ -112,19 +112,26 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def listPhotos(def offset=0, def limit=-1) {
-    //assert this.loggedIn
-    
-    log.debug "loggedin to facebook " + this.loggedIn
-    
+    assert this.loggedIn
+        
     Connection<Photo> photos = client.fetchConnection("${this.cachedUid}/photos", Photo.class)
-    Connection<Album> albums = client.fetchConnection("${this.cachedUid}/albums", Album.class)
-    
-    log.debug photos
-    log.debug albums
 
+    return photos
   }
   
-  def listPhotoAlbums(def offset=0, def limit=-1) {
+  def listAlbums(def offset=0, def limit=-1) {
     assert this.loggedIn
+    
+    Connection<Album> albums = client.fetchConnection("${this.cachedUid}/albums", Album.class)
+    
+    return albums
+  }
+  
+  def getProfilePicture() {
+    assert this.loggedIn
+    
+    Photo profilePicture = client.fetchObject("${this.cachedUid}/picture", Photo.class)
+    
+    return profilePicture
   }
 }

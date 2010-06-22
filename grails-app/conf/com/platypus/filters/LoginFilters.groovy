@@ -7,8 +7,16 @@ class LoginFilters {
   def filters = {
     checkFacebookStatus(controller:'*', action:'*') {
       before = {
-        log.debug "handling facebook login event"
+        
+        /*
+        This all seems very badly written.  Need to find a more elegant way to know when 
+        i need to do this checking, and when i don't
+        */
+        log.debug "handling facebook auth event"
         facebookConnectService.handleAuthEvent(request)
+        
+        log.debug "asking for the current user"
+        userService.getCurrentUser(request)
       }
       after = {
         

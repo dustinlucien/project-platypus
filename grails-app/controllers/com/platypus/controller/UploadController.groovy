@@ -60,14 +60,27 @@ class UploadController {
       log.debug "Signature : ${results['signature']}"
     }
     
-    def fbLoggedIn = facebookConnectService.isLoggedIn(request)
     def fbPhotos = null
     
-    if (fbLoggedIn) {
-      fbPhotos = facebookConnectService.getPhotos(request)
+    if (facebookConnectService.isLoggedIn()) {
+      fbPhotos = facebookConnectService.listPhotos(request)
+      
+      if (fbPhotos != null) {
+        
+        log.debug "found  some photos from facebook"
+        
+        fbPhotos = fbPhotos.getData()
+        
+        if (log.isDebugEnabled()) {
+          fbPhotos.each {
+            log.debug "${it}"
+          }
+        }
+      }
+      
     }
     
-    return [fbLoggedIn : fbLoggedIn, fbPhotos : fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
+    return [fbLoggedIn : facebookConnectService.isLoggedIn(), fbPhotos : fbPhotos, bucket : bucket, chiave : chiave, apiKey : apiKey, policyBase64 : results['signed'], signature : results['signature']]
   }
   
   def success = {

@@ -67,21 +67,18 @@ class UserService {
 				session.user = null
 				log.error "wtf? unkown user in session.  cleaning session."
 			} else {
-				if (user.facebookUid == -1 && facebookConnectService.isLoggedIn(request)) {
+				if (user.facebookUid == -1 && facebookConnectService.isLoggedIn()) {
 					/*
 						Update existing user with facebookUid
 					*/
-					def facebookApi = facebookConnectService.getFacebookClient(request)
-					def facebookUid = facebookApi.users_getLoggedInUser()
-					
-					def existingUser = User.findByFacebookUid(facebookUid)
+					def existingUser = User.findByFacebookUid(facebookConnectService.getUid())
 					
 					if (existingUser) {
-						imageService.mergeUsers(existingUser, user)
-						user.delete()
+						imageService.mergeOwners(existingUser, user)
+						user.delete(flush:true)
 						user = existingUser
 					} else {
-						user.facebookUid = facebookUid
+						user.facebookUid = facebookConnectService.getUid()
 						if (!user.save()) {
 							user.errors.allErrors.each {
 								log.error "${it}"
@@ -93,15 +90,12 @@ class UserService {
 		}
 		
 		if (!user) {
-			if (facebookConnectService.isLoggedIn(request)) {
-				def facebookApi = facebookConnectService.getFacebookClient(request)			
-				def facebookUid = facebookApi.users_getLoggedInUser();
-				
-				user = User.findByFacebookUid(facebookUid)
+			if (facebookConnectService.isLoggedIn()) {
+				user = User.findByFacebookUid(facebookConnectService.getUid())
 
 				if (!user) {
-					log.info "creating a new user with facebookUid : ${facebookUid}"
-					user = this.createUser([facebookUid : facebookUid])
+					log.info "creating a new user with facebookUid : ${facebookConnectService.getUid()}"
+					user = this.createUser([facebookUid : facebookConnectService.getUid()])
 					
 					log.info "user ${user} with facebookUid of ${user.facebookUid} created"
 				}

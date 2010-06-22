@@ -41,10 +41,10 @@
 		</div>
 		<div class="span-12 last" id="facebook">
 			<g:if test="${fbPhotos != null}">
-				<g:set var="numPhotos" value="${fbPhotos.length()}" />
+				<g:set var="numPhotos" value="${fbPhotos.size()}" />
 				<g:set var="num" value="${0}" />
 				<g:while test="${num < numPhotos}">
-					<img src="${fbPhotos.get(num++).src}" />
+					<img src="${fbPhotos.getAt(num++).src}" />
 				</g:while>
 			</g:if>
 			<g:else>

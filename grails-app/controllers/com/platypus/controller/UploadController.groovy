@@ -14,7 +14,7 @@ class UploadController {
   def imageService
   def userService
   
-  def upload = {
+  def index = {
     
     def user = userService.getCurrentUser(request)
     
@@ -86,7 +86,7 @@ class UploadController {
   def success = {
     def user = userService.getCurrentUser(request)
     def image = imageService.saveNewImage(params, user)
-    redirect(controller:'shop',action:'show')
+    redirect(controller:'share')
   }
   
   

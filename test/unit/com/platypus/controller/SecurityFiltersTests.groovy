@@ -1,4 +1,4 @@
-package project.platypus
+package com.platypus.controller
 
 import grails.test.*
 

@@ -7,7 +7,7 @@
 	<g:render template="/navigation/mainHeaderTemplate" />
 
 	 <div class="span-24 last" id="login banner">
-	 	<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos"/>
+	 	<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos,friends_photos,publish_stream"/>
 	</div>
 
 	<div class="span-24" id="content">
@@ -31,7 +31,7 @@
 
         <div class="span-14  prepend-1 last" id="rightContent">
           <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
-		  <p>Git 'er done <a href="${createLink(controller:'upload', action:'upload')}" class="blue">here</a></p>
+		  <p>Git 'er done <a href="${createLink(controller:'upload')}" class="blue">here</a></p>
         </div>
 	</div>
   </body>

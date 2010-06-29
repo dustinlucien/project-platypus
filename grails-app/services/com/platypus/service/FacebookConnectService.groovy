@@ -14,6 +14,7 @@ import com.restfb.types.Album;
 import com.restfb.types.Photo;
 
 import java.lang.Long
+import java.util.concurrent.atomic.AtomicBoolean
 
 class FacebookConnectService implements InitializingBean {
   
@@ -26,7 +27,7 @@ class FacebookConnectService implements InitializingBean {
   private String cachedSecret
   private Long cachedExpiration
   private String cachedAccessToken
-  private boolean loggedIn
+  private AtomicBoolean loggedIn
   
   void afterPropertiesSet() {
     appId = ConfigurationHolder.config.facebook.appId
@@ -38,20 +39,11 @@ class FacebookConnectService implements InitializingBean {
     this.cachedAccessToken = null
     
     this.client = null
-    this.loggedIn = false
+    this.loggedIn = new AtomicBoolean(false)
   }
   
   String getAppId() {
     return this.appId
-  }
-  
-  
-  def getUid(def request) {
-    if (cachedUid == -1) {
-      assert isLoggedIn(request)
-    }
-    
-    return cachedUid
   }
   
   public void handleAuthEvent(def request) {
@@ -88,31 +80,32 @@ class FacebookConnectService implements InitializingBean {
       log.debug "cachedAccessToken ${this.cachedAccessToken}"
       
       this.client = new DefaultFacebookClient(this.cachedAccessToken)
-      
+      //this.client = new DefaultFacebookClient('2227470867|2.8UReIc1M3huqe0lt1f6xKA__.3600.1277791200-621241239|CKqQu6RdqDR87bQ8aeO22mtgHEA.')
       log.debug "setting facebookconnectservice.loggedIn to true"
-      this.loggedIn = true
+      this.loggedIn.set(true)
+
     } else {
       this.client = null
       this.cachedUid = -1
       this.cachedSecret = null
       this.cachedAccessToken = null
       log.debug "setting facebookconnectservice.loggedIn to false"
-      this.loggedIn = false;
+      this.loggedIn.set(false)
     }
   }
   
   public Long getUid() {
-    assert this.loggedIn
+    assert this.loggedIn.get()
     
     return this.cachedUid
   }
   
   public boolean isLoggedIn() {
-    return this.loggedIn
+    return this.loggedIn.get()
   }
   
   def listPhotos(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.loggedIn.get()
         
     Connection<Photo> photos = client.fetchConnection("${this.cachedUid}/photos", Photo.class)
 
@@ -120,7 +113,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def listAlbums(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.loggedIn.get()
     
     Connection<Album> albums = client.fetchConnection("${this.cachedUid}/albums", Album.class)
     
@@ -128,7 +121,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def getProfilePicture() {
-    assert this.loggedIn
+    assert this.loggedIn.get()
     
     Photo profilePicture = client.fetchObject("${this.cachedUid}/picture", Photo.class)
     

@@ -6,10 +6,11 @@ import com.platypus.domain.User
 
 class UserService {
 
-    boolean transactional = false
+  boolean transactional = false
 
+  def imageService
 	def facebookConnectService
-		
+	
 	def createUser(def params = null) {
 		def user = new User(params);
 
@@ -73,7 +74,7 @@ class UserService {
 					*/
 					def existingUser = User.findByFacebookUid(facebookConnectService.getUid())
 					
-					if (existingUser) {
+					if (existingUser && (existingUser.id != user.id)) {
 						imageService.mergeOwners(existingUser, user)
 						user.delete(flush:true)
 						user = existingUser

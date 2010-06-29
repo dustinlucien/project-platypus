@@ -32,16 +32,16 @@
 		</div>
 		<div class="span-12 last" id="facebook">
 			<g:if test="${fbPhotos != null}">
-				<g:set var="numPhotos" value="${fbPhotos.length()}" />
+				<g:set var="numPhotos" value="${fbPhotos.size()}" />
 				<g:set var="num" value="${0}" />
 				<g:while test="${num < numPhotos}">
-					<img src="${fbPhotos.get(num++).src}" />
+					<img src="${fbPhotos.get(num++).getPicture()}" />
 				</g:while>
 			</g:if>
 			<g:else>
-				<g:if test="${!fbLoggedIn}">
+				<g:if test="${fbLoggedIn != true}">
 					<h3>You're not logged into Facebook</h3>
-					<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos">Login to use your photos</fb:login-button>
+					<fb:login-button v="2" size="medium" autologoutlink="true" perms="user_photos,friends_photos,publish_stream">Login to use your photos</fb:login-button>
 				</g:if>
 			</g:else>
 		</div>		

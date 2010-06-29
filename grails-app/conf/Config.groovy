@@ -119,7 +119,8 @@
         }
 
         debug  'com.platypus',
-        'grails.app'
+        'grails.app',
+        'com.restfb'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
         'org.codehaus.groovy.grails.commons', // core / classloading
@@ -138,9 +139,9 @@
       }
 
       facebook {
-        apiKey = "8000f0fcf8dcd9594bf19c010b9c723d"
-        secretKey = "1434dc650e4dddd3585b59ac956724d3"
-        appId = "122941727717546"
+        apiKey = "251d4b5b391a70904920a88c4f1208db"
+        secretKey = "b887bb1fd73b2f8ec37fbef9d4a64073"
+        appId = "130899563611059"
       }
 
 
@@ -158,9 +159,9 @@
       }
 
       facebook {
-        apiKey = "8000f0fcf8dcd9594bf19c010b9c723d"
-        secretKey = "1434dc650e4dddd3585b59ac956724d3"
-        appId = "122941727717546"
+        apiKey = "251d4b5b391a70904920a88c4f1208db"
+        secretKey = "b887bb1fd73b2f8ec37fbef9d4a64073"
+        appId = "130899563611059"
       }
 
       platypus {

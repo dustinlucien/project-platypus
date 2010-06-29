@@ -15,8 +15,13 @@ class LoginFilters {
         log.debug "handling facebook auth event"
         facebookConnectService.handleAuthEvent(request)
         
+        log.debug "facebook login status before? " + facebookConnectService.isLoggedIn()
+        
         log.debug "asking for the current user"
         userService.getCurrentUser(request)
+
+        log.debug "facebook login status after? " + facebookConnectService.isLoggedIn()
+
       }
       after = {
         

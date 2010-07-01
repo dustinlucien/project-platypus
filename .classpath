@@ -12,6 +12,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.springsource.sts.grails.core.CLASSPATH_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/jets3t-0.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/restfb-1.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/restfb-1.5.2.jar"/>
 	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
 </classpath>

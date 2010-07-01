@@ -12,6 +12,7 @@ import com.restfb.FacebookClient
 import com.restfb.DefaultFacebookClient
 import com.restfb.types.Album;
 import com.restfb.types.Photo;
+import com.restfb.types.User;
 
 import java.lang.Long
 import java.util.concurrent.atomic.AtomicBoolean
@@ -123,7 +124,7 @@ class FacebookConnectService implements InitializingBean {
   def getProfilePicture() {
     assert this.loggedIn.get()
     
-    Photo profilePicture = client.fetchObject("${this.cachedUid}/picture", Photo.class)
+    Photo profilePicture = client.fetchObject("${this.cachedUid}", User.class)
     
     return profilePicture
   }

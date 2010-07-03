@@ -15,7 +15,6 @@ class SecurityFilters {
         }
       }
     }
-    
     secureFlash(controller:'flash', action:'*') {
       before = {
         def token = params?.stoken

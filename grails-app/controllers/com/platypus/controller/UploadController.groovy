@@ -53,7 +53,7 @@ class UploadController {
     
     log.info "policy : ${policy}"
     
-    def results = securityService.sign(policy, secretKey)
+    def results = securityService.signPolicy(policy, secretKey)
     
     if (log.isDebugEnabled()) {
       log.debug "Base64 Policy : ${results['signed']}"

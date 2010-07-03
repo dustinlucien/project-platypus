@@ -124,8 +124,8 @@ class FacebookConnectService implements InitializingBean {
   def getProfilePicture() {
     assert this.loggedIn.get()
     
-    Photo profilePicture = client.fetchObject("${this.cachedUid}", User.class)
+    User user = client.fetchObject("${this.cachedUid}", User.class)
     
-    return profilePicture
+    return user.getPicture()
   }
 }

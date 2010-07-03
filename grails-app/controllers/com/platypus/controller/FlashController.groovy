@@ -31,13 +31,20 @@ class FlashController {
 		def imageKey = imageService.buildUniqueImageKey();
 		def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(20);
 		
-		def stringToSign = "POST\n\n\n" + timestamp.getMillis() + "\n" + "/" + bucket + "/" + imageKey;
+		long secondsTimestamp = timestamp.getMillis() / 1000;
 		
-		def signature = securityService.sign(stringToSign, secretKey)
+		log.debug "timestamp : " + timestamp.toString()
+		log.debug "timestamp epoch : " + secondsTimestamp
+		log.debug "javas version : " + System.currentTimeMillis()
+		
+		def stringToSign = "POST\n\n\n" + secondsTimestamp + "\n" + "/" + bucket + "/" + imageKey;
+		//def stringToSign = "PUT\n\n" + "application/x-www-form-urlencoded" + "\n" + secondsTimestamp + "\n" + "/" + bucket + "/" + imageKey;
+    
+		def signature = securityService.signHeaders(stringToSign, secretKey)
 		
 		def postUrl = "http://" + bucket + ".s3.amazonaws.com/" + imageKey + 
-					  "?AWSAccessKeyId=" + apiKey + "&Signature=" + signature + 
-					  "&Expires=" + timestamp.getMillis()
+					  "?AWSAccessKeyId=" + apiKey + "&Signature=" + signature['signature'].encodeAsURL() + 
+					  "&Expires=" + secondsTimestamp
 		
 		response.status = 200
 		render "${postUrl}\n${successUrl}"

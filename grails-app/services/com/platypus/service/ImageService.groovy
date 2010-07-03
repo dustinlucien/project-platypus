@@ -52,6 +52,16 @@ class ImageService {
 		return Image.findAllByOwner(user, params)
 	}
 	
+	def getMostRecentImage(def user) {
+	  assert user != null
+	  assert user.id != -1
+	  
+	  def params = [:]
+	  params["sort"] = "dateCreated"
+	  params["order"] = "desc"
+	  
+	  return Image.findByOwner(user, params)
+	}
 	
 	def saveNewImage(def params, def user) {
 		assert params != null

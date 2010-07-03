@@ -13,6 +13,9 @@
 	</div>
 	
 	<div class="span-24" id="content">
+		<div class="span-7 last">
+			<img src="${image.getImageUrl()}" />
+		</div>
 	</div>
   </body>
 </html>

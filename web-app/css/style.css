@@ -48,7 +48,7 @@ div#leftContent{ border-right: 1px dashed #aa9073;}
 div#pickYrR{ height: 54px; background: url(../images/pickYrR_bg.jpg) no-repeat; }
 a.sex{ text-decoration: none; font-size: 16px; font-weight: bold; color: #371d00;}
 a.sex:hover{color: #07748b;}
-div.pics img{ width: 100px; height: 100px; border: 5px solid #f9e4ca;}
+div.pics img{ border: 5px solid #f9e4ca;}
 div.pics a img:hover{ border: 5px solid #371d00;}
 
 /************************ rightcontent *********************** */

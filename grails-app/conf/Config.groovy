@@ -85,8 +85,8 @@
       }
 
       amazonaws {
-        apiKey = "1CVPFRPBE5NB36ZVWHR2"
-        secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+        apiKey = "AKIAJUJNIBYO3FIT77MQ"
+        secretKey = "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"
       }
 
       facebook {
@@ -134,8 +134,8 @@
       }
 
       amazonaws {
-        apiKey = "1CVPFRPBE5NB36ZVWHR2"
-        secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+        apiKey = "AKIAJUJNIBYO3FIT77MQ"
+        secretKey = "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"
       }
 
       facebook {
@@ -154,8 +154,8 @@
       grails.serverURL = "http://localhost:8080/${appName}"
 
       amazonaws {
-        apiKey = "1CVPFRPBE5NB36ZVWHR2"
-        secretKey = "KEnotqrWecohkmxkt2PQqCkQR2V4yCgu/cCdnmYI"
+        apiKey = "AKIAJUJNIBYO3FIT77MQ"
+        secretKey = "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"
       }
 
       facebook {

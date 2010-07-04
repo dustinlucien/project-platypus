@@ -4,9 +4,6 @@ class FacebookTagLib {
 	
 	def facebookConnectService
 	
-	//Example: <g:facebookConnectJavascript base="http://example.com" secure="true"/>
-	//Base attribute is optional.
-	//Secure attribute is optional.  You should set it to true if your site uses ssl
 	def facebookConnectJavascript = { attrs, body ->
 		out << '''\n'''
 		out << '''\n'''
@@ -20,17 +17,9 @@ class FacebookTagLib {
 		out << """<script>
 		      window.fbAsyncInit = function() {
 		          FB.init({appId: '${facebookConnectService.getAppId()}', status: true, cookie: true, xfbml: true});
-				  FB.Event.subscribe('auth.sessionChange', function(response) {
-				    if (response.session) {
-				      alert('logged in!')
-				    } else {
-					  alert('logged out!')
-				    }
-				  });
-				  FB.Event.subscribe('auth.login', function(response) {
-			        window.location.reload();
-			      });
-			    
+	                  FB.Event.subscribe('auth.sessionChange', function(response) {
+		             window.location.reload();
+		          });    
 		      };
 		      (function() {
 		        var e = document.createElement('script');

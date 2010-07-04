@@ -8,7 +8,7 @@ class ShopController {
 		You've just created a new redneck image if you're coming here.  Already stored, will be the 
 		most recent one
 	*/
-	def show = {
+	def index = {
 		def user = userService.getCurrentUser(request)
 		
 		def images = imageService.listMostRecentByOwner(user)

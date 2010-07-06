@@ -12,33 +12,34 @@
     </head>
     <body>
 		<div class="container">
-          <g:layoutBody />
+    
+    <g:layoutBody />
 
-		  <div class="clear"></div>
+	  <div class="clear"></div>
 
-	      <div id="footer">
-	        <a href="#" class="span-4" id="logofooter"><span class="hidden">Redneckify</span></a>
-	        <ul class="span-3">
-	            <li><a href="#">Redneckify Me</a></li>
-	            <li><a href="#">Gallery</a></li>
-	            <li><a href="#">Merch</a></li>
-	            <li><a href="#">About us</a></li>
-	        </ul>
-	        <ul class="span-3">
-	            <li><a href="#">Twitter</a></li>
-	            <li><a href="#">Facebook</a></li>
-	            <li><a href="#">MySpace</a></li>
-	        </ul>
-	        <ul class="span-3">
-	            <li>Terms of Service</li>
-	            <li>Privacy Policy</li>
-	        </ul>
-	        <ul class="span-6">
-	            <li>Copyright © 2010 BustedHumps Inc.</li>
-	            <li>All Right Reserved.</li>
-	        </ul>
-	      </div>
-	   </div>
-	  <g:facebookConnectJavascript />
-    </body>
+      <div id="footer">
+        <a href="#" class="span-4" id="logofooter"><span class="hidden">Redneckify</span></a>
+        <ul class="span-3">
+            <li><a href="#">Redneckify Me</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Merch</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
+        <ul class="span-3">
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">MySpace</a></li>
+        </ul>
+        <ul class="span-3">
+            <li>Terms of Service</li>
+            <li>Privacy Policy</li>
+        </ul>
+        <ul class="span-6">
+            <li>Copyright © 2010 BustedHumps Inc.</li>
+            <li>All Right Reserved.</li>
+        </ul>
+      </div>
+   </div>
+   <g:facebookConnectJavascript />
+   </body>
 </html>

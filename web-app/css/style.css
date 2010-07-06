@@ -40,21 +40,18 @@ a#subh2:hover{background: url(../images/subh2_hover.jpg);}
 a#subh3:hover{background: url(../images/subh3_hover.jpg);}
 
 /************************ content *********************** */
-div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;}
-div#content a{ margin: 0; }
+div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;  font-size: 14px; }
+div#content a{ margin: 0; font-weight: bold; text-decoration: none; color: #07748b;  }
+div#content a:hover{ color: #371d00; }
 
 /************************ leftcontent *********************** */
 div#leftContent{ border-right: 1px dashed #aa9073;}
 div#pickYrR{ height: 54px; background: url(../images/pickYrR_bg.jpg) no-repeat; }
-a.sex{ text-decoration: none; font-size: 16px; font-weight: bold; color: #371d00;}
-a.sex:hover{color: #07748b;}
+a.sex{ font-size: 16px;}
 div.pics img{ border: 5px solid #f9e4ca;}
 div.pics a img:hover{ border: 5px solid #371d00;}
 
-/************************ rightcontent *********************** */
-div#rightContent { font-size: 14px;}
-div#rightContent a{ text-decoration: none;}
-div#rightContent a:hover{ color:#07748b;}
+
 /************************ footer *********************** */
 #footer{ height: 118px;  padding: 20px 0 0 10px; color: #fff;}
 a#logofooter{ background: url(../images/logo_footer.png) no-repeat; height: 48px; }
@@ -63,9 +60,41 @@ a#logofooter{ background: url(../images/logo_footer.png) no-repeat; height: 48px
 #footer ul a:hover{ text-decoration: underline;}
 #footer ul{ list-style-type: none;}
 
+
 .blue{color:#07748b; font-weight: bold;}
 span.hidden{ visibility: hidden; }
 
 
+/************************ home *********************** */
+div#latestR{ height: 51px; background: url(../images/latestR_bg.jpg) no-repeat; margin-bottom: 10px; }
+div.rate{ width: 240px; height: 100px; background: #E0C6A7; display: block; margin: 10px 0 10px -20px; padding: 5px;  }
+
+div.rate p{ color: #371d00; font-size: 12px;}
+div.rate img {float: left; margin-right: 20px;}
+div#yepBubba{ height: 113px; width: 323px; background: url(../images/yepBubba.jpg) no-repeat; }
+a#goOnbtn{ display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
+a:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
+
+ul.rating { list-style-type: none; margin: 0; padding: 0;}
+ul.rating li{ float: left; margin: 0 1px;}
+
+ul.rating li a{ display: block; height: 18px; width: 19px; text-decoration: none; background: url(../images/rate.jpg); background-repeat: no-repeat; background-position:right; }
+ul.rating li a.red{  background: url(../images/rate.jpg); background-repeat: no-repeat; background-position:left; }
+ul.rating li a:hover{  background: url(../images/rate.jpg); background-repeat: no-repeat; background-position: left; }
+
+*html span.hidden{font-size: 1px;}
 
 
+/************************ step3 *********************** */
+ul#icons { list-style-type: none; padding: 0; }
+ul#icons li{ float: left; margin: 0 20px 20px 0; }
+ul#icons a{ display: block; height: 48px; width: 48px;}
+a#fb{ background: url(../images/bg_fb.jpg); }
+a#tw{ background: url(../images/bg_tw.jpg); }
+a#gt{ background: url(../images/bg_g.jpg); }
+a#ym{ background: url(../images/bg_ym.jpg); }
+div#sl1{ background: url(../images/sl1.jpg) no-repeat; display: block; height: 19px; width: 435px; margin-bottom: 20px;}
+#get img{ background: url(../images/bg_img.jpg) no-repeat; padding: 5px;}
+#get p{ width: 140px; float:left; text-align: center; }
+a.savebtn{ background: url(../images/savebtn.jpg) no-repeat; height: 64px;}
+a:hover.savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; height: 64px;}

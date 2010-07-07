@@ -63,13 +63,13 @@
 	}
 	</script>		    
 
-	<script type="text/javascript" src="${createLinkTo(dir:'js', file: 'swfobject.js')}"></script>
+	<script type="text/javascript" src="${resource(dir:'js', file: 'swfobject.js')}"></script>
 	<script type="text/javascript">
 		<!-- For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. --> 
 		var swfVersionStr = "10.0.0";
 		<!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
-		var xiSwfUrlStr = "${createLinkTo(dir:'swf', file: 'playerProductInstall.swf')}";
-		var flashvars = { baseUrl : "http://localhost:8080/project-platypus", userImage : "${createLinkTo(dir:'images', file: 'face1.jpg')}" };  
+		var xiSwfUrlStr = "${resource(dir:'swf', file: 'playerProductInstall.swf')}";
+		var flashvars = { baseUrl : "http://localhost:8080/project-platypus", userImage : "${resource(dir:'images', file: 'face1.jpg')}" };  
 		var params = {};
 		params.quality = "high";
 		params.bgcolor = "#f9e4ca";
@@ -80,7 +80,7 @@
 		attributes.name = "Redneckify";
 		attributes.align = "middle";
 		swfobject.embedSWF(
-			"${createLinkTo(dir:'swf', file: 'Redneckify.swf')}", "flashContent", 
+			"${resource(dir:'swf', file: 'Redneckify.swf')}", "flashContent", 
 			"480", "810", 
 			swfVersionStr, xiSwfUrlStr, 
 			flashvars, params, attributes);
@@ -105,40 +105,40 @@
 			<div class="span-7"><a class="sex" href="#">Male</a> | <a class="sex" href="#">Female</a></div>
 
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '01.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '02.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '01.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '02.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '03.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '04.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '03.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '04.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '05.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '06.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '05.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '06.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '07.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '08.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '07.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '08.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '09.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '10.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '09.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '10.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '11.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '12.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '11.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '12.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '13.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '14.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '13.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '14.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '15.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '16.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '15.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '16.png')}" /></a></div>
 			</div>
 			<div class="pics">
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '17.png')}" /></a></div>
-				<div class="span-3"><a href="#"><img width=100 height=100 src="${createLinkTo(dir:'images/rednecks', file: '18.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '17.png')}" /></a></div>
+				<div class="span-3"><a href="#"><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '18.png')}" /></a></div>
 			</div>						
 		</div>
 		
@@ -189,12 +189,12 @@
 					<!--<![endif]-->
 				</object>
 			</noscript>
-						  
+
+			<a style='display:block;' href="#" onclick="SetUserImage('${resource(dir:'images', file: 'face1.jpg')}');return false;" >click me to load User Image</a>	
+    	<a style='display:block;' href="#" onclick='SetOverlayImage("ov1.png");return false;' >click me to load Overlay Image 1</a>
+    	<a style='display:block;' href="#" onclick='SetOverlayImage("ov2.png");return false;' >click me to load Overlay Image 2</a>		
+    		  
     </div>
-	</div>
-	
-	<a style='display:block;' href="#" onclick="SetUserImage('${createLinkTo(dir:'images', file: 'face1.jpg')}');return false;" >click me to load User Image</a>	
-	<a style='display:block;' href="#" onclick='SetOverlayImage("ov1.png");return false;' >click me to load Overlay Image 1</a>
-	<a style='display:block;' href="#" onclick='SetOverlayImage("ov2.png");return false;' >click me to load Overlay Image 2</a>		
-</body>
+  </div>  
+ </body>
 </html>

@@ -14,7 +14,7 @@
 		<div class="span-7 prepend-1" id="leftContent">
 		  <div class="span-7 pull-1" id="latestR"><span class="hidden">Latest Redneck</span></div> 
             <div class="rate clear"> 
-                <img src="images/img1.jpg" /> 
+                <img src="${resource(dir:'images', file:'img1.jpg')}" /> 
                 <p><strong>"Redneck Jim"</strong><br />by Jim Johnson</p> 
                 <ul class="rating"> 
                   <li><a class="red" class="red" href="#"><span class="hidden">Rate 1</span></a></li> 
@@ -25,7 +25,7 @@
                 </ul> 
             </div> 
             <div class="rate"> 
-                <img src="images/img2.jpg" /> 
+                <img src="${resource(dir:'images', file:'img2.jpg')}" /> 
                 <p><strong>"Redneck Jim"</strong><br />by Jim Johnson</p> 
                                 <ul class="rating"> 
                   <li><a class="red" class="red" href="#"><span class="hidden">Rate 1</span></a></li> 
@@ -36,7 +36,7 @@
                 </ul> 
             </div> 
             <div class="rate"> 
-                <img src="images/img3.jpg" /> 
+                <img src="${resource(dir:'images', file:'img3.jpg')}" /> 
                 <p><strong>"Redneck Jim"</strong><br />by Jim Johnson</p> 
                 <ul class="rating"> 
                   <li><a class="red" class="red" href="#"><span class="hidden">Rate 1</span></a></li> 

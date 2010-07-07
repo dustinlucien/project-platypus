@@ -13,7 +13,7 @@ class ShareController {
       def image = imageService.getMostRecentImage(user)
       
       if (image == null) {
-        redirect(controller:gallery)
+        redirect(controller:'gallery')
       } else {
         return [ image : imageService.getMostRecentImage(user) ]
       }

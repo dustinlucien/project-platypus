@@ -26,7 +26,11 @@ class FlashController {
 
     session.etoken = RandomStringUtils.randomAlphanumeric(8)
     
-    def successUrl = taglib.createLink(controller:'flash', action:'postfinish', absolute:'true') + "?etoken=" + session.etoken
+    /*
+      A hack to get ahold of the webflow variables.  should have these passed in with flash params or something
+    */
+    
+    def successUrl = taglib.createLink(controller:'flash', action:'postfinish', params:[etoken:session.etoken], absolute:'true')
 
     def imageKey = imageService.buildUniqueImageKey();
 
@@ -42,7 +46,7 @@ class FlashController {
 
     log.info "policy : ${policy}"
 
-    def results = securityService.sign(policy, secretKey)
+    def results = securityService.signPolicy(policy, secretKey)
     
     response.status = 200
     render "${imageKey}\n${results['signed']}\n${results['signature']}\n${apiKey}\nhttp://${bucket}.s3.amazonaws.com\n${successUrl}"
@@ -53,14 +57,19 @@ class FlashController {
 	*/
 	def postfinish = {
 		def etoken = params?.etoken
+		def execution = session?.flowExecution
 		
 		if (etoken == null || (!(session?.etoken?.equals(etoken)))) {
-			response.status = 403
-			render "Incorrect ephemeral token"
-		} else {		
-  		def user = userService.getCurrentUser(request)
-  		def image = imageService.saveNewImage(params, user)
-  		redirect(controller:'shop',action:'index')
+		  log.error "incorrect ephemeral token in the params"
+		  flash.message = "incorrect security token"
+		} else if (execution == null) {
+		  log.error "no flow execution state in session.  redirecting to home page"
+		  flash.message = "There was an error in the upload flow.  Please try again"
+		} else {
+		  
+  		imageService.saveNewImage(params, userService.getCurrentUser(request))
+  		
+  		redirect(controller:'create',action:'redneckify',params:[_eventId:'finish', execution: (execution + "s2")])
 	  }
 	}
 }

@@ -9,14 +9,14 @@ class User {
 	*/
 	Long facebookUid
 	
-    static constraints = {
-    	id visible:false
+  static constraints = {
+    id visible:false
 		firstname nullable:true
 		lastname nullable:true
 		facebookUid nullable:true
 	}
 	
-	def beforeInsert() {
+  def beforeInsert() {
 		if (facebookUid == null) {
 			facebookUid = -1
 		}

@@ -7,7 +7,7 @@ class DebuggingFilters {
   def filters = {
     notAppEngine(controller:'appEngineReload', action:'*', invert:true) {
       before = {
-        log.debug "------------------------------------------------"
+        log.debug "-------------------ENTERING-----------------------------"
         log.debug "User agent: " + request.getHeader("User-Agent")
         log.debug "request params : ${params}"
         log.debug "entering controller : ${controllerName}"
@@ -18,6 +18,7 @@ class DebuggingFilters {
       after = {
         log.debug "leaving controller : ${controllerName}"
         log.debug "leaving action     : ${actionName}"
+        log.debug "-------------------LEAVING-----------------------------"        
       }
       afterView = {
 

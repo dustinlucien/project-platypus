@@ -13,9 +13,11 @@ class ShareController {
       def image = imageService.getMostRecentImage(user)
       
       if (image == null) {
+        log.debug "no image(s) for this user.  sending them to the gallery."
+        
         redirect(controller:'gallery')
       } else {
-        return [ image : imageService.getMostRecentImage(user) ]
+        return [ image : image ]
       }
     }
 }

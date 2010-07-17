@@ -15,11 +15,7 @@ class UploadController {
   def userService
   
   def index = {
-    
-    def user = userService.getCurrentUser(request)
-    
-    log.info "services available : signature -> ${securityService}, image -> ${imageService}, user -> ${userService}"
-    
+        
     def timestamp = new DateTime(DateTimeZone.UTC).plusMinutes(30);
     
     def apiKey = grailsApplication.config.amazonaws.apiKey

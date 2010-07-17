@@ -6,7 +6,7 @@ class HomeController {
   def imageService
   
   def index = {
-    [ images : imageService.listMostRecent() ]
+    [ images : imageService.listMostRecent([limit:3]) ]
   }
   
 }

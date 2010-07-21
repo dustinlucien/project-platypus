@@ -4,11 +4,7 @@ class ShopController {
 	def imageService
 	def userService
 	
-	/*
-		You've just created a new redneck image if you're coming here.  Already stored, will be the 
-		most recent one
-	*/
-	def index = {
+	def show = {
 		def user = userService.getCurrentUser(request)
 		
 		def images = imageService.listMostRecentByOwner(user)
@@ -23,14 +19,14 @@ class ShopController {
 		
 		if (!images) {
 			log.info "no images returned. redirecting to gallery"
-			redirect(action:'list')
+			redirect(action:'index')
 		}
 		
 		return [ images : images ]
 
 	}
 	
-	def list = {
+	def index = {
 		[ images : imageService.listMostRecent() ]
 	}
 }

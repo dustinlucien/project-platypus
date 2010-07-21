@@ -1,21 +1,24 @@
 package com.platypus.domain
 
-
-
-import javax.persistence.*;
-// import com.google.appengine.api.datastore.Key;
-
-@Entity
-class User implements Serializable {
-
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id
-
+class User {
 	String firstname
 	String lastname
+
+	/*
+	I think I need my own user id with a decent length for this class
+	*/
+	Long facebookUid
 	
-    static constraints = {
-    	id visible:false
+  static constraints = {
+    id visible:false
+		firstname nullable:true
+		lastname nullable:true
+		facebookUid nullable:true
+	}
+	
+  def beforeInsert() {
+		if (facebookUid == null) {
+			facebookUid = -1
+		}
 	}
 }

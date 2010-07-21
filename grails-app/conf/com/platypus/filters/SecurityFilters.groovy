@@ -5,6 +5,7 @@ import org.apache.commons.lang.RandomStringUtils
 class SecurityFilters {
   
   def filters = {
+    /*
     sessionSecurity(controller:'*', action:'*') {
       before = {
         if (!session?.secureToken) {
@@ -15,6 +16,7 @@ class SecurityFilters {
         }
       }
     }
+    
     secureFlash(controller:'flash', action:'*') {
       before = {
         def token = params?.stoken
@@ -26,12 +28,14 @@ class SecurityFilters {
         log.debug "session securetoken : ${session.secureToken}"
         
         if (token == null || (!(session.secureToken.equals(token)))) {
+          log.error "incorrect access token.  returning a 403"
           response.status = 403
           render "Incorrect access token"
           return false
         }
       }
     }
+    */
   }
   
 }

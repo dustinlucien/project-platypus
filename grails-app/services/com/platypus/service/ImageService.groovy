@@ -8,10 +8,13 @@ import org.joda.time.DateTimeZone
 import java.util.UUID
 
 import com.platypus.util.BaseConverterUtil
+import org.springframework.web.context.request.RequestContextHolder
 
 class ImageService {
 
-    boolean transactional = false
+  static final def mimeMap = ['image/png' : 'png', 'image/jpeg' : 'jpg', 'image/gif' : 'gif']
+  
+  boolean transactional = false
 	
 	def buildUniqueImageKey() {
 		/*
@@ -31,10 +34,9 @@ class ImageService {
 		return key;
 	}
 	
-	def listMostRecent(def params = [limit:5,offset:0,page:1]) {
+	def listMostRecent(def params = [offset:0,page:1]) {
 		assert params != null
-		assert params.limit > 0
-		
+				
 		params["sort"] = "dateCreated"
 		params["order"] = "desc"
 		
@@ -102,6 +104,36 @@ class ImageService {
 		} else {
 			return 0
 		}
+	}
+	
+	def saveUploadedFile(def file) {
+	  assert file != null
+	  
+	  def contentType = file.getContentType()
+	  
+	  log.debug "content type of image file is ${contentType}"
+	  def suffix = this.mimeMap.get(contentType)
+	  if (suffix == null) {
+	    log.debug "mime type of ${contentType} not recognized.  assuming jpg"
+	    suffix = 'jpg'
+	    contentType = 'image/jpeg'
+	  }
+	  
+	  def session = RequestContextHolder.currentRequestAttributes().getSession()
+	  
+	  def localFile = session.createTempFile("platypus-upload", suffix)
+	  
+	  //localFile.deleteOnExit()
+	  
+	  log.debug "the local file is : ${localFile.getPath()}"
+	  
+	  try {
+	    file.transferTo(localFile)
+	  } catch (Exception e) {
+	    log.error(e)
+	  }
+	  
+	  return [ 'url': localFile.getPath(), 'contentType' : contentType, 'local' : true ]
 	}
 	
 	/*

@@ -24,10 +24,20 @@ a#gallery:hover{ background: url(../images/gallery_bg_h.png) no-repeat top right
 a#merch:hover{ background: url(../images/merch_bg_h.png) no-repeat top right; }
 a#aboutUs:hover{ background: url(../images/aboutUs_bg_h.png) no-repeat top right; }
 
+a#redneskifyMeActive{ background: url(../images/redneckifyMe_bg_h.png) no-repeat top right; }
+a#galleryActive{ background: url(../images/gallery_bg_h.png) no-repeat top right; }
+a#merchActive{ background: url(../images/merch_bg_h.png) no-repeat top right; }
+a#aboutUsActive{ background: url(../images/aboutUs_bg_h.png) no-repeat top right; }
+
 *html a#redneskifyMe:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/redneckifyMe_bg_h.png');}
 *html a#gallery:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/gallery_bg_h.png', sizingMethod='image ');}
 *html a#merch:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/merch_bg_h.png', sizingMethod='image');}
 *html a#aboutUs:hover{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg_h.png', sizingMethod='image');}
+
+*html a#redneskifyMeActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/redneckifyMe_bg_h.png');}
+*html a#galleryActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/gallery_bg_h.png', sizingMethod='image ');}
+*html a#merchActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/merch_bg_h.png', sizingMethod='image');}
+*html a#aboutUsActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg_h.png', sizingMethod='image');}
 
 /************************ midNav *********************** */
 #midNav{background: #371d00; height: 94px;}
@@ -38,6 +48,9 @@ a#subh3{background: url(../images/subh3.jpg);}
 a#subh1:hover{background: url(../images/subh1_hover.jpg);}
 a#subh2:hover{background: url(../images/subh2_hover.jpg);}
 a#subh3:hover{background: url(../images/subh3_hover.jpg);}
+a#subh1Active{background: url(../images/subh1_hover.jpg);}
+a#subh2Active{background: url(../images/subh2_hover.jpg);}
+a#subh3Active{background: url(../images/subh3_hover.jpg);}
 
 /************************ content *********************** */
 div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;  font-size: 14px; }
@@ -98,3 +111,6 @@ div#sl1{ background: url(../images/sl1.jpg) no-repeat; display: block; height: 1
 #get p{ width: 140px; float:left; text-align: center; }
 a.savebtn{ background: url(../images/savebtn.jpg) no-repeat; height: 64px;}
 a:hover.savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; height: 64px;}
+
+/*********************flash messages***********************/
+.message { color: #f9e4ca; margin: 10px 0 5px 0; padding: 5px 5px 5px 30px }

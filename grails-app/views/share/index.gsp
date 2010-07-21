@@ -4,19 +4,38 @@
   <meta name="layout" content="main" />
 </head>
 <body>
-  <g:render template="/navigation/createHeaderTemplate" />
+  <div id="header" class="span-23 prepend-1">
+    <a href="${createLink(controller:'home')}" class="span-7" id="logoheader"><span class="hidden">Redneckify</span></a>
+    <div id="mainNav">
+      <a href="${createLink(controller:'create')}" class="span-5" id="redneskifyMeActive"><span class="hidden">Redneckify Me</span></a>
+      <a href="${createLink(controller:'gallery')}" class="span-3" id="gallery"><span class="hidden">Redneckify Me</span></a>
+      <a href="${createLink(controller:'shop')}" class="span-3" id="merch"><span class="hidden">Redneckify Me</span></a>
+      <a href="${resource(uri:'/aboutus')}" class="span-4 last" id="aboutUs"><span class="hidden">Redneckify Me</span></a>
+    </div>
+  </div>
 
   <div id="midNav" class="span-24">
-    <a href="${createLink(controller:'upload')}" class="span-10" id="subh1"></a>
+    <a href="${createLink(controller:'create')}" class="span-10" id="subh1"></a>
     <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
-    <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
+    <a href="${createLink(controller:'share')}" class="span-6" id="subh3Active"></a>
   </div>
+
+  <g:if test="${flash.error}">
+    <div class="error">
+      ${flash.error}
+    </div>
+  </g:if>
+
+  <g:if test="${flash.message}">
+    <div class="message">
+      ${flash.message}
+    </div>
+  </g:if>
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">
-      <a href="#" id="edit">Edit my picture</a>
-      <img src="${image.getImageUrl()}" />
-      <p><a href="#">Redneckify another pic.</a></p>
+      <img width=90% height=90% src="${image.getImageUrl()}" />
+      <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
       <p><strong>Go on. Do it.</strong> You know you want to!</p>
     </div>
 
@@ -31,9 +50,9 @@
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
       <div id="get">
-        <img src="${image.getImageUrl()}" />
-        <img src="${image.getImageUrl()}" />
-        <img class="last" src="${image.getImageUrl()}" />
+        <img width=30% height=30% src="${image.getImageUrl()}" />
+        <img width=30% height=30% src="${image.getImageUrl()}" />
+        <img width=30% height=30% class="last" src="${image.getImageUrl()}" />
         <p>Mens Hoodie<br /><strong>$29</strong> | <a href="#">Git it now</a></p>
         <p>Mens Hoodie<br /><strong>$29</strong> | <a href="#">Git it now</a></p>
         <p>Mens Hoodie<br /><strong>$29</strong> | <a href="#">Git it now</a></p>

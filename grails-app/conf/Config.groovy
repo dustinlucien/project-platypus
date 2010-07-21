@@ -99,6 +99,10 @@
       platypus {
         imageBucket = "project-platypus"
       }
+      
+      buffers {
+        imageStreamingBufferSize = 1024
+      }
     }
 
     development {
@@ -148,6 +152,10 @@
       platypus {
         imageBucket = "project-platypus-development"
       }
+      
+      buffers {
+        imageStreamingBufferSize = 1024
+      }
     }
 
     test {
@@ -166,6 +174,10 @@
 
       platypus {
         imageBucket = "project-platypus-development"
+      }
+      
+      buffers {
+        imageStreamingBufferSize = 1024
       }
     }
 

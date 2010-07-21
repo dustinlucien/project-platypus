@@ -1,6 +1,9 @@
 package com.platypus.controller
 
 class GalleryController {
-
-    def index = { }
+  def imageService
+  
+  def index = {
+    [ images : imageService.listMostRecent() ]
+  }
 }

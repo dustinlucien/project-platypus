@@ -34,10 +34,9 @@ class ImageService {
 		return key;
 	}
 	
-	def listMostRecent(def params = [limit:5,offset:0,page:1]) {
+	def listMostRecent(def params = [offset:0,page:1]) {
 		assert params != null
-		assert params.limit > 0
-		
+				
 		params["sort"] = "dateCreated"
 		params["order"] = "desc"
 		

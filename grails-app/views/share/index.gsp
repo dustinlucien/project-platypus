@@ -4,13 +4,33 @@
   <meta name="layout" content="main" />
 </head>
 <body>
-  <g:render template="/navigation/createHeaderTemplate" />
+  <div id="header" class="span-23 prepend-1">
+    <a href="${createLink(controller:'home')}" class="span-7" id="logoheader"><span class="hidden">Redneckify</span></a>
+    <div id="mainNav">
+      <a href="${createLink(controller:'create')}" class="span-5" id="redneskifyMeActive"><span class="hidden">Redneckify Me</span></a>
+      <a href="${createLink(controller:'gallery')}" class="span-3" id="gallery"><span class="hidden">Redneckify Me</span></a>
+      <a href="${createLink(controller:'shop')}" class="span-3" id="merch"><span class="hidden">Redneckify Me</span></a>
+      <a href="${resource(uri:'/aboutus')}" class="span-4 last" id="aboutUs"><span class="hidden">Redneckify Me</span></a>
+    </div>
+  </div>
 
   <div id="midNav" class="span-24">
     <a href="${createLink(controller:'create')}" class="span-10" id="subh1"></a>
     <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
-    <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
+    <a href="${createLink(controller:'share')}" class="span-6" id="subh3Active"></a>
   </div>
+
+  <g:if test="${flash.error}">
+    <div class="error">
+      ${flash.error}
+    </div>
+  </g:if>
+
+  <g:if test="${flash.message}">
+    <div class="message">
+      ${flash.message}
+    </div>
+  </g:if>
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">

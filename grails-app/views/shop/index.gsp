@@ -1,55 +1,36 @@
 <html>
     <head>
 		<meta name="layout" content="main" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="title" content="title" />
-		<meta name="description" content="Redneckify Me! image" />
-		<meta name="medium" content="image" />
-		<link rel="image_src" href="${images[0].getImageUrl()}" / >
 		<!--<link rel="target_url" href=""/>-->
     </head>
   <body>
-	<div class="span-24 last" id="navigation">
-		<div class="span-24 last" id="l1 navigation">
-			<div class="span-8">
-				<h1>Redneckify</h1>
-			</div>
-			<div class="span-4">
-				<h3><a href="${createLink(controller:'home')}">Redneckify Me!</a></h3>
-			</div>
-			<div class="span-4">
-				<h3><a href="${createLink(controller:'gallery')}">Gallery</a></h3>
-			</div>
-			<div class="span-4">
-				<h3><b>Merchandise</b></h3>
-			</div>
-			<div class="span-4 last">
-				<h3><a href="${resource(uri:'/aboutus')}">About Us</a></h3>
-			</div>
-		</div>
-		<div class="span-24 last" id="l2 navigation">
-			<div class="span-6">
-				<h2>Empty Space</h2>
-			</div>
-			<div class="span-6">
-				<h2>Upload Yer Picture</h2>
-			</div>
-			<div class="span-6">
-				<h2>Redneckify It!</h2>
-			</div>
-			<div class="span-6 last">
-				<h2><b>Share It!</b></h2>
-			</div>
-		</div>
-	</div>	
-	<div class="span-24 last" id="wrapper">
-		<div class"span-6">
-			<img height="320" width="240" src="${images[0].getImageUrl()}" />
-		</div>
-		<div class="span-10" id="sharing">
-			<fb:share-button class="url" type="icon_link"></fb:share-button>
-			<a href="http://twitter.com/home?status=Just Redneckified myself here : http://redneckify.me" title="Click to share on Twitter" target="_blank">Share on Twitter</a>
-		<div>
-	</div>
+    <div id="header" class="span-23 prepend-1">
+      <a href="${createLink(controller:'home')}" class="span-7" id="logoheader"><span class="hidden">Redneckify</span></a>
+      <div id="mainNav">
+        <a href="${createLink(controller:'create')}" class="span-5" id="redneskifyMe"><span class="hidden">Redneckify Me</span></a>
+        <a href="${createLink(controller:'gallery')}" class="span-3" id="gallery"><span class="hidden">Redneckify Me</span></a>
+        <a href="${createLink(controller:'shop')}" class="span-3" id="merchActive"><span class="hidden">Redneckify Me</span></a>
+        <a href="${resource(uri:'/aboutus')}" class="span-4 last" id="aboutUs"><span class="hidden">Redneckify Me</span></a>
+      </div>
+    </div>
+
+    <div id="midNav" class="span-24">
+      <a href="${createLink(controller:'create')}" class="span-10" id="subh1"></a>
+      <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
+      <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
+    </div>
+
+    <g:if test="${flash.error}">
+      <div class="error">
+        ${flash.error}
+      </div>
+    </g:if>
+
+    <g:if test="${flash.message}">
+      <div class="message">
+        ${flash.message}
+      </div>
+    </g:if>
+
   </body>
 </html>

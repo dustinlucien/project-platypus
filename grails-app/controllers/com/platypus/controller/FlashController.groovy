@@ -32,6 +32,10 @@ class FlashController {
     
     def successUrl = taglib.createLink(controller:'flash', action:'postfinish', params:[etoken:session.etoken], absolute:'true')
 
+    if (log.isDebugEnabled) {
+      log.debug "the redirect URL to use following S3 upload : ${successUrl}"
+    }
+    
     def imageKey = imageService.buildUniqueImageKey();
 
     def policy = """\

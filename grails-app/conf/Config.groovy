@@ -45,7 +45,7 @@
 
   tomcat.deploy.username="tomcat"
   tomcat.deploy.password="pl@typu5"
-  tomcat.deploy.url="http://project-platypus.dyndns.org:8080/manager"
+  tomcat.deploy.url="http://project-platypus.dyndns.org/manager"
 
   // set per-environment serverURL stem for creating absolute links
   environments {

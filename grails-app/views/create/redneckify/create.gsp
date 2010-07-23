@@ -70,7 +70,7 @@
 		<!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
 		
 		var xiSwfUrlStr = "${resource(dir:'swf', file: 'playerProductInstall.swf')}";
-		var flashvars = { baseUrl : "http://localhost:8080/project-platypus", userImage : "${createLink(controller:'image', action:'serve')}" };  
+		var flashvars = { baseUrl : "${grailsApplication.config.grails.serverURL}", userImage : "${createLink(controller:'image', action:'serve')}" };  
 		var params = {};
 		params.quality = "high";
 		params.bgcolor = "#f9e4ca";

@@ -2,6 +2,13 @@
 <head>
   <title>Redneckify!</title>
   <meta name="layout" content="main" />
+  <title>${image.getDisplayName()}</title>
+  <meta property="og:title" content="${image.getDisplayName()}"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="${longUrl}"/>
+  <meta property="og:image" content="${image.getImageUrl()}"/>
+  <meta property="og:site_name" content="Redneckify Me!"/>
+  <meta property="fb:app_id" content="${grailsApplication.config.facebook.appId}"/>
 </head>
 <body>
   <div id="header" class="span-23 prepend-1">

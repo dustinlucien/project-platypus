@@ -39,7 +39,7 @@
 	      
 		      <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
 	      
-          <p><a href="#"class="blue" >See all them there rednecks</a></p> 		  
+          <p><a href="${createLink(controller:'gallery')}"class="blue" >See all them there rednecks</a></p> 		  
 		</div>
 
 	  <div class="span-14  prepend-1 last" id="rightContent"> 

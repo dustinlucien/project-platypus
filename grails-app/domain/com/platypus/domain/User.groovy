@@ -22,10 +22,10 @@ class User implements Serializable {
 		}
 	}
 	
-	transient def displayName() {
+	transient def getDisplayName() {
 	  def displayName = "Anonymous"
 	  
-	  if (firsname != null)
+	  if (firstname != null)
 	    displayName = firstname
 	  
 	  if (lastname != null)

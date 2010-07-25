@@ -51,4 +51,11 @@ class ImageController {
       
       log.debug "image served?"
     }
+    
+    def rate ={
+      assert params?.pkey
+      assert params?.stoken
+      
+      
+    }
 }

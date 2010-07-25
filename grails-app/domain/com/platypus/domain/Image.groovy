@@ -41,4 +41,8 @@ class Image implements Serializable {
 	transient def getImageUrl() {
 		return "http://${this.bucket}.s3.amazonaws.com/${this.chiave}"
 	}
+	
+	transient def getDisplayName() {
+    return (title == null) ? "Billy Bob Redneck" : title
+	}
 }

@@ -7,8 +7,12 @@ import java.io.InputStream
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class ImageController {
-
-    def serve = { 
+    static layout = 'admin'
+	  static scaffold = com.platypus.domain.Image
+	  
+    def serve = {
+      
+      if (params?.id == null)
       assert session?.userImageFile
       assert session?.userImageFileContentType
       assert session?.userImageFileIsLocal

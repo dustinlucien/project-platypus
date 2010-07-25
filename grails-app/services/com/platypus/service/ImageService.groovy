@@ -82,8 +82,9 @@ class ImageService {
 		if (image.save()) {
 			return image;
 		} else {
+		  log.error "ERROR : couldn't save new image"
 			image.errors.allErrors.each {
-				println it
+				log.error "${it}"
 			}
 			return null;
 		}

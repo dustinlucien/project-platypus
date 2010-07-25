@@ -10,10 +10,16 @@ class CreateController {
     }
     
     def redneckifyFlow = {
+      home {
+        action {
+          [ images : imageService.listMostRecent([limit:3]) ]
+        }
+        
+        on("success").to("upload")
+      }
+      
       upload {
-        on("submit") {
-          log.debug "inside the submit method"
-        }.to("save")
+        on("submit").to("save")
       }
     
       save {

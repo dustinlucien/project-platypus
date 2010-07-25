@@ -43,8 +43,8 @@
       <p>Already been redneckkified? Need to git at yer pic?<a href="#"> Sign on in right here. Billy Bob</a></p>
       <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
       <ul id="icons">
-        <li><fb:like href="${longUrl}" show_faces="false" /></li>
-        <li><a target="_blank" href="http://twitter.com/home?status=Check out my Redneck self.  Made with @redneckify.  ${shortUrl}" id="tw">Share on Twitter!</a></li>
+        <li><fb:like href="${shareUrl}" show_faces="false" /></li>
+        <li><a href="#" id="tw"></a></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
       <div id="get">

@@ -25,7 +25,7 @@ class ImageService {
 		def date = new DateTime()
 		def format = DateTimeFormat.forPattern("yyyy/MM/dd/");
 		
-		def key = format.print(date) + uuid
+		def key = format.print(date) + uuid + ".jpg"
 		
 		if (log.isDebugEnabled()) {
 			log.debug "generated this unique key " + key;

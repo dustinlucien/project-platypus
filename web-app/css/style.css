@@ -109,8 +109,8 @@ a#ym{ background: url(../images/bg_ym.jpg); }
 div#sl1{ background: url(../images/sl1.jpg) no-repeat; display: block; height: 19px; width: 435px; margin-bottom: 20px;}
 #get img{ background: url(../images/bg_img.jpg) no-repeat; padding: 5px;}
 #get p{ width: 140px; float:left; text-align: center; }
-a.savebtn{ background: url(../images/savebtn.jpg) no-repeat; height: 64px;}
-a:hover.savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; height: 64px;}
+input.savebtn{ display: block; background: url(../images/savebtn.jpg) no-repeat; width: 391; height: 64px;}
+input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; width: 391; height: 64px;}
 
 /*********************flash messages***********************/
 .message { color: #f9e4ca; margin: 10px 0 5px 0; padding: 5px 5px 5px 30px }

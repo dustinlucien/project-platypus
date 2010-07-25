@@ -1,6 +1,6 @@
 package com.platypus.domain
 
-class User {
+class User implements Serializable {
 	String firstname
 	String lastname
 
@@ -16,9 +16,22 @@ class User {
 		facebookUid nullable:true
 	}
 	
-  def beforeInsert() {
-		if (facebookUid == null) {
-			facebookUid = -1
+  transient def beforeInsert() {
+		if (this.facebookUid == null) {
+			this.facebookUid = -1
 		}
 	}
+	
+	transient def getDisplayName() {
+	  def displayName = "Anonymous"
+	  
+	  if (firstname != null)
+	    displayName = firstname
+	  
+	  if (lastname != null)
+	    displayName += lastname
+	  
+	  return displayName  
+	}
+	
 }

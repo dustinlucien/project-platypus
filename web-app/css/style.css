@@ -85,8 +85,8 @@ div.rate{ width: 240px; height: 100px; background: #E0C6A7; display: block; marg
 div.rate p{ color: #371d00; font-size: 12px;}
 div.rate img {float: left; margin-right: 20px;}
 div#yepBubba{ height: 113px; width: 323px; background: url(../images/yepBubba.jpg) no-repeat; }
-a#goOnbtn{ display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
-a:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
+input#goOnbtn{ display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
+input:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
 
 ul.rating { list-style-type: none; margin: 0; padding: 0;}
 ul.rating li{ float: left; margin: 0 1px;}
@@ -109,8 +109,8 @@ a#ym{ background: url(../images/bg_ym.jpg); }
 div#sl1{ background: url(../images/sl1.jpg) no-repeat; display: block; height: 19px; width: 435px; margin-bottom: 20px;}
 #get img{ background: url(../images/bg_img.jpg) no-repeat; padding: 5px;}
 #get p{ width: 140px; float:left; text-align: center; }
-a.savebtn{ background: url(../images/savebtn.jpg) no-repeat; height: 64px;}
-a:hover.savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; height: 64px;}
+input.savebtn{ display: block; background: url(../images/savebtn.jpg) no-repeat; width: 391; height: 64px;}
+input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; width: 391; height: 64px;}
 
 /*********************flash messages***********************/
 .message { color: #f9e4ca; margin: 10px 0 5px 0; padding: 5px 5px 5px 30px }

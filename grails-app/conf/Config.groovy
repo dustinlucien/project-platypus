@@ -96,6 +96,11 @@
         appId = "314398985906"
       }
 
+      bitly {
+        login = "dustinlucien"
+        apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
+      }
+      
       platypus {
         imageBucket = "project-platypus"
       }
@@ -148,7 +153,11 @@
         appId = "130899563611059"
       }
 
-
+      bitly {
+        login = "dustinlucien"
+        apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
+      }
+      
       platypus {
         imageBucket = "project-platypus-development"
       }
@@ -171,7 +180,12 @@
         secretKey = "b887bb1fd73b2f8ec37fbef9d4a64073"
         appId = "130899563611059"
       }
-
+      
+      bitly {
+        login = "dustinlucien"
+        apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
+      }
+      
       platypus {
         imageBucket = "project-platypus-development"
       }

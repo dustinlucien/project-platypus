@@ -6,4 +6,5 @@ class GalleryController {
   def index = {
     [ images : imageService.listMostRecent() ]
   }
+  
 }

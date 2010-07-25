@@ -25,7 +25,7 @@ class ImageService {
 		def date = new DateTime()
 		def format = DateTimeFormat.forPattern("yyyy/MM/dd/");
 		
-		def key = format.print(date) + uuid
+		def key = format.print(date) + uuid + ".jpg"
 		
 		if (log.isDebugEnabled()) {
 			log.debug "generated this unique key " + key;
@@ -82,8 +82,9 @@ class ImageService {
 		if (image.save()) {
 			return image;
 		} else {
+		  log.error "ERROR : couldn't save new image"
 			image.errors.allErrors.each {
-				println it
+				log.error "${it}"
 			}
 			return null;
 		}

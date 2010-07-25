@@ -20,15 +20,14 @@
         <div id="footer">
           <a href="#" class="span-4" id="logofooter"><span class="hidden">Redneckify</span></a>
           <ul class="span-3">
-            <li><a href="#">Redneckify Me</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Merch</a></li>
+            <li><a href="${createLink(controller:'create')}">Redneckify Me</a></li>
+            <li><a href="${createLink(controller:'gallery')}">Gallery</a></li>
+            <li><a href="${createLink(controller:'shop')}">Merch</a></li>
             <li><a href="#">About us</a></li>
           </ul>
           <ul class="span-3">
             <li><a href="#">Twitter</a></li>
             <li><a href="#">Facebook</a></li>
-            <li><a href="#">MySpace</a></li>
           </ul>
           <ul class="span-3">
             <li>Terms of Service</li>

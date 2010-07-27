@@ -1,8 +1,34 @@
 <html>
     <head>
         <title>Git yer pitcher on in there</title>
-		<meta name="layout" content="main" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		    <meta name="layout" content="main" />
+		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		    
+		    <script type="text/javascript">
+  		    function loginToFacebook() {
+            FB.login(function(response) {
+              if (response.session) {
+                if (response.perms) {
+                  alert('logged in with perms:' + response.perms)
+                } else {
+                  alert('no permissions granted')
+                }
+              } else {
+                alert('user not logged in')
+              }
+            }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
+          }
+          
+          function getLoginStatus() {
+            FB.getLoginStatus(function(response) {
+              if (response.session) {
+                alert('logged into facebook')
+              } else {
+                loginToFacebook()
+              }
+            });
+          }
+        </script>
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -39,6 +65,7 @@
 	     -->
 	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
    		<div class="span-12 last" id="upload">
+   		  <button onClick="getLoginStatus()">Find Images on Facebook</button>
          <g:form controller="create" action="redneckify" 
             method="post" enctype="multipart/form-data">
              <input type="file" name="file"/>

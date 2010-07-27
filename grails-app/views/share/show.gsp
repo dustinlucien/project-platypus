@@ -31,8 +31,8 @@
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">
-      <img width="80%" src="${image.getImageUrl()}" />
-      <fb:like href="${longUrl}" show_faces="false" />
+      <img width="400" src="${image.getImageUrl()}" />
+      <fb:comments width="500"></fb:comments>
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">

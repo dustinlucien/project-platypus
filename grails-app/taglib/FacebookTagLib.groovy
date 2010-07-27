@@ -17,9 +17,9 @@ class FacebookTagLib {
 		out << """<script>
 		      window.fbAsyncInit = function() {
 		          FB.init({appId: '${facebookConnectService.getAppId()}', status: true, cookie: true, xfbml: true});
-	                  FB.Event.subscribe('auth.sessionChange', function(response) {
-		             window.location.reload();
-		          });    
+	                  //FB.Event.subscribe('auth.sessionChange', function(response) {
+		          //   window.location.reload();
+		          //});
 		      };
 		      (function() {
 		        var e = document.createElement('script');

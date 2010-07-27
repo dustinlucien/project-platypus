@@ -5,16 +5,6 @@
 		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		    
 		    <script type="text/javascript">
-  		    $(document).ready(function(){
-    		      FB.Event.subscribe('auth.sessionChange', function(response) {
-                alert("sessionChange event")
-              });
-     		      FB.Event.subscribe('auth.login', function(response) {
-                  alert("login event")
-              });            
-            });
-          });
-        
   		    function loginToFacebook() {
             FB.login(function(response) {
               if (response.session) {
@@ -29,16 +19,23 @@
               }
             }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
           }
+
+          function logoutOfFacebook() {
+             FB.logout(function(response) {
+             });
+          }
           
           function getLoginStatus() {
             FB.getLoginStatus(function(response) {
               if (response.session) {
-                alert('logged in')
+                getImagesToDisplay();
               } else {
-                alert('not logged in')
+                FB.Event.subscribe('auth.login', getImagesToDisplay());
+                loginToFacebook()
               }
             });
           }
+
           
           function getImagesToDisplay() {
             FB.api('/me/photos', { limit: 5 }, function(response) {
@@ -90,6 +87,7 @@
 	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
    		<div class="span-12 last" id="upload">
    		  <button onClick="getLoginStatus()">Find Images on Facebook</button>
+   		  <button onClick="logoutOfFacebook()">Logout</button>
          <g:form controller="create" action="redneckify" 
             method="post" enctype="multipart/form-data">
              <input type="file" name="file"/>

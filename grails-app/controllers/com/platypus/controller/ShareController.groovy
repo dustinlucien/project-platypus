@@ -63,6 +63,6 @@ class ShareController {
 
       log.debug "shortUrl back from shortening service : ${shortUrl}"
               
-      return [image : image, longUrl : longUrl, shortUrl : shortUrl]
+      return [image : image, longUrl : longUrl, shortUrl : shortUrl, facebookAppId : grailsApplication.config.facebook.appId]
     }
 }

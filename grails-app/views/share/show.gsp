@@ -8,7 +8,7 @@
   <meta property="og:url" content="${longUrl}"/>
   <meta property="og:image" content="${image.getImageUrl()}"/>
   <meta property="og:site_name" content="Redneckify Me!"/>
-  <meta property="fb:app_id" content="${grailsApplication.config.facebook.appId}"/>
+  <meta property="fb:app_id" content="${facebookAppId}"/>
 </head>
 <body>
   <div id="header" class="span-23 prepend-1">
@@ -27,17 +27,7 @@
     <a href="${createLink(controller:'share')}" class="span-6" id="subh3Active"></a>
   </div>
 
-  <g:if test="${flash.error}">
-    <div class="error">
-      ${flash.error}
-    </div>
-  </g:if>
-
-  <g:if test="${flash.message}">
-    <div class="message">
-      ${flash.message}
-    </div>
-  </g:if>
+  <g:render template="/snippets/flashMessageTemplate" />
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">
@@ -46,8 +36,7 @@
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">
-      <p>Already been redneckkified? Need to git at yer pic?<a href="#"> Sign on in right here. Billy Bob</a></p>
-      <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
+      <h5>Let the whole trailer park know you found a picture of your long lost cousin!</h5>
       <ul id="icons">
         <li><fb:like href="${shareUrl}" show_faces="false" /></li>
         <li><a target="_blank" href="http://twitter.com/home?status=Check this Redneck I found!  Made with @redneckify.  ${shortUrl}" id="tw">Share on Twitter!</a></li>

@@ -41,7 +41,8 @@
   grails.logging.jul.usebridge = true
   // packages to include in Spring bean scanning
   grails.spring.bean.packages = []
-
+  //use jquery instead of prototype
+  grails.views.javascript.library="jquery"
 
   tomcat.deploy.username="tomcat"
   tomcat.deploy.password="pl@typu5"

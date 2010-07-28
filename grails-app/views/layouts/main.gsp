@@ -7,8 +7,13 @@
       <link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'screen.css')}" media="screen, projection" type="text/css"/>
       <link rel="stylesheet" href="${resource(dir:'css/blueprint/src',file:'print.css')}" type="text/css" media="print">	
       <!--[if lt IE 8]><link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'ie.css')}" type="text/css" media="screen, projection"><![endif]-->
-      <g:layoutHead />
+      
       <g:javascript library="application" />
+      <g:javascript library="jquery" plugin="jquery"/>
+      <jqui:resources/>
+      
+      <g:layoutHead />
+     
     </head>
     <body>
       <div class="container">

@@ -1,8 +1,66 @@
 <html>
     <head>
         <title>Git yer pitcher on in there</title>
-		<meta name="layout" content="main" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		    <meta name="layout" content="main" />
+		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		    
+		    <script type="text/javascript">
+  		    function loginToFacebook() {
+            FB.login(function(response) {
+              if (response.session) {
+                if (response.perms) {
+                  getImagesToDisplay()
+                }
+              }
+            }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
+          }
+
+          function logoutOfFacebook() {
+             FB.logout(function(response) {
+               window.location.reload()
+             });
+          }
+          
+          function getLoginStatus() {
+            FB.getLoginStatus(function(response) {
+              if (response.session) {
+                getImagesToDisplay();
+              } else {
+                loginToFacebook()
+              }
+            });
+          }
+
+          
+          function getImagesToDisplay() {
+            FB.api('/me/photos', function(response) {
+              if (!response || response.error) {
+                alert ("error occurred: " + response.error)
+              }
+              
+              var parent = document.createElement('ul')
+              
+              parent.id = 'selectable'
+              
+              for (var i=0, l=response.data.length; i<l; i++) {
+                var photo = response.data[i];
+                var e = document.createElement('img')
+                e.src = photo.picture
+                var li = document.createElement('li')
+                li.className = 'ui-state-default'
+                li.appendChild(e)
+                parent.appendChild(li)
+              }
+              //parent.selectable()
+              document.getElementById('facebook-photos').appendChild(parent);
+              
+              $(function() {
+            		$("#selectable").selectable();
+            	});
+            	
+            });
+          }
+        </script>
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -21,36 +79,29 @@
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
 
-    <g:if test="${flash.error}">
-      <div class="error">
-        ${flash.error}
-      </div>
-    </g:if>
-
-    <g:if test="${flash.message}">
-      <div class="message">
-        ${flash.message}
-      </div>
-    </g:if>
+    <g:render template="/snippets/flashMessageTemplate" />
 
 	<div class="span-24" id="content">
 		<div class="span-7 prepend-1" id="leftContent">
-		  <div class="span-7 pull-1" id="latestR"><span class="hidden">Latest Rednecks</span></div>
-	      
-		      <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
-	      
-          <p><a href="${createLink(controller:'gallery')}"class="blue" >See all them there rednecks</a></p> 		  
+		  <div class="span-7 pull-1" id="latestR">
+		    <span class="hidden">Latest Rednecks</span>
+		  </div>  
+		  <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
+      <p><a href="${createLink(controller:'gallery')}"class="blue" >See all them there rednecks</a></p> 		  
 		</div>
-
-	  <div class="span-14  prepend-1 last" id="rightContent"> 
-
+		
+	  <div class="span-14  prepend-1 last" id="rightContent">
 	     <!--
 	     <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
 	     -->
 	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
+         
+      <div id="facebook-photos"></div>
+         
    		<div class="span-12 last" id="upload">
-         <g:form controller="create" action="redneckify" 
-            method="post" enctype="multipart/form-data">
+   		  <button onClick="getLoginStatus()">Find Images on Facebook</button>
+   		  <button onClick="logoutOfFacebook()">Logout</button>
+         <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
              <input type="file" name="file"/>
       	     <div id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             
              <g:submitButton id="goOnbtn" name="submit" value=""></g:submitButton>

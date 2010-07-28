@@ -20,17 +20,7 @@
     <a href="${createLink(controller:'share')}" class="span-6" id="subh3Active"></a>
   </div>
 
-  <g:if test="${flash.error}">
-    <div class="error">
-      ${flash.error}
-    </div>
-  </g:if>
-
-  <g:if test="${flash.message}">
-    <div class="message">
-      ${flash.message}
-    </div>
-  </g:if>
+  <g:render template="/snippets/flashMessageTemplate" />
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">

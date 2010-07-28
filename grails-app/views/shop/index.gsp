@@ -19,18 +19,6 @@
       <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
-
-    <g:if test="${flash.error}">
-      <div class="error">
-        ${flash.error}
-      </div>
-    </g:if>
-
-    <g:if test="${flash.message}">
-      <div class="message">
-        ${flash.message}
-      </div>
-    </g:if>
-
+    <g:render template="/snippets/flashMessageTemplate" />
   </body>
 </html>

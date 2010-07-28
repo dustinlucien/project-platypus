@@ -10,7 +10,8 @@
       
       <g:javascript library="application" />
       <g:javascript library="jquery" plugin="jquery"/>
-            
+      <jqui:resources/>
+      
       <g:layoutHead />
      
     </head>

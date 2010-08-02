@@ -17,7 +17,7 @@ import org.apache.commons.lang.NotImplementedException;
 
 class HttpClientService {
 
-    boolean transactional = false
+  boolean transactional = false
 
 	private Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
 		def client = new DefaultHttpClient()

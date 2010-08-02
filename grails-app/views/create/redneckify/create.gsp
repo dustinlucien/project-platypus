@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Git yer pitcher on in there</title>
+	<title>You Got A Purty Mouth</title>
 	<meta name="layout" content="main" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
@@ -70,7 +70,7 @@
 		<!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
 		
 		var xiSwfUrlStr = "${resource(dir:'swf', file: 'playerProductInstall.swf')}";
-		var flashvars = { baseUrl : "${grailsApplication.config.grails.serverURL}", userImage : "${createLink(controller:'image', action:'serve')}" };  
+		var flashvars = { baseUrl : "${grailsApplication.config.grails.serverURL.encodeAsURL()}", userImage : "${userImageUrl.encodeAsURL()}" };  
 		var params = {};
 		params.quality = "high";
 		params.bgcolor = "#f9e4ca";

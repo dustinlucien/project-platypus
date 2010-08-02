@@ -2,6 +2,22 @@
 <head>
   <title>Redneckify!</title>
   <meta name="layout" content="main" />
+  <script type="text/javascript">
+    function postTheImage() {
+      FB.login(function(response) {
+        if (response.session) {
+          if (response.perms) {
+            //AJAX request to post the image, then remove the button
+            $.get("${createLink(controller:'share', action:'pubtofb', params : [image : image.pkey, st : stoken ])}",
+              function(data){
+                alert("Response from pubtofb: " + data);
+                $('#facebook-post-button').attr('disabled', 'true')
+              });
+          }
+        }
+      }, {perms:'publish_stream, user_photos, friends_photos, user_photo_video_tags'});      
+    }
+  </script>
 </head>
 <body>
   <div id="header" class="span-23 prepend-1">
@@ -23,14 +39,9 @@
   <g:render template="/snippets/flashMessageTemplate" />
 
   <div class="span-24" id="content">
-    <div class="span-10 prepend-1">
+    <div class="span-10 prepend-1" id="leftContent">
       <img width="95%" src="${image.getImageUrl()}" />
       <fb:like href="${longUrl}" show_faces="false" />
-      <g:form controller="gallery" action="add" method="post" enctype="multipart/form-data">
-        <label for="title">Title</label><g:textField name="title" value="My Redneck Self" />
-        <g:submitButton class="savebtn" name="submit" value=""></g:submitButton>
-      </g:form>
-            
       <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
       <p><strong>Go on. Do it.</strong> You know you want to!</p>
     </div>
@@ -38,7 +49,7 @@
     <div class="span-11 prepend-1 last" id="rightContent">
       <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
       <ul id="icons">
-        <li><fb:like href="${longUrl}" show_faces="false" /></li>
+        <li><button onclick="postTheImage()" id="facebook-post-button">Post this image to Facebook</button></li>
         <li><a target="_blank" href="http://twitter.com/home?status=Check out my Redneck self.  Made with @redneckify.  ${shortUrl}" id="tw">Share on Twitter!</a></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>

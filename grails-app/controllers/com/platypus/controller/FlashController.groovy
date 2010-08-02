@@ -71,9 +71,9 @@ class FlashController {
 		  flash.message = "There was an error in the upload flow.  Please try again"
 		} else {
 		  
-  		imageService.saveNewImage(params, userService.getCurrentUser(request))
+  		def image = imageService.saveNewImage(params, userService.getCurrentUser(request))
   		
-  		redirect(controller:'create',action:'redneckify',params:[_eventId:'finish', execution: (execution + "s2")])
+  		redirect(controller:'create',action:'redneckify',params:[_eventId:'finish', image:image.pkey, execution: (execution + "s2")])
 	  }
 	}
 }

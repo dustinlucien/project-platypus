@@ -1,25 +1,31 @@
 package com.platypus.service
 
-import org.springframework.beans.factory.InitializingBean
-import java.security.MessageDigest
-import javax.servlet.http.HttpServletRequest
+import org.springframework.beans.factory.InitializingBean;
+import java.security.MessageDigest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 
 import com.restfb.Connection;
-import com.restfb.FacebookClient
-import com.restfb.DefaultFacebookClient
+import com.restfb.FacebookClient;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.types.FacebookType;
 import com.restfb.types.Album;
 import com.restfb.types.Photo;
 import com.restfb.types.User;
+import com.restfb.Parameter;
 
-import java.lang.Long
-import java.util.concurrent.atomic.AtomicBoolean
+import java.lang.Long;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import java.net.URL;
 
 class FacebookConnectService implements InitializingBean {
   
   boolean transactional = false
+  
+  def imageService
   
   private FacebookClient client
   private String appId
@@ -127,5 +133,29 @@ class FacebookConnectService implements InitializingBean {
     User user = client.fetchObject("${this.cachedUid}", User.class)
     
     return user.getPicture()
+  }
+  
+  def getPhotoDetails(def objectId) {
+    assert this.loggedIn.get()
+    
+    Photo photo = client.fetchObject("${objectId}", Photo.class)
+    
+    log.debug "returned a photo object + ${photo}"
+    
+    return ['url' : photo.getSource()]
+  }
+  
+  def publishImage(def image, def message) {
+    assert this.loggedIn.get()
+    
+    def imageStream = imageService.openStream(image)
+    
+    FacebookType publishPhotoResponse = facebookClient.publish("${this.cachedUid}/photos", 
+                                                                FacebookType.class, imageStream, 
+                                                                Parameter.with("message", message));
+
+    log.debug("Published photo ID: " + publishPhotoResponse.getId());
+    
+    return true
   }
 }

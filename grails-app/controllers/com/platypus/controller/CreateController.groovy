@@ -1,9 +1,10 @@
 package com.platypus.controller
 
-class CreateController {
+import com.platypus.domain.Image
 
-    def userService
+class CreateController {
     def imageService
+    def facebookConnectService
     
     def index = {
       redirect(action:"redneckify")
@@ -19,20 +20,40 @@ class CreateController {
       }
       
       upload {
-        on("submit").to("save")
+        on("submit").to("saveImage")
       }
     
-      save {
+      saveImage {
         action {
-          def userImageParams = imageService.saveUploadedFile(request.getFile('file'))
-
-          if (log.isDebugEnabled()) {
-            log.debug "user image params returned from saveUploadedFile {$userImageParams}"
-          }
+          def file = request.getFile('file')
+          def oParams = [:]
           
-          session.userImageFile = userImageParams.url
-          session.userImageFileIsLocal = userImageParams.local
-          session.userImageFileContentType = userImageParams.contentType
+          if (!file.empty) {
+            def results = imageService.saveUploadedFile(request.getFile('file'))
+            
+            if (results) {
+              session.imagePath = results.path
+              session.imageContentType = results.contentType
+              oParams['st'] = session.stoken
+              oParams['ct'] = results.suffix
+              oParams['t'] = 'l'
+           } else {
+             error()
+           }
+            
+          } else if (params?.facebookfile){
+            log.debug "got a facebook image with id ${params.facebookfile}";
+            oParams['o'] = params.facebookfile
+            oParams['st'] = session.stoken
+            oParams['t'] = 'fb'
+          } else {
+            error()
+          }
+        
+          def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+          def userImageUrl = taglib.createLink(controller:'image', action:'serve', params : oParams)
+          
+          [ userImageUrl : userImageUrl ]
         }
         
         on("success") {
@@ -40,7 +61,6 @@ class CreateController {
             hack! remove if flash can handle an execution param
           */
           session.flowExecution = params.execution.substring(0, params.execution.length() - 2)
-          
         }.to("create")
         
         on("error") {
@@ -49,7 +69,49 @@ class CreateController {
       }
       
       create {
-        on("finish").to("share")
+        on("finish").to("getImage")
+      }
+      
+      getImage {
+        action {
+          if (!params?.image) {
+            log.error "No image key was found in the request"
+            error()
+          }
+          
+          def image = Image.findByPkey(params.image)
+          
+          if (!image) {
+            log.error "Could not find image referenced by Pkey ${params.image}"
+            error()
+          }
+          
+          flow.image = image
+        }
+        
+        on("success").to("info")
+      }
+      
+      info {
+        on("submit").to("saveName")
+      }
+      
+      saveName {
+        action {
+          def image = flow.image
+          
+          if (params?.title) {
+            image.title = params.title
+            
+            if (!image.save()) {
+              log.error "ERROR : couldn't save new image"
+        			image.errors.allErrors.each {
+        				log.error "${it}"
+        			}
+            }
+          }
+        }
+        on("success").to("share")
       }
       
       share {

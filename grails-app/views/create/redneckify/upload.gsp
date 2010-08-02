@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Git yer pitcher on in there</title>
+        <title>Git Yer Pitcher On In There</title>
 		    <meta name="layout" content="main" />
 		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		    
@@ -9,7 +9,7 @@
             FB.login(function(response) {
               if (response.session) {
                 if (response.perms) {
-                  getImagesToDisplay()
+                  getImagesToDisplay(15, 0)
                 }
               }
             }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
@@ -24,7 +24,7 @@
           function getLoginStatus() {
             FB.getLoginStatus(function(response) {
               if (response.session) {
-                getImagesToDisplay();
+                getImagesToDisplay(15, 0);
               } else {
                 loginToFacebook()
               }
@@ -32,30 +32,74 @@
           }
 
           
-          function getImagesToDisplay() {
-            FB.api('/me/photos', function(response) {
+          function getImagesToDisplay(fbLimit, fbOffset) {           
+            FB.api('/me/photos', { limit: fbLimit, offset: fbOffset }, function(response) {
               if (!response || response.error) {
-                alert ("error occurred: " + response.error)
+                alert ("Problem with Facebook API request: " + response.error)
               }
               
-              var parent = document.createElement('ul')
+              var ulist = document.createElement('ul')
               
-              parent.id = 'selectable'
+              ulist.id = 'selectable'
               
               for (var i=0, l=response.data.length; i<l; i++) {
                 var photo = response.data[i];
                 var e = document.createElement('img')
                 e.src = photo.picture
+ 
                 var li = document.createElement('li')
                 li.className = 'ui-state-default'
+                li.id = photo.id
                 li.appendChild(e)
-                parent.appendChild(li)
+                ulist.appendChild(li)
               }
-              //parent.selectable()
-              document.getElementById('facebook-photos').appendChild(parent);
+              
+              var parent = document.createElement('div')
+              parent.id ="facebook-photos"
+              parent.className = "span-12 last"
+              
+              var tempDiv = document.createElement('div')
+              tempDiv.className = 'photos'
+              
+              tempDiv.appendChild(ulist)
+
+              parent.appendChild(tempDiv)
+              
+              var prevButton = document.createElement('button')
+              if ((fbOffset - fbLimit) >= 0) {
+               prevButton.onclick = function(){getImagesToDisplay(fbLimit, fbOffset - fbLimit);};
+              } else {
+                prevButton.disabled = 'true'
+              }
+              
+              prevButton.innerHTML = '<< Previous'
+              
+              tempDiv = document.createElement('div')
+              tempDiv.className = 'span-12 last'
+              tempDiv.id = 'buttons'
+              
+              tempDiv.appendChild(prevButton)
+              
+              var nextButton = document.createElement('button')
+              if (response.data.length < fbLimit) {
+                nextButton.disabled = 'true'
+              } else {
+                nextButton.onclick = function(){getImagesToDisplay(fbLimit, fbLimit + fbOffset);};                
+              }
+              nextButton.innerHTML = 'Next >>'
+              
+              tempDiv.appendChild(nextButton)
+              
+              parent.appendChild(tempDiv)
+              
+              $('#facebook-photos').replaceWith(parent);
               
               $(function() {
-            		$("#selectable").selectable();
+            		$('#selectable').selectable({
+                   selected: function(event, ui) {
+                     $('#externalfile').attr('name', 'facebookfile').attr('value', ui.selected.id);
+                   }
+                });
             	});
             	
             });
@@ -96,13 +140,14 @@
 	     -->
 	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
          
-      <div id="facebook-photos"></div>
+      <div id="facebook-photos" class="span-12 last">
+        <button onclick="getLoginStatus()">Find Images on Facebook</button>
+      </div>
          
    		<div class="span-12 last" id="upload">
-   		  <button onClick="getLoginStatus()">Find Images on Facebook</button>
-   		  <button onClick="logoutOfFacebook()">Logout</button>
          <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
              <input type="file" name="file"/>
+             <input type="hidden" id="externalfile" name="externalfile" />
       	     <div id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             
              <g:submitButton id="goOnbtn" name="submit" value=""></g:submitButton>
          </g:form>

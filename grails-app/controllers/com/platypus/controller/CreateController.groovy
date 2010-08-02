@@ -45,14 +45,14 @@ class CreateController {
             log.debug "got a facebook image with id ${params.facebookfile}";
             oParams['o'] = params.facebookfile
             oParams['st'] = session.stoken
-            oParams['t'] = 'fb'
+            oParams['t'] = 'fb'            
           } else {
             error()
           }
         
           def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
           def userImageUrl = taglib.createLink(controller:'image', action:'serve', params : oParams)
-          
+
           [ userImageUrl : userImageUrl ]
         }
         

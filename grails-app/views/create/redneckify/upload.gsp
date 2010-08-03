@@ -30,7 +30,30 @@
               }
             });
           }
-
+          
+          function getAlbumsToDisplay(fbLimit, fbOffset) {
+            FB.api('/me/albums'), { limit: fbLimit, offset: fbOffset }, function(response) {
+              if (!response || response.error) {
+                alert ("Problem with Facebook API request: " + response.error)
+              }
+              var ulist = document.createElement('ul')
+              ulist.id = 'selectable'
+              
+              if (fbOffset = 0) {
+                //put the tagged photos as 'album' 0
+              }
+            });
+          }
+          
+          function buildSelectable(imgUrl, liId) {
+            var e = document.createElement('img')
+            e.src = imgUrl
+            
+            var li = document.createElement('li')
+            li.className = 'ui-state-default'
+            li.id = liId
+            li.appendChild(e)
+          }
           
           function getImagesToDisplay(fbLimit, fbOffset) {           
             FB.api('/me/photos', { limit: fbLimit, offset: fbOffset }, function(response) {
@@ -39,19 +62,12 @@
               }
               
               var ulist = document.createElement('ul')
-              
               ulist.id = 'selectable'
               
               for (var i=0, l=response.data.length; i<l; i++) {
                 var photo = response.data[i];
-                var e = document.createElement('img')
-                e.src = photo.picture
- 
-                var li = document.createElement('li')
-                li.className = 'ui-state-default'
-                li.id = photo.id
-                li.appendChild(e)
-                ulist.appendChild(li)
+                
+                ulist.appendChild(buildSelectable(photo.src, photo.id))
               }
               
               var parent = document.createElement('div')

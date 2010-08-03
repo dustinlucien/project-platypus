@@ -4,16 +4,14 @@
   <meta name="layout" content="main" />
   <script type="text/javascript">
     function postTheImage() {
-      FB.login(function(response) {
+      FB.getLoginStatus(function(response) {
         if (response.session) {
-          if (response.perms) {
-            //AJAX request to post the image, then remove the button
-            $.get("${createLink(controller:'share', action:'pubtofb', params : [image : image.pkey, st : stoken ])}",
-              function(data){
-                alert("Response from pubtofb: " + data);
-                $('#facebook-post-button').attr('disabled', 'true')
-              });
-          }
+          //AJAX request to post the image, then remove the button
+          $.get("${createLink(controller:'share', action:'pubtofb', params : [image : image.pkey, st : stoken ])}",
+            function(data){
+              console.log("response form pubtofb" + data)
+              $('#facebook-post-button').attr('disabled', 'true')
+            });
         }
       }, {perms:'publish_stream, user_photos, friends_photos, user_photo_video_tags'});      
     }

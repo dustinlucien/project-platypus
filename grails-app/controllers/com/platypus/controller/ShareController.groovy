@@ -6,8 +6,8 @@ class ShareController {
   
     def userService
     def imageService
-    def facebookService
     def urlShortenerService
+    def facebookConnectService
     
     def index = {
       def user = userService.getCurrentUser(request)
@@ -105,14 +105,14 @@ class ShareController {
 
       def shortUrl = urlShortenerService.shortenUrl(longUrl)
       
-      def message = '''I just created an image with Redneckify!  Make one of your own here ${shortUrl}'''
+      def message = "I just created an image with Redneckify!  Make one of your own here ${shortUrl}"
       
       if (!facebookConnectService.publishImage(image, message)) {
         log.error "Had trouble posting the image to Facebook"
       }
       
       response.status = 200
-      render()
+      render ""
       return;
     }
 }

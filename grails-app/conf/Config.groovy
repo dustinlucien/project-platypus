@@ -43,7 +43,9 @@
   grails.spring.bean.packages = []
   //use jquery instead of prototype
   grails.views.javascript.library="jquery"
-
+  //disable the jsessionid on the url.  security risk
+  grails.views.enable.jsessionid=false
+  
   tomcat.deploy.username="tomcat"
   tomcat.deploy.password="pl@typu5"
   tomcat.deploy.url="http://project-platypus.dyndns.org/manager"

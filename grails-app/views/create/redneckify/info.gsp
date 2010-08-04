@@ -28,7 +28,7 @@
     	  <div class="span-14  prepend-1 last" id="rightContent">
     	    <img width="95%" src="${image.getImageUrl()}" />
     	    <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
-            <label for="title">Title</label><g:textField name="title" value="My Redneck Self" />
+            <label for="title">Title</label><g:textField class="title" name="title" value="My Redneck Self" />
             <g:submitButton name="submit" value="Save the details"></g:submitButton>
           </g:form>
     	  </div>

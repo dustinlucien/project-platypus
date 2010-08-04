@@ -157,4 +157,13 @@ class FacebookConnectService implements InitializingBean {
     
     return true
   }
+  
+  def publishMessageToFeed(def message) {
+    assert this.loggedIn
+    
+    FacebookType response = facebookClient.publish("${this.cachedUid}/feed", 
+                                                    FacebookType.class, 
+                                                    Parameter.with("message", message));
+    
+  }
 }

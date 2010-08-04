@@ -25,12 +25,7 @@ class Image implements Serializable {
 	
 	transient def beforeInsert() {
 	  if (this.pkey == null) {
-  	  def random = new Random()
-      def randomInt = random.nextInt((int)Image.count() + 1) + 10000
-    
-      log.debug "randomInt generated beforeInsert : ${randomInt}"
-    
-      def pkey = BaseConverterUtil.toBase62(randomInt)
+      def pkey = BaseConverterUtil.toBase62(Image.count() + 1000000)
     
       log.debug "pkey generated beforeInsert : ${pkey}"
     

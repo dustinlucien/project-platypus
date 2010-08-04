@@ -111,6 +111,9 @@ class ShareController {
         log.error "Had trouble posting the image to Facebook"
       }
       
+      if (!facebookConnectService.publishMessageToFeed(message)) {
+        
+      }
       response.status = 200
       render ""
       return;

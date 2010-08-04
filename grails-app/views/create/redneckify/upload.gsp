@@ -54,35 +54,17 @@
             
             return li
           }
-          
-          function getAlbumsToDisplay(fbLimit, fbOffset) {
-            FB.api('/me/albums', { limit: fbLimit, offset: fbOffset }, function(response) {
-              if (!response || response.error) {
-                alert ("Problem with Facebook API request: " + response.error)
-              }
-              var ulist = document.createElement('ul')
-              ulist.id = 'selectable'
-              
-              //if (fbOffset == 0) {
-                //buildSelectable()
-              //}
-              
-              var session = FB.getSession()
-              if (session == null) {
-                console.log('null returned for the session object')
-                return
-              }
-              
-              for (var i=0, l=response.data.length; i<l; i++) {
-                var album = response.data[i];
-                FB.api(album.id + '/photos', { limit:1, offset:0 }, function(photos) {
+
+          function buildClosureForPhotosResponse(selectableList, album) {
+              return function(photos) {
                   if (!photos || photos.error) {
-                    alert('Problem with Facebook API request' + photos.error)
+                      alert('Problem with Facebook API request' + photos.error)
                   }
-                  ulist.appendChild(buildSelectable(photos.data[0].picture, album.id, album.name))
-                });
-              }
-              
+                  selectableList.appendChild(buildSelectable(photos.data[0].picture, album.id, album.name))
+              };
+          }
+
+          function buildImagesPagingContainer(fbLimit, fbOffset, selectableList, getSelectableClosure) {
               var parent = document.createElement('div')
               parent.id ="facebook-photos"
               parent.className = "span-12 last"
@@ -90,13 +72,13 @@
               var tempDiv = document.createElement('div')
               tempDiv.className = 'photos'
               
-              tempDiv.appendChild(ulist)
+              tempDiv.appendChild(selectableList)
 
               parent.appendChild(tempDiv)
               
               var prevButton = document.createElement('button')
               if ((fbOffset - fbLimit) >= 0) {
-               prevButton.onclick = function(){getAlbumsToDisplay(fbLimit, fbOffset - fbLimit);};
+               prevButton.onclick = function(){getSelectableClosure(fbLimit, fbOffset - fbLimit);};
               } else {
                 prevButton.disabled = 'true'
               }
@@ -113,13 +95,46 @@
               if (response.data.length < fbLimit) {
                 nextButton.disabled = 'true'
               } else {
-                nextButton.onclick = function(){getAlbumsToDisplay(fbLimit, fbLimit + fbOffset);};                
+                nextButton.onclick = function(){getSelectableClosure(fbLimit, fbLimit + fbOffset);};                
               }
               nextButton.innerHTML = 'Next >>'
               
               tempDiv.appendChild(nextButton)
               
-              parent.appendChild(tempDiv)
+              parent.appendChild(tempDiv)              
+          }
+
+          function buildAlbumsToDisplayClosure() {
+              return function(limit, offset) {
+                  return getAlbumsToDisplay(limit, offset)
+              }
+          }
+
+          function buildImagesToDisplayClosure() {
+              return function(limit, offset) {
+                  return getImagesToDisplay(limit, offset)
+              }
+          }
+             
+          function getAlbumsToDisplay(fbLimit, fbOffset) {
+            FB.api('/me/albums', { limit: fbLimit, offset: fbOffset }, function(albums) {
+              if (!albums || albums.error) {
+                alert ("Problem with Facebook API request: " + response.error)
+              }
+
+              var selectableList = document.createElement('ul')
+              selectableList.id = 'selectable'
+              
+              //if (fbOffset == 0) {
+                //buildSelectable()
+              //}
+              
+              for (var i=0, l=albums.data.length; i<l; i++) {
+                var album = albums.data[i];
+                FB.api(album.id + '/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, album));
+              }
+              
+              var parent = buildImagesPagingContainer(fbLimit, fbOffset, selectableList, buildGetAlbumsToDisplayClosure())
               
               $('#facebook-photos').replaceWith(parent);
               
@@ -130,7 +145,6 @@
                    }
                 });
             	});
-            	              
             });
           }
           
@@ -141,52 +155,16 @@
                 alert ("Problem with Facebook API request: " + response.error)
               }
               
-              var ulist = document.createElement('ul')
-              ulist.id = 'selectable'
+              var selectableList = document.createElement('ul')
+              selectableList.id = 'selectable'
               
               for (var i=0, l=response.data.length; i<l; i++) {
                 var photo = response.data[i];
                 
-                ulist.appendChild(buildSelectable(photo.picture, photo.id, null))
+                selectableList.appendChild(buildSelectable(photo.picture, photo.id, null))
               }
               
-              var parent = document.createElement('div')
-              parent.id ="facebook-photos"
-              parent.className = "span-12 last"
-              
-              var tempDiv = document.createElement('div')
-              tempDiv.className = 'photos'
-              
-              tempDiv.appendChild(ulist)
-
-              parent.appendChild(tempDiv)
-              
-              var prevButton = document.createElement('button')
-              if ((fbOffset - fbLimit) >= 0) {
-               prevButton.onclick = function(){getImagesToDisplay(fbLimit, fbOffset - fbLimit);};
-              } else {
-                prevButton.disabled = 'true'
-              }
-              
-              prevButton.innerHTML = '<< Previous'
-              
-              tempDiv = document.createElement('div')
-              tempDiv.className = 'span-12 last'
-              tempDiv.id = 'buttons'
-              
-              tempDiv.appendChild(prevButton)
-              
-              var nextButton = document.createElement('button')
-              if (response.data.length < fbLimit) {
-                nextButton.disabled = 'true'
-              } else {
-                nextButton.onclick = function(){getImagesToDisplay(fbLimit, fbLimit + fbOffset);};                
-              }
-              nextButton.innerHTML = 'Next >>'
-              
-              tempDiv.appendChild(nextButton)
-              
-              parent.appendChild(tempDiv)
+              var parent = buildImagesPagingContainer(fbLimit, fbOffset, selectableList, buildGetImagesToDisplayClosure());
               
               $('#facebook-photos').replaceWith(parent);
               

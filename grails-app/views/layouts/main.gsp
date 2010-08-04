@@ -31,7 +31,7 @@
             <li><a href="#">About us</a></li>
           </ul>
           <ul class="span-3">
-            <li><a href="#">Twitter</a></li>
+            <li><a href="http://twitter.com/redneckify">Twitter</a></li>
             <li><a href="#">Facebook</a></li>
           </ul>
           <ul class="span-3">

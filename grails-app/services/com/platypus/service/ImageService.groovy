@@ -10,6 +10,9 @@ import java.util.UUID
 import com.platypus.util.BaseConverterUtil
 import org.springframework.web.context.request.RequestContextHolder
 
+import java.net.URL;
+import java.io.InputStream;
+
 class ImageService {
 
   static final def mimeMap = ['image/png' : 'png', 'image/jpeg' : 'jpg', 'image/gif' : 'gif']
@@ -34,12 +37,12 @@ class ImageService {
 		return key;
 	}
 	
-	def listMostRecent(def params = [offset:0,page:1]) {
+	def listMostRecent(def params = [limit : 20]) {
 		assert params != null
 				
 		params["sort"] = "dateCreated"
 		params["order"] = "desc"
-		
+
 		return Image.list(params)
 	}
 	
@@ -123,8 +126,7 @@ class ImageService {
 	  def session = RequestContextHolder.currentRequestAttributes().getSession()
 	  
 	  def localFile = session.createTempFile("platypus-upload", suffix)
-	  
-	  //localFile.deleteOnExit()
+	  localFile.deleteOnExit()
 	  
 	  log.debug "the local file is : ${localFile.getPath()}"
 	  
@@ -134,16 +136,10 @@ class ImageService {
 	    log.error(e)
 	  }
 	  
-	  return [ 'url': localFile.getPath(), 'contentType' : contentType, 'local' : true ]
+	  return [ 'path': localFile.getPath(), 'suffix' : suffix, 'contentType' : contentType]
 	}
 	
-	/*
-	def listMostPopular(def params = [limit:5,offset:0,page:1]) {
-		
+	InputStream openStream(def image) {
+	  return new URL(image.getImageUrl()).openStream()
 	}
-	
-	def listHighestRated(def params = [limit:5,offset:0,page:1]) {
-		
-	}
-	*/
 }

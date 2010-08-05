@@ -9,7 +9,7 @@
             FB.login(function(response) {
               if (response.session) {
                 if (response.perms) {
-                  getImagesToDisplay(15, 0)
+                  getAlbumsToDisplay(15, 0)
                 }
               }
             }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
@@ -24,7 +24,6 @@
           function getLoginStatus() {
             FB.getLoginStatus(function(response) {
               if (response.session) {
-                //getImagesToDisplay(15, 0);
                 getAlbumsToDisplay(15,0)
               } else {
                 loginToFacebook()
@@ -32,68 +31,113 @@
             });
           }
           
-          function buildSelectable(imgUrl, liId, text) {
+          function buildSelectable(imgUrl, liId, liText) {
             //var e = document.createElement('img')
             //e.src = imgUrl
                         
             var li = document.createElement('li')
             li.className = 'ui-state-default'
-            li.id = liId
             
-            li.style.background = "url(" + imgUrl + ")";
-            li.style.backgroundRepeat = "no-repeat"
-            li.style.backgroundColor = "#FFFFFF"
-            li.style.backgroundPosition = "center"
-            li.style.fontSize = "1em"
-            
-            if (text != null) {
-              li.innerHTML = text
+            if (liId != null) {
+              li.id = liId
             }
             
-            //li.appendChild(e)
+            if (imgUrl != null) {
+              li.style.background = "url(" + imgUrl + ")";
+              li.style.backgroundRepeat = "no-repeat"
+              li.style.backgroundPosition = "center"
+              li.style.backgroundColor = '#FFFFFF'
+            }
             
+            if (liText != null) {
+              li.innerHTML = liText
+              li.style.fontSize = "1em"
+            }
+            
+            //li.appendChild(e)            
             return li
           }
+
+          function replaceAndEnableAlbumSelectable(parent) {
+            $('#facebook-photos').replaceWith(parent);
+
+            $(function() {
+          		$('#selectable').selectable({
+                 selected: function(event, ui) {
+                   $('#select-album').attr('disabled', false).attr('value', ui.selected.id);
+                 }
+              });
+          	});
+          }
+          
+          function replaceAndEnableImageSelectable(parent) {
+            $('#facebook-photos').replaceWith(parent);
+
+            $(function() {
+          		$('#selectable').selectable({
+          		   selecting: function(event, ui) {
+          		     ui.selecting.style.backgroundColor = '#FECA40';
+          		   },
+                 selected: function(event, ui) {
+                   ui.selected.style.backgroundColor = '#F39814';
+                   $('#externalfile').attr('name', 'facebookfile').attr('value', ui.selected.id);
+                 },
+                 unselecting: function(event, ui) {
+                   ui.unselecting.style.backgroundColor = '#FECA40';
+                 },
+                 unselected: function(event, ui) {
+                   ui.unselected.style.backgroundColor = '#FFFFFF'
+                 }
+              });
+          	});
+          }          
 
           function buildClosureForPhotosResponse(selectableList, album) {
               return function(photos) {
                   if (!photos || photos.error) {
                       alert('Problem with Facebook API request' + photos.error)
                   }
+                  
+                  if (photos.data.length == 0) {
+                    return
+                  }
+                  
                   selectableList.appendChild(buildSelectable(photos.data[0].picture, album.id, album.name))
               };
           }
 
-          function buildImagesPagingContainer(fbLimit, fbOffset, selectableList, getSelectableClosure) {
+
+          function buildSelectablePagingContainer(fbLimit, fbOffset, enableNextButton, selectableList, getSelectableClosure) {
+              
               var parent = document.createElement('div')
               parent.id ="facebook-photos"
               parent.className = "span-12 last"
-              
+            
               var tempDiv = document.createElement('div')
               tempDiv.className = 'photos'
               
               tempDiv.appendChild(selectableList)
-
+              
               parent.appendChild(tempDiv)
               
+              tempDiv = document.createElement('div')
+              tempDiv.className = 'span-12 last'
+              tempDiv.id = 'controls'
+                            
               var prevButton = document.createElement('button')
               if ((fbOffset - fbLimit) >= 0) {
                prevButton.onclick = function(){getSelectableClosure(fbLimit, fbOffset - fbLimit);};
               } else {
-                prevButton.disabled = 'true'
+                prevButton.disabled = true
               }
               
               prevButton.innerHTML = '<< Previous'
               
-              tempDiv = document.createElement('div')
-              tempDiv.className = 'span-12 last'
-              tempDiv.id = 'buttons'
-              
               tempDiv.appendChild(prevButton)
               
               var nextButton = document.createElement('button')
-              if (response.data.length < fbLimit) {
-                nextButton.disabled = 'true'
+              if (enableNextButton) {
+                nextButton.disabled = true
               } else {
                 nextButton.onclick = function(){getSelectableClosure(fbLimit, fbLimit + fbOffset);};                
               }
@@ -101,18 +145,32 @@
               
               tempDiv.appendChild(nextButton)
               
-              parent.appendChild(tempDiv)              
+              parent.appendChild(tempDiv)
+              
+              return parent;            
           }
 
-          function buildAlbumsToDisplayClosure() {
+          function buildAlbumSelectButton() {
+            var selectButton = document.createElement('button')
+            selectButton.id = 'select-album'
+            selectButton.innerHTML = 'Select Album'
+            selectButton.disabled = true
+            selectButton.onclick = function() {
+              getImagesToDisplay(this.value, 15, 0)
+            }
+            
+            return selectButton
+          }
+          
+          function buildGetAlbumsToDisplayClosure() {
               return function(limit, offset) {
                   return getAlbumsToDisplay(limit, offset)
               }
           }
 
-          function buildImagesToDisplayClosure() {
+          function buildGetImagesToDisplayClosure(albumId) {
               return function(limit, offset) {
-                  return getImagesToDisplay(limit, offset)
+                  return getImagesToDisplay(albumId, limit, offset)
               }
           }
              
@@ -125,60 +183,67 @@
               var selectableList = document.createElement('ul')
               selectableList.id = 'selectable'
               
-              //if (fbOffset == 0) {
-                //buildSelectable()
-              //}
-              
-              for (var i=0, l=albums.data.length; i<l; i++) {
-                var album = albums.data[i];
-                FB.api(album.id + '/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, album));
+              if (fbOffset == 0) {
+                var taggedAlbum = new Object()
+                taggedAlbum.id = 'tagged'
+                taggedAlbum.name = 'Tagged Photos'
+                
+                FB.api('/me/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, taggedAlbum));
               }
               
-              var parent = buildImagesPagingContainer(fbLimit, fbOffset, selectableList, buildGetAlbumsToDisplayClosure())
+              for (var i=0, l=albums.data.length; i<l; i++) {
+                var album = albums.data[i]
+                FB.api(album.id + '/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, album));
+              }
+
+              var parent = buildSelectablePagingContainer(fbLimit, fbOffset, (albums.data.length < fbLimit), 
+                                                          selectableList, buildGetAlbumsToDisplayClosure())
+                                                          
+
+              jQuery('#controls', parent).append(buildAlbumSelectButton())
+
+              replaceAndEnableAlbumSelectable(parent);
               
-              $('#facebook-photos').replaceWith(parent);
-              
-              $(function() {
-            		$('#selectable').selectable({
-                   selected: function(event, ui) {
-                     $('#externalfile').attr('name', 'facebookfile').attr('value', ui.selected.id);
-                   }
-                });
-            	});
+              //add a button to select a folder
             });
           }
           
 
-          function getImagesToDisplay(fbLimit, fbOffset) {           
-            FB.api('/me/photos', { limit: fbLimit, offset: fbOffset }, function(response) {
-              if (!response || response.error) {
-                alert ("Problem with Facebook API request: " + response.error)
+          function getImagesToDisplay(albumId, fbLimit, fbOffset) {
+            var apiMethod = ''
+            if (albumId == 'tagged') {
+              apiMethod = '/me/photos'
+            } else {
+              apiMethod = '/' + albumId + '/photos'
+            }
+            
+            FB.api(apiMethod, { limit: fbLimit, offset: fbOffset }, function(photos) {
+              if (!photos || photos.error) {
+                alert ("Problem with Facebook API request: " + photos.error)
               }
               
               var selectableList = document.createElement('ul')
               selectableList.id = 'selectable'
               
-              for (var i=0, l=response.data.length; i<l; i++) {
-                var photo = response.data[i];
+              for (var i=0, l=photos.data.length; i<l; i++) {
+                var photo = photos.data[i];
                 
                 selectableList.appendChild(buildSelectable(photo.picture, photo.id, null))
               }
               
-              var parent = buildImagesPagingContainer(fbLimit, fbOffset, selectableList, buildGetImagesToDisplayClosure());
+              var parent = buildSelectablePagingContainer(fbLimit, fbOffset, (photos.data.length < fbLimit),
+                                                          selectableList, buildGetImagesToDisplayClosure(albumId));
               
-              $('#facebook-photos').replaceWith(parent);
-              
-              $(function() {
-            		$('#selectable').selectable({
-                   selected: function(event, ui) {
-                     $('#externalfile').attr('name', 'facebookfile').attr('value', ui.selected.id);
-                   }
-                });
-            	});
-            	
+            	replaceAndEnableImageSelectable(parent)
             });
           }
         </script>
+        <style type="text/css">
+        	#selectable .ui-selecting { background: #FECA40; }
+        	#selectable .ui-selected { background: #F39814; color: white; }
+        	#selectable .ui-state-default { background: #FFFFFF; color: white;}
+        </style>
+        
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">

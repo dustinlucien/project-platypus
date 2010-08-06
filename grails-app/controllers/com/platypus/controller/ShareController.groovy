@@ -112,7 +112,7 @@ class ShareController {
       }
       
       if (!facebookConnectService.publishMessageToFeed(message)) {
-        
+        log.error "Had trouble posting the message to Facebook"
       }
       response.status = 200
       render ""

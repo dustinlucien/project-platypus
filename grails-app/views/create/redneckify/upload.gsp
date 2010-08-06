@@ -2,8 +2,8 @@
     <head>
         <title>Git Yer Pitcher On In There</title>
 		    <meta name="layout" content="main" />
-		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		    
+        <g:javascript library="jquery" plugin="jquery"/>
+        <jqui:resources/>
 		    <script type="text/javascript">
   		    function loginToFacebook() {
             FB.login(function(response) {
@@ -31,10 +31,7 @@
             });
           }
           
-          function buildSelectable(imgUrl, liId, liText) {
-            //var e = document.createElement('img')
-            //e.src = imgUrl
-                        
+          function buildSelectable(imgUrl, liId, liText) {                        
             var li = document.createElement('li')
             li.className = 'ui-state-default'
             
@@ -53,8 +50,6 @@
               li.innerHTML = liText
               li.style.fontSize = "1em"
             }
-            
-            //li.appendChild(e)            
             return li
           }
 
@@ -63,9 +58,19 @@
 
             $(function() {
           		$('#selectable').selectable({
-                 selected: function(event, ui) {
-                   $('#select-album').attr('disabled', false).attr('value', ui.selected.id);
-                 }
+          		  selecting: function(event, ui) {
+         		      ui.selecting.style.backgroundColor = '#FECA40';
+         		    },
+                selected: function(event, ui) {
+                  ui.selected.style.backgroundColor = '#F39814';
+                  $('#select-album').attr('disabled', false).attr('value', ui.selected.id);
+                },
+                unselecting: function(event, ui) {
+                  ui.unselecting.style.backgroundColor = '#FECA40';
+                },
+                unselected: function(event, ui) {
+                  ui.unselected.style.backgroundColor = '#FFFFFF'
+                }                
               });
           	});
           }
@@ -108,7 +113,6 @@
 
 
           function buildSelectablePagingContainer(fbLimit, fbOffset, enableNextButton, selectableList, getSelectableClosure) {
-              
               var parent = document.createElement('div')
               parent.id ="facebook-photos"
               parent.className = "span-12 last"
@@ -183,6 +187,7 @@
               var selectableList = document.createElement('ul')
               selectableList.id = 'selectable'
               
+              /*
               if (fbOffset == 0) {
                 var taggedAlbum = new Object()
                 taggedAlbum.id = 'tagged'
@@ -190,6 +195,7 @@
                 
                 FB.api('/me/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, taggedAlbum));
               }
+              */
               
               for (var i=0, l=albums.data.length; i<l; i++) {
                 var album = albums.data[i]
@@ -210,13 +216,15 @@
           
 
           function getImagesToDisplay(albumId, fbLimit, fbOffset) {
+            /*
             var apiMethod = ''
             if (albumId == 'tagged') {
               apiMethod = '/me/photos'
             } else {
               apiMethod = '/' + albumId + '/photos'
             }
-            
+            */
+            var apiMethod = '/' + albumId + '/photos'
             FB.api(apiMethod, { limit: fbLimit, offset: fbOffset }, function(photos) {
               if (!photos || photos.error) {
                 alert ("Problem with Facebook API request: " + photos.error)
@@ -238,12 +246,8 @@
             });
           }
         </script>
-        <style type="text/css">
-        	#selectable .ui-selecting { background: #FECA40; }
-        	#selectable .ui-selected { background: #F39814; color: white; }
-        	#selectable .ui-state-default { background: #FFFFFF; color: white;}
-        </style>
         
+		    <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=${grailsApplication.config.twitter.apiKey}&v=1"></script>        
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">

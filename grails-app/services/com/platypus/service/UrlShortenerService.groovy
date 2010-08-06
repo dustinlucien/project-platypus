@@ -30,6 +30,6 @@ class UrlShortenerService implements InitializingBean {
     assert response != null
     assert response.code == 200
     
-    return response.response
+    return response.response.trim()
   }
 }

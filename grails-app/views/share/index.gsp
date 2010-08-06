@@ -2,6 +2,9 @@
 <head>
   <title>Redneckify!</title>
   <meta name="layout" content="main" />
+  <g:javascript library="jquery" plugin="jquery"/>
+  <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=${grailsApplication.config.twitter.apiKey}&v=1" ></script>
+    
   <script type="text/javascript">
     function postTheImage() {
       FB.getLoginStatus(function(response) {
@@ -40,6 +43,9 @@
     <div class="span-10 prepend-1" id="leftContent">
       <img width="95%" src="${image.getImageUrl()}" />
       <fb:like href="${longUrl}" show_faces="false" />
+      <br/>
+      <span id="tweet-box"></span>
+      <br/>  
       <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
       <p><strong>Go on. Do it.</strong> You know you want to!</p>
     </div>
@@ -48,7 +54,7 @@
       <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
       <ul id="icons">
         <li><button onclick="postTheImage()" id="facebook-post-button">Post this image to Facebook</button></li>
-        <li><a target="_blank" href="http://twitter.com/home?status=Check out my Redneck self.  Made with @redneckify.  ${shortUrl}" id="tw">Share on Twitter!</a></li>
+        <li><span id="follow-placeholder"></span></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
       <div id="get">
@@ -63,5 +69,19 @@
       <a href="">Check out more gear to Redneckify here!</a>
     </div>
   </div>
+  <script type="text/javascript">
+
+    twttr.anywhere(function (T) {
+      T("#tweet-box").tweetBox({
+         height: 100,
+         width: 350,
+         defaultContent: "Check out my Redneck self.  Made with @redneckify.  ${shortUrl} ",
+         label: "Git it on with the lil' birdie"
+       });
+      
+      T("#follow-placeholder").followButton('redneckify');
+    });
+    
+  </script>
 </body>
 </html>

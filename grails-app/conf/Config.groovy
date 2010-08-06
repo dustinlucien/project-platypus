@@ -135,14 +135,14 @@
         'com.restfb'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-        'org.codehaus.groovy.grails.commons', // core / classloading
-        'org.codehaus.groovy.grails.web.pages', //  GSP
-        'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-        'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-        'org.codehaus.groovy.grails.web.mapping', // URL mapping
-        'org.codehaus.groovy.grails.plugins', // plugins
-        'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-        'org.springframework'
+                'org.codehaus.groovy.grails.commons', // core / classloading
+                'org.codehaus.groovy.grails.web.pages', //  GSP
+                'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+                'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+                'org.codehaus.groovy.grails.web.mapping', // URL mapping
+                'org.codehaus.groovy.grails.plugins', // plugins
+                'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+                'org.springframework'
       }
 
       amazonaws {
@@ -159,6 +159,12 @@
       bitly {
         login = "dustinlucien"
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
+      }
+      
+      twitter {
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+        consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
       }
       
       platypus {

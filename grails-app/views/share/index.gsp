@@ -3,20 +3,35 @@
   <title>Redneckify!</title>
   <meta name="layout" content="main" />
   <g:javascript library="jquery" plugin="jquery"/>
-  <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=${grailsApplication.config.twitter.apiKey}&v=1" ></script>
-    
+  <g:twitterAnywhereResources />
   <script type="text/javascript">
-    function postTheImage() {
-      FB.getLoginStatus(function(response) {
+    function loginToFacebook() {
+      FB.login(function(response) {
         if (response.session) {
-          //AJAX request to post the image, then remove the button
-          $.get("${createLink(controller:'share', action:'pubtofb', params : [image : image.pkey, st : stoken ])}",
-            function(data){
-              console.log("response form pubtofb" + data)
-              $('#facebook-post-button').attr('disabled', 'true')
-            });
+          if (response.perms) {
+            postTheImage()
+          }
         }
-      }, {perms:'publish_stream, user_photos, friends_photos, user_photo_video_tags'});      
+      }, {perms:'publish_stream'});
+    }
+    
+    function getLoginStatus() {
+      FB.getLoginStatus(function(response) {
+          if (response.session) {
+            //checkExistingPerms()
+            postTheImage()
+          } else {
+            loginToFacebook()
+          }
+        });
+      }
+    
+    function postTheImage() {
+      $.get("${createLink(controller:'share', action:'sajaxpubtofb', params : [image : image.pkey, st : stoken])}",
+        function(data){
+          console.log("response form pubtofb" + data)
+          $('#facebook-post-button').attr('disabled', 'true')
+        });
     }
   </script>
 </head>
@@ -41,19 +56,23 @@
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1" id="leftContent">
-      <img width="95%" src="${image.getImageUrl()}" />
-      <fb:like href="${longUrl}" show_faces="false" />
-      <br/>
-      <span id="tweet-box"></span>
-      <br/>  
-      <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
-      <p><strong>Go on. Do it.</strong> You know you want to!</p>
+      <div>
+        <img width="375" src="${image.getImageUrl()}" />
+      </div>
+      <div>
+        <br/>
+        <fb:like href="${longUrl}" show_faces="false" />
+        <br/>
+        <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
+        <p><strong>Go on. Do it.</strong> You know you want to!</p>
+      </div>
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">
       <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
       <ul id="icons">
         <li><button onclick="postTheImage()" id="facebook-post-button">Post this image to Facebook</button></li>
+        <li><span id="tweet-box"></span></li>
         <li><span id="follow-placeholder"></span></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
@@ -74,14 +93,16 @@
     twttr.anywhere(function (T) {
       T("#tweet-box").tweetBox({
          height: 100,
-         width: 350,
+         width: 400,
          defaultContent: "Check out my Redneck self.  Made with @redneckify.  ${shortUrl} ",
          label: "Git it on with the lil' birdie"
        });
       
-      T("#follow-placeholder").followButton('redneckify');
+      T("#follow-placeholder").followButton("${grailsApplication.config.twitter.username}");
     });
     
   </script>
+  
+  <g:facebookConnectJavascript />
 </body>
 </html>

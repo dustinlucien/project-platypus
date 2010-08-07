@@ -110,6 +110,7 @@ class CreateController {
         			}
             }
           }
+          //Post a status update to facebook and twitter here
         }
         on("success").to("share")
       }

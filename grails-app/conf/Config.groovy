@@ -49,7 +49,7 @@
   tomcat.deploy.username="tomcat"
   tomcat.deploy.password="pl@typu5"
   tomcat.deploy.url="http://project-platypus.dyndns.org/manager"
-
+  
   // set per-environment serverURL stem for creating absolute links
   environments {
     production {
@@ -92,6 +92,11 @@
         secretKey = "eXngZaPMhnwhACEHevUQFP7dwY2/jw6tGK/K5Hod"
       }
 
+      google {
+        accountCode = "UA-17797647-3"
+        domainName = "redneckify.me"
+      }
+      
       facebook {
         //These two values need to be grabbed from facebook when you create your application there.	
         apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
@@ -104,12 +109,19 @@
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
       }
       
+      twitter {
+        username = "platypusdev"
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+        consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+      }
+      
       platypus {
         imageBucket = "project-platypus"
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 
@@ -145,6 +157,11 @@
                 'org.springframework'
       }
 
+      google {
+        accountCode = "UA-17797647-3"
+        domainName = "localhost"
+      }
+      
       amazonaws {
         apiKey = "AKIAJUJNIBYO3FIT77MQ"
         secretKey = "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"
@@ -162,6 +179,7 @@
       }
       
       twitter {
+        username = "platypusdev"
         apiKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
@@ -172,7 +190,7 @@
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 

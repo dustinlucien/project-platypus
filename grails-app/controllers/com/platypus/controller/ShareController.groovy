@@ -36,7 +36,7 @@ class ShareController {
       
       log.debug "shortUrl back from shortening service : ${shortUrl}"
       
-      return [ image : image, longUrl : longUrl, shortUrl : shortUrl, stoken : session.stoken]
+      return [ image : image, longUrl : longUrl, shortUrl : shortUrl]
     }
     
     def show = {
@@ -67,7 +67,7 @@ class ShareController {
       return [image : image, longUrl : longUrl, shortUrl : shortUrl, facebookAppId : grailsApplication.config.facebook.appId]
     }
     
-    def pubtofb = {
+    def sajaxpubtofb = {
       if (!params?.st || (params.st != session.stoken)) {
         response.status = 403
         render "Incorrect security token"

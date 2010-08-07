@@ -6,7 +6,14 @@ class UserController {
 	
 	def facebookConnectService
 	
-	def fblogin = {
+	def sajaxsessionevent = {
 	  facebookConnectService.handleAuthEvent(request)
+	  response.status = 200
+	  render ""
+	  return
+	}
+	
+	def sajaxedgeevent = {
+	  //TODO
 	}
 }

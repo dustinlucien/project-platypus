@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="${resource(dir:'css/blueprint/src',file:'print.css')}" type="text/css" media="print">	
       <!--[if lt IE 8]><link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'ie.css')}" type="text/css" media="screen, projection"><![endif]-->
       <g:layoutHead />
+      <g:googleAnalytics />
     </head>
     <body>
       <div class="container">
@@ -26,7 +27,7 @@
           </ul>
           <ul class="span-3">
             <li><a href="http://twitter.com/redneckify">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+            <li><a href="http://www.facebook.com/redneckify">Facebook</a></li>
           </ul>
           <ul class="span-3">
             <li>Terms of Service</li>
@@ -38,6 +39,5 @@
           </ul>
         </div>
       </div>
-      <g:facebookConnectJavascript />
     </body>
 </html>

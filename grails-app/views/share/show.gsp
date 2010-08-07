@@ -32,14 +32,17 @@
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">
       <img width="400" src="${image.getImageUrl()}" />
-      <fb:comments width="500"></fb:comments>
+      <fb:like href="${longUrl}" show_faces="false" />
+      <br/>
+      <span id="tweet-box"></span>
+      <br/>
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">
       <h5>Let the whole trailer park know you found a picture of your long lost cousin!</h5>
       <ul id="icons">
-        <li><fb:like href="${shareUrl}" show_faces="false" /></li>
-        <li><a target="_blank" href="http://twitter.com/home?status=Check this Redneck I found!  Made with @redneckify.  ${shortUrl}" id="tw">Share on Twitter!</a></li>
+        <li><fb:like href="${longUrl}" show_faces="false" /></li>
+        <li><span id="follow-placeholder"></span></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
       <div id="get">
@@ -52,5 +55,18 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+    twttr.anywhere(function (T) {
+      T("#tweet-box").tweetBox({
+         height: 100,
+         width: 350,
+         defaultContent: "Y'all need to see this picture on @redneckify.  ${shortUrl}",
+         label: "Git it on with the lil' birdie"
+       });
+      
+      T("#follow-placeholder").followButton("${grailsApplication.config.twitter.username}");
+    });
+    
+  </script>
 </body>
 </html>

@@ -2,8 +2,10 @@
     <head>
         <title>Git Yer Pitcher On In There</title>
 		    <meta name="layout" content="main" />
+        
         <g:javascript library="jquery" plugin="jquery"/>
         <jqui:resources/>
+        
 		    <script type="text/javascript">
   		    function loginToFacebook() {
             FB.login(function(response) {
@@ -246,8 +248,6 @@
             });
           }
         </script>
-        
-		    <script type="text/javascript" src="http://platform.twitter.com/anywhere.js?id=${grailsApplication.config.twitter.apiKey}&v=1"></script>        
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -274,7 +274,7 @@
 		    <span class="hidden">Latest Rednecks</span>
 		  </div>  
 		  <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
-      <p><a href="${createLink(controller:'gallery')}"class="blue" >See all them there rednecks</a></p> 		  
+      <p><a href="${createLink(controller:'gallery')}" class="blue" >See all them there rednecks</a></p> 		  
 		</div>
 		
 	  <div class="span-14  prepend-1 last" id="rightContent">
@@ -297,5 +297,7 @@
    		</div>
 	   </div>	  
 	</div>
+	<span>${flash.stoken}</span>
+	<g:facebookConnectJavascript stoken="${flash.stoken}" />
   </body>
 </html>

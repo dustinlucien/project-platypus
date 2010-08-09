@@ -9,6 +9,8 @@
   <meta property="og:image" content="${image.getImageUrl()}"/>
   <meta property="og:site_name" content="Redneckify Me!"/>
   <meta property="fb:app_id" content="${facebookAppId}"/>
+  <g:javascript library="jquery" plugin="jquery"/>
+  <g:twitterAnywhereResources />  
 </head>
 <body>
   <div id="header" class="span-23 prepend-1">
@@ -31,11 +33,15 @@
 
   <div class="span-24" id="content">
     <div class="span-10 prepend-1">
-      <img width="400" src="${image.getImageUrl()}" />
-      <fb:like href="${longUrl}" show_faces="false" />
-      <br/>
-      <span id="tweet-box"></span>
-      <br/>
+      <div>
+        <img width="400" src="${image.getImageUrl()}" />
+      </div>
+      <div>
+        <fb:like href="${longUrl}" show_faces="false" />
+        <br/>
+        <span id="tweet-box"></span>
+        <br/>
+      </div>
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">
@@ -68,5 +74,7 @@
     });
     
   </script>
+  
+  <g:facebookConnectJavascript />  
 </body>
 </html>

@@ -10,7 +10,7 @@ class DebuggingFilters {
         log.debug "-------------------ENTERING ${controllerName}-----------------------------"
         log.debug "request params : ${params}"
         log.debug "calling action      : ${actionName}"
-        log.debug "facebook login status : ${facebookConnectService.isLoggedIn()}"
+//        log.debug "facebook login status : ${facebookConnectService.isLoggedIn()}"
         log.debug "------------------------------------------------"
       }
       after = {

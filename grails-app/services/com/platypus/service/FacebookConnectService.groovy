@@ -112,8 +112,9 @@ class FacebookConnectService implements InitializingBean {
     if (!this.loggedIn) {
       //give it the old college try
       def request = RequestContextHolder.currentRequestAttributes().getRequest()
-      this.handlAuthEvent(request)
+      this.handleAuthEvent(request)
     }
+    
     return this.loggedIn
   }
   

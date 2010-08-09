@@ -33,6 +33,7 @@
         ${flash.message}
       </div>
     </g:if>
+    
   	<div class="span-24" id="content">
   		<div class="span-7 prepend-1" id="leftContent">
   		</div>
@@ -48,7 +49,7 @@
    <script type="text/javascript">
 
      twttr.anywhere(function (T) {
-       T("#follow-placeholder").followButton('redneckify');
+       T("#follow-placeholder").followButton("${grailsApplication.config.twitter.username}");
      });
 
    </script>     

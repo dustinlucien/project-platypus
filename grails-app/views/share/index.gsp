@@ -27,7 +27,7 @@
       }
     
     function postTheImage() {
-      $.get("${createLink(controller:'share', action:'sajaxpubtofb', params : [image : image.pkey, st : stoken])}",
+      $.get("${createLink(controller:'share', action:'sajaxpubtofb', params : [image : image.pkey, st : flash.stoken])}",
         function(data){
           console.log("response form pubtofb" + data)
           $('#facebook-post-button').attr('disabled', 'true')

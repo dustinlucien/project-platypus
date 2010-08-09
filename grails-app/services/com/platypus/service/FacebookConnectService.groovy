@@ -55,7 +55,7 @@ class FacebookConnectService implements InitializingBean {
     return this.appId
   }
   
-  public void handleAuthEvent(def request) {
+  public void parseCookies(def request) {
     log.debug "cookies:"
     
     request.cookies.each { log.debug "name : ${it.name} value: ${it.value}" }
@@ -112,11 +112,12 @@ class FacebookConnectService implements InitializingBean {
     if (!this.loggedIn) {
       //give it the old college try
       def request = RequestContextHolder.currentRequestAttributes().getRequest()
-      this.handlAuthEvent(request)
+      this.parseCookies(request)
     }
+    
     return this.loggedIn
   }
-  
+    
   def listPhotos(def offset=0, def limit=-1) {
     assert this.isLoggedIn()
         
@@ -168,9 +169,43 @@ class FacebookConnectService implements InitializingBean {
   def publishMessageToFeed(def message) {
     assert this.isLoggedIn()
     
-    FacebookType response = facebookClient.publish("${this.cachedUid}/feed", 
-                                                    FacebookType.class, 
-                                                    Parameter.with("message", message));
+    FacebookType response = client.publish("${this.cachedUid}/feed", 
+                                            FacebookType.class, 
+                                            Parameter.with("message", message));
     
+  }
+  
+  def populateUserWithFacebookProfile(def user) {
+    assert this.isLoggedIn()
+    
+    User fbUser = client.fetchObject("${this.cachedUid}", User.class);
+    
+    if (fbUser) {
+      user.facebookUid = this.cachedUid
+      user.firstname = fbUser.getFirstName()
+      user.lastname = fbUser.getLastName()
+      user.email = fbUser.getEmail()
+      user.location = fbUser.getLocation().getName()
+      user.gender = fbUser.getGender()
+    }
+  }
+  
+  def getFacebookProfileParams() {
+    assert this.isLoggedIn()
+    
+    User fbUser = client.fetchObject("${this.cachedUid}", User.class);
+    
+    def params = [:]
+   
+    if (fbUser) {
+      params.facebookUid = this.cachedUid
+      params.firstname = fbUser.getFirstName()
+      params.lastname = fbUser.getLastName()
+      params.email = fbUser.getEmail()
+      params.location = fbUser.getLocation().getName()
+      params.gender = fbUser.getGender()
+    }
+    
+    return params
   }
 }

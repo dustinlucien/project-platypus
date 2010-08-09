@@ -218,7 +218,7 @@
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 

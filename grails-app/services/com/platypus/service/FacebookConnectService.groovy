@@ -3,6 +3,8 @@ package com.platypus.service
 import org.springframework.beans.factory.InitializingBean;
 import java.security.MessageDigest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
@@ -87,7 +89,7 @@ class FacebookConnectService implements InitializingBean {
       log.debug "cachedAccessToken ${this.cachedAccessToken}"
       
       this.client = new DefaultFacebookClient(this.cachedAccessToken)
-      //this.client = new DefaultFacebookClient('2227470867|2.8UReIc1M3huqe0lt1f6xKA__.3600.1277791200-621241239|CKqQu6RdqDR87bQ8aeO22mtgHEA.')
+
       log.debug "setting facebookconnectservice.loggedIn to true"
       this.loggedIn = true
     } else {
@@ -101,17 +103,22 @@ class FacebookConnectService implements InitializingBean {
   }
   
   public Long getUid() {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     return this.cachedUid
   }
   
   public boolean isLoggedIn() {
+    if (!this.loggedIn) {
+      //give it the old college try
+      def request = RequestContextHolder.currentRequestAttributes().getRequest()
+      this.handlAuthEvent(request)
+    }
     return this.loggedIn
   }
   
   def listPhotos(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
         
     Connection<Photo> photos = client.fetchConnection("${this.cachedUid}/photos", Photo.class)
 
@@ -119,7 +126,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def listAlbums(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     Connection<Album> albums = client.fetchConnection("${this.cachedUid}/albums", Album.class)
     
@@ -127,7 +134,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def getProfilePicture() {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     User user = client.fetchObject("${this.cachedUid}", User.class)
     
@@ -135,7 +142,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def getPhotoDetails(def objectId) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     Photo photo = client.fetchObject("${objectId}", Photo.class)
     
@@ -145,7 +152,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def publishImage(def image, def message) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     def imageStream = imageService.openStream(image)
     
@@ -159,7 +166,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def publishMessageToFeed(def message) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     FacebookType response = facebookClient.publish("${this.cachedUid}/feed", 
                                                     FacebookType.class, 

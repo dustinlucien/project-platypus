@@ -22,12 +22,14 @@ class FacebookTagLib {
 		           
 		           \$.get(ajaxurl, function(data){
                    console.log('response from sajaxsessionevent' + data)
-                   \$('#facebook-post-button').attr('disabled', 'true')
                  });    
 		        });
 		        FB.Event.subscribe('edge.create', function(response) {
-		          console.log('liked something')
-		          console.log(response)
+		           var ajaxurl = '${createLink(controller:'user', action:'sajaxedgeevent', params : [st : attrs.stoken])}'
+		          
+		           \$.get(ajaxurl, function(data){
+                  console.log('response from sajaxedgeevent' + data)
+                });
 		        });
 		      };
 		      (function() {

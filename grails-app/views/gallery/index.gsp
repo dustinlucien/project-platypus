@@ -22,10 +22,11 @@
     
     <g:render template="/snippets/flashMessageTemplate" />
     
-	<div class="span-24" id="content">
-  		<div class="span-7 prepend-1" id="leftContent">
-        <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
-      </div>
-	 </div>
+	  <div class="span-24" id="content">
+    		<div class="span-7 prepend-1" id="leftContent">
+          <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
+        </div>
+  	</div>
+	 <g:facebookConnectJavascript stoken="${flash.stoken}" />
   </body>
 </html>

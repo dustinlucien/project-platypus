@@ -37,17 +37,14 @@
         <img width="400" src="${image.getImageUrl()}" />
       </div>
       <div>
-        <fb:like href="${longUrl}" show_faces="false" />
-        <br/>
-        <span id="tweet-box"></span>
-        <br/>
+          <fb:like href="${longUrl}" show_faces="false" />
       </div>
     </div>
 
     <div class="span-11 prepend-1 last" id="rightContent">
       <h5>Let the whole trailer park know you found a picture of your long lost cousin!</h5>
       <ul id="icons">
-        <li><fb:like href="${longUrl}" show_faces="false" /></li>
+        <li><span id="tweet-box"></span></li>
         <li><span id="follow-placeholder"></span></li>
       </ul>
       <div id="sl1" class="clear"><span class="hidden">Mugs, shirts, mouse pads - get yer redneck self on anything!</span></div>
@@ -75,6 +72,6 @@
     
   </script>
   
-  <g:facebookConnectJavascript />  
+  <g:facebookConnectJavascript stoken="${flash.stoken}"/>  
 </body>
 </html>

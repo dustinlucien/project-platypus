@@ -60,9 +60,9 @@
         <img width="375" src="${image.getImageUrl()}" />
       </div>
       <div>
-        <br/>
         <fb:like href="${longUrl}" show_faces="false" />
-        <br/>
+      </div>
+      <div>
         <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
         <p><strong>Go on. Do it.</strong> You know you want to!</p>
       </div>
@@ -103,6 +103,6 @@
     
   </script>
   
-  <g:facebookConnectJavascript />
+  <g:facebookConnectJavascript stoken="${flash.stoken}"/>
 </body>
 </html>

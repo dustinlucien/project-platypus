@@ -7,7 +7,7 @@ class GoogleAnalyticsTagLib {
       out << '''<!-- BEGIN: Javascript for Google Analytics -->'''
   		out << '''\n'''
 		
-      out << '''
+      out << """
               <script type="text/javascript">
 
                 var _gaq = _gaq || [];
@@ -23,7 +23,7 @@ class GoogleAnalyticsTagLib {
                 })();
 
               </script>
-            '''
+            """
     
       out << '''\n'''
   		out << '''<!-- END: Javascript for Google Analytics -->'''

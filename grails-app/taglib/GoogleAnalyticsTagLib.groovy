@@ -8,7 +8,7 @@ class GoogleAnalyticsTagLib {
   		out << '''\n'''
 		
       out << """
-              <script type="text/javascript">
+              <script type=\"text/javascript\">
 
                 var _gaq = _gaq || [];
                 _gaq.push(['_setAccount', '${grailsApplication.config.google.accountCode}']);

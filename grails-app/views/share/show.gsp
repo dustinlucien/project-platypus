@@ -71,7 +71,5 @@
     });
     
   </script>
-  
-  <g:facebookConnectJavascript stoken="${flash.stoken}"/>  
 </body>
 </html>

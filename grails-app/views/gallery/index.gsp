@@ -27,6 +27,5 @@
           <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
         </div>
   	</div>
-	 <g:facebookConnectJavascript stoken="${flash.stoken}" />
   </body>
 </html>

@@ -297,6 +297,5 @@
    		</div>
 	   </div>	  
 	</div>
-	<g:facebookConnectJavascript stoken="${flash.stoken}" />
   </body>
 </html>

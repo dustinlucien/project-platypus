@@ -17,7 +17,7 @@ class ImageService {
 
   static final def mimeMap = ['image/png' : 'png', 'image/jpeg' : 'jpg', 'image/gif' : 'gif']
   
-  boolean transactional = false
+  static transactional = false
 	
 	def buildUniqueImageKey() {
 		/*

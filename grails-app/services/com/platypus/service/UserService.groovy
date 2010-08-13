@@ -8,7 +8,7 @@ import com.platypus.domain.Image
 
 class UserService {
 
-  boolean transactional = false
+  static transactional = false
 
   def imageService
 	def facebookConnectService

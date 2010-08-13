@@ -20,7 +20,8 @@ import org.apache.commons.lang.NotImplementedException;
 
 
 class RestClientService implements RestClient {
-
+  static transactional = false
+  
 	def httpClientService
 
 	public Map get(String url, Map params, ResponseHandler handler = null) {

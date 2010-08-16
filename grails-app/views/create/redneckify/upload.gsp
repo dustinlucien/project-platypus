@@ -5,6 +5,7 @@
         
         <g:javascript library="jquery" plugin="jquery"/>
         <jqui:resources/>
+        <g:twitterTweetButtonResources />
         
 		    <script type="text/javascript">
   		    function loginToFacebook() {

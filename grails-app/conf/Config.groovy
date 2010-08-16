@@ -114,6 +114,8 @@
         apiKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
       }
       
       platypus {
@@ -183,6 +185,8 @@
         apiKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerKey = "l5ISiphqMnhQ5S57FWwrA"
         consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
       }
       
       platypus {

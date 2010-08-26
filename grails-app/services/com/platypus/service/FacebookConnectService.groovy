@@ -199,7 +199,7 @@ class FacebookConnectService implements InitializingBean {
       user.firstname = fbUser.getFirstName()
       user.lastname = fbUser.getLastName()
       user.email = fbUser.getEmail()
-      user.location = fbUser.getLocation().getName()
+      user.location = fbUser.getLocation()?.getName()
       user.gender = fbUser.getGender()
     }
   }
@@ -216,7 +216,7 @@ class FacebookConnectService implements InitializingBean {
       params.firstname = fbUser.getFirstName()
       params.lastname = fbUser.getLastName()
       params.email = fbUser.getEmail()
-      params.location = fbUser.getLocation().getName()
+      params.location = fbUser.getLocation()?.getName()
       params.gender = fbUser.getGender()
     }
     

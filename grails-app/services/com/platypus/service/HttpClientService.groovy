@@ -23,7 +23,7 @@ class HttpClientService {
 		def client = new DefaultHttpClient()
 		
 		try {
-			def response = client.execute(method, (handler == null) ? internalHandler : handler);
+			def response = client.execute(method, handler);
 			if (response == null) {
 				return [ response : null, code : 500 ]
 			} else {

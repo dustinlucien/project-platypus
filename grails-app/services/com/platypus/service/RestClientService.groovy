@@ -1,4 +1,4 @@
-package com.platypus.service
+package com.platypus.service;
 
 import com.platypus.rest.RestClient;
 
@@ -89,7 +89,7 @@ class RestClientService implements RestClient {
 		throw new NotImplementedException("HTTP HEAD not yet implemeneted");		
 	}
 	
-	private Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
+	protected Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
 		return httpClientService.execute(method, (handler == null) ? new BasicResponseHandler() : handler);
 	}
 }

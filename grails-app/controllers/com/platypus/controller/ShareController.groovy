@@ -32,6 +32,7 @@ class ShareController {
       def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
 
       def longUrl = taglib.createLink(controller:'share', action:'show', id:"${image.pkey}", absolute:'true')
+      
       def shortUrl = urlShortenerService.shortenUrl(longUrl)
       
       log.debug "shortUrl back from shortening service : ${shortUrl}"

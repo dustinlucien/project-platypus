@@ -5,6 +5,8 @@ import com.platypus.domain.Image
 class CreateController {
     def imageService
     def facebookConnectService
+    def twitterService
+    def urlShortenerService
     
     def index = {
       redirect(action:"redneckify")
@@ -111,6 +113,18 @@ class CreateController {
             }
           }
           //Post a status update to facebook and twitter here
+          log.debug "posting a status update to twitter"
+          
+          def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+
+          def longUrl = taglib.createLink(controller:'share', action:'show', id:"${image.pkey}", absolute:'true')
+
+          def shortUrl = urlShortenerService.shortenUrl(longUrl)
+          
+          def message = "New Redneck \"${image.title}\" just posted.  Check 'er out ${shortUrl}"
+          
+          twitterService.statusUpdateForOurAccount(message)
+          log.debug "status update pposted"
         }
         on("success").to("share")
       }

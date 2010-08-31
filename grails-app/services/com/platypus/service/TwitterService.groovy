@@ -1,14 +1,15 @@
-package com.platypus.service;
+package com.platypus.service
 
-import com.platypus.rest.RestClient;
-import com.platypus.service.RestClientService;
+import com.platypus.rest.RestClient
+import com.platypus.service.RestClientService
 
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpUriRequest
+import org.apache.http.client.ResponseHandler
+import org.apache.http.params.CoreProtocolPNames
 
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.InitializingBean
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder;
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class TwitterService extends RestClientService implements InitializingBean, RestClient {
 
@@ -54,14 +55,16 @@ class TwitterService extends RestClientService implements InitializingBean, Rest
     
     log.debug "updating twitter account @${this.username} with status ${message}"
     def response = this.post(this.serviceUrl + "/statuses/update.json", params)
-    log.debug "reponse from twitter ${reponse}"
+    log.debug "reponse from twitter ${response}"
   }
   
 	protected Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
 	  assert method != null
 	  
-	  method = authorizationService.sign("twitter", method, this.oAuthAccessToken, this.oAuthAccessTokenSecret)
+	  authorizationService.sign("twitter", method, this.oAuthAccessToken, this.oAuthAccessTokenSecret)
 	  
+	  // set this to avoid 417 error (Expectation Failed)  
+	  method.getParams().setBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
 	  return super.execute(method, handler)
 	}
 }

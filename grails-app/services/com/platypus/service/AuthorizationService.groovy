@@ -23,6 +23,7 @@ class AuthorizationService implements InitializingBean {
 	static transactional = false
 	
 	def providers = [:]
+	def consumers = [:]
     
     /**
      * Parses OAuth settings in Config.groovy and propagates providers and consumers
@@ -44,36 +45,33 @@ class AuthorizationService implements InitializingBean {
      */
     void afterPropertiesSet() {
       //initialize consumer list by reading config
-      def serverURL = ConfigurationHolder.config.grails.serverURL.toString()
-      if(!serverURL.endsWith('/')){
-        serverURL += '/'
+      def serverUrl = ConfigurationHolder.config.grails.serverUrl.toString()
+      if(!serverUrl.endsWith('/')){
+        serverUrl += '/'
       }
 
       ConfigurationHolder.config.oauth.each{key, value->
-        	//default single consumer
-        	//if single consumer defined, will not go on to parse multiple consumers
-          OAuthConsumer consumer = new CommonsHttpOAuthConsumer(value.consumerKey, value.consumerSecret);
-          consumer.setMessageSigner(new HmacSha1MessageSigner())
-          consumer.setSigningStrategy(new QueryStringSigningStrategy())
-          
-        	OAuthProvider provider = new CommonsHttpOAuthProvider(consumer, value.requestTokenURL, value.accessTokenURL, value.authURL);
-        	providers[key] = provider
-        }
-      } else {
-        println "Error initializaing OauthService: No consumers defined!"
+      	//default single consumer
+      	//if single consumer defined, will not go on to parse multiple consumers
+        OAuthConsumer consumer = new CommonsHttpOAuthConsumer(value.consumerKey, value.consumerSecret)
+        consumers[key] = consumer
+              	
+      	OAuthProvider provider = new CommonsHttpOAuthProvider(value.requestTokenUrl, value.accessTokenUrl, value.authUrl)
+      	providers[key] = provider
       }
       
-      log.debug "OAuth Initialized"
+      log.debug "OAuth Initialized:"
       providers.each { key, value ->
       	log.debug "Provider : " + key
       	log.debug "Request Token Endpoint     : " + value.getRequestTokenEndpointUrl()
       	log.debug "Access Token Endpoint      : " + value.getAccessTokenEndpointUrl()
-      	log.debug "Authorization Website URL  : " + value.getAuthorizationWebsiteUrl()
+      	log.debug "Authorization Website Url  : " + value.getAuthorizationWebsiteUrl()
+    	}
 
-      	def consumer = value.getConsumer();
-
-      	log.debug "Consumer Key               : " + consumer.getConsumerKey();
-      	log.debug "Consumer Secret            : " + consumer.getConsumerSecret();
+      consumers.each { key, value ->
+        log.debug "Provider : " + key
+      	log.debug "Consumer Key               : " + value.getConsumerKey();
+      	log.debug "Consumer Secret            : " + value.getConsumerSecret();
       }
     }
     
@@ -81,40 +79,30 @@ class AuthorizationService implements InitializingBean {
      * Retrieves an unauthorized request token from the OAuth service
      * @return A map containing the token key and secret
      */
-    def fetchRequestToken(String service, String callbackURL = OAuth.OUT_OF_BAND) {
-     	def provider = providers[service];
+    def fetchRequestToken(String service, String callbackUrl = OAuth.OUT_OF_BAND) {
+    	def provider = this.getProvider(service)
+    	def consumer = this.getConsumer(service)
 
-     	if (!provider) {
-    		log.debug "Unknown ServiceProvider requested: " + service;
-    		throw new OAuthExpectationFailedException("Unknown Service Provider requested");
-    	}
-
-     	log.debug "Calling retrieveRequestToken with callbackURL : " + callbackURL;
+     	log.debug "Calling retrieveRequestToken with callbackUrl : " + callbackUrl;
      	
-     	provider.retrieveRequestToken(callbackURL);
-
-     	def consumer = provider.getConsumer();
+     	provider.retrieveRequestToken(consumer, callbackUrl);
 
      	log.debug "Return Consumer key ${consumer.getConsumerKey()} and secret ${consumer.getConsumerSecret()}"
      	return [key:consumer.getConsumerKey(), secret:consumer.getConsumerSecret()]
     }
 
     /*
-     * Returns the authorization URL for the user
+     * Returns the authorization Url for the user
      */
-    def fetchAuthorizationURL(String service, String callbackURL = OAuth.OUT_OF_BAND) {
-     	def provider = providers[service];
+    def fetchAuthorizationUrl(String service, String callbackUrl = OAuth.OUT_OF_BAND) {
+    	def provider = this.getProvider(service)
+    	def consumer = this.getConsumer(service)
 
-     	if (!provider) {
-    		log.debug "Unknown ServiceProvider requested: " + service;
-    		throw new OAuthExpectationFailedException("Unknown Service Provider requested");
-    	}
+     	log.debug "The callback Url : " + callbackUrl;
 
-     	log.debug "The callback URL : " + callbackURL;
-
-     	String authUrl = provider.retrieveRequestToken(callbackURL);
+     	String authUrl = provider.retrieveRequestToken(consumer, callbackUrl);
      	
-     	log.debug "The URL we're going to use to authorize the user : " + authUrl;
+     	log.debug "The Url we're going to use to authorize the user : " + authUrl;
      	
      	return authUrl;
     }
@@ -125,16 +113,10 @@ class AuthorizationService implements InitializingBean {
      */
     def fetchAccessToken(String service, String verificationCode) {
     	log.debug "Going to exchange ${verificationCode} for access token"
-    	def provider = providers[service];
+    	def provider = this.getProvider(service)
+    	def consumer = this.getConsumer(service)
 
-    	if (!provider) {
-    		log.debug "Unknown ServiceProvider requested: " + service;
-    		throw new OAuthExpectationFailedException("Unknown Service Provider requested");
-    	}
-
-    	provider.retrieveAccessToken(verificationCode);
-
-    	def consumer = provider.getConsumer();
+    	provider.retrieveAccessToken(consumer, verificationCode);
 
     	log.debug "Return Consumer access token ${consumer.getToken()} and token secret ${consumer.getTokenSecret()}"
 
@@ -173,6 +155,17 @@ class AuthorizationService implements InitializingBean {
     }
     
     private def getConsumer(String service) {
+      def consumer = consumers[service];
+
+    	if (!consumer) {
+    		log.debug "Unknown ServiceProvider requested: " + service;
+    		throw new OAuthExpectationFailedException("Unknown Service Provider requested");   		
+    	}
+    	
+    	return consumer
+    }
+    
+    private def getProvider(String service) {
       def provider = providers[service];
 
     	if (!provider) {
@@ -180,6 +173,6 @@ class AuthorizationService implements InitializingBean {
     		throw new OAuthExpectationFailedException("Unknown Service Provider requested");   		
     	}
     	
-    	return provider.getConsumer()
-    }
+    	return provider
+    }    
 }

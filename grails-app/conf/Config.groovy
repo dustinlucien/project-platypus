@@ -119,9 +119,9 @@
       
       oauth {
         twitter {
-          requestTokenURL = "https://api.twitter.com/oauth/request_token"
-          accessTokenURL = "https://api.twitter.com/oauth/access_token"
-          authUrl = "http://api.twitter.com/oauth/authorize"
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
           consumerKey = "l5ISiphqMnhQ5S57FWwrA"
           consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
         }
@@ -199,9 +199,9 @@
       
       oauth {
         twitter {
-          requestTokenURL = "https://api.twitter.com/oauth/request_token"
-          accessTokenURL = "https://api.twitter.com/oauth/access_token"
-          authUrl = "http://api.twitter.com/oauth/authorize"
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
           consumerKey = "l5ISiphqMnhQ5S57FWwrA"
           consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
         }
@@ -235,6 +235,24 @@
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
       }
       
+      twitter {
+        username = "platypusdev"
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        apiVersion = "1"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
+      }
+      
+      oauth {
+        twitter {
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
+          consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+          consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        }
+      }
+            
       platypus {
         imageBucket = "project-platypus-development"
       }

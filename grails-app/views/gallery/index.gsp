@@ -19,10 +19,8 @@
       <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
-    
-    <g:render template="/snippets/flashMessageTemplate" />
-    
 	  <div class="span-24" id="content">
+	      <g:render template="/snippets/flashMessageTemplate" />
     		<div class="span-7 prepend-1" id="leftContent">
           <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
         </div>

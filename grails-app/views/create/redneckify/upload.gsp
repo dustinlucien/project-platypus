@@ -119,27 +119,17 @@
               var parent = document.createElement('div')
               parent.id ="facebook-photos"
               parent.className = "span-12 last"
-            
-              var tempDiv = document.createElement('div')
-              tempDiv.className = 'photos'
-              
-              tempDiv.appendChild(selectableList)
-              
-              parent.appendChild(tempDiv)
               
               tempDiv = document.createElement('div')
               tempDiv.className = 'span-12 last'
-              tempDiv.id = 'controls'
-                            
+              tempDiv.id = 'controls'         
               var prevButton = document.createElement('button')
               if ((fbOffset - fbLimit) >= 0) {
                prevButton.onclick = function(){getSelectableClosure(fbLimit, fbOffset - fbLimit);};
               } else {
                 prevButton.disabled = true
               }
-              
-              prevButton.innerHTML = '<< Previous'
-              
+              prevButton.innerHTML = '<< Previous Page'
               tempDiv.appendChild(prevButton)
               
               var nextButton = document.createElement('button')
@@ -148,10 +138,13 @@
               } else {
                 nextButton.onclick = function(){getSelectableClosure(fbLimit, fbLimit + fbOffset);};                
               }
-              nextButton.innerHTML = 'Next >>'
-              
+              nextButton.innerHTML = 'Next Page >>'
               tempDiv.appendChild(nextButton)
+              parent.appendChild(tempDiv)
               
+              tempDiv = document.createElement('div')
+              tempDiv.className = 'photos'
+              tempDiv.appendChild(selectableList)
               parent.appendChild(tempDiv)
               
               return parent;            
@@ -278,17 +271,16 @@
       <p><a href="${createLink(controller:'gallery')}" class="blue" >See all them there rednecks</a></p> 		  
 		</div>
 		
-	  <div class="span-14  prepend-1 last" id="rightContent">
-	     <!--
-	     <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
-	     -->
-	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
-         
-      <div id="facebook-photos" class="span-12 last">
+	  <div class="span-14 prepend-1 last" id="rightContent">
+	    <p>Already been redneckified? Need to git at yer pic? <a href="${createLink(controller:'shop')}" class="blue">Head on over to the shop!</a></p>
+	     
+	    <h2>To git started redneckifyin' yer picture, upload it to the site by pushin' the big button down yonder.</h2> 
+      
+      <div id="facebook-photos">
         <button onclick="getLoginStatus()">Find Images on Facebook</button>
       </div>
-         
-   		<div class="span-12 last" id="upload">
+      <div class="span-14 last"><h3>Or</h3></div>
+   		<div id="upload">
          <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
              <input type="file" name="file"/>
              <input type="hidden" id="externalfile" name="externalfile" />

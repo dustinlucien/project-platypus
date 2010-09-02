@@ -1,8 +1,7 @@
 body{background: url(../images/bg_body.jpg); }
 
-
 /************************ header *********************** */
-#header{background: url(../images/bg_header.jpg) no-repeat;  height: 149px;}
+#header{background: url(../images/bg_header.jpg) no-repeat;  height: 162px;}
 #header a{ text-decoration: none; height: 36px;}
 
 /************************ mainNav *********************** */
@@ -40,17 +39,17 @@ a#aboutUsActive{ background: url(../images/aboutUs_bg_h.png) no-repeat top right
 *html a#aboutUsActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg_h.png', sizingMethod='image');}
 
 /************************ midNav *********************** */
-#midNav{background: #371d00; height: 94px;}
-#midNav a {height: 94px;}
-a#subh1{background: url(../images/subh1.jpg);}
-a#subh2{background: url(../images/subh2.jpg);}
-a#subh3{background: url(../images/subh3.jpg);}
-a#subh1:hover{background: url(../images/subh1_hover.jpg);}
-a#subh2:hover{background: url(../images/subh2_hover.jpg);}
-a#subh3:hover{background: url(../images/subh3_hover.jpg);}
-a#subh1Active{background: url(../images/subh1_hover.jpg);}
-a#subh2Active{background: url(../images/subh2_hover.jpg);}
-a#subh3Active{background: url(../images/subh3_hover.jpg);}
+#midNav{background: #371d00; height: 80px;}
+#midNav a {height: 80px;}
+a#subh1{background: url(../images/subh1.jpg) no-repeat bottom right;}
+a#subh2{background: url(../images/subh2.jpg) no-repeat bottom right;}
+a#subh3{background: url(../images/subh3.jpg) no-repeat bottom right;}
+a#subh1:hover{background: url(../images/subh1_hover.jpg) no-repeat bottom right;}
+a#subh2:hover{background: url(../images/subh2_hover.jpg) no-repeat bottom right;}
+a#subh3:hover{background: url(../images/subh3_hover.jpg) no-repeat bottom right;}
+a#subh1Active{background: url(../images/subh1_hover.jpg) no-repeat bottom right;}
+a#subh2Active{background: url(../images/subh2_hover.jpg) no-repeat bottom right;}
+a#subh3Active{background: url(../images/subh3_hover.jpg) no-repeat bottom right;}
 
 /************************ content *********************** */
 div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;  font-size: 14px; }
@@ -84,7 +83,7 @@ div.rate{ width: 240px; height: 100px; background: #E0C6A7; display: block; marg
 
 div.rate p{ color: #371d00; font-size: 12px;}
 div.rate img {float: left; margin-right: 20px;}
-div#yepBubba{ height: 113px; width: 323px; background: url(../images/yepBubba.jpg) no-repeat; }
+div#yepBubba{ height: 113px; width: 323px; margin-top: 20px; background: url(../images/yepBubba.jpg) no-repeat; }
 input#goOnbtn{ border: none; display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
 input:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
 
@@ -116,3 +115,5 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #selectable .ui-selected { background: #F39814; color: white; }
 #selectable { list-style-type: none; margin: 0; padding: 0; }
 #selectable li { margin: 3px; padding: 1px; float: left; width: 140px; height: 140px; font-size: 4em; text-align: center; }
+
+#facebook-photos { margin-bottom: 20px;}

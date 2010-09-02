@@ -4,13 +4,13 @@
   	<meta name="layout" content="main" />
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-  	<!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
-  	the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
-  	the percentage of the height of its parent container, which has to be set explicitly.  Initially, 
-  	don't display flashContent div so it won't show if JavaScript disabled.
+  	<!-- 
+    	Include CSS to eliminate any default margins/padding and set the height of the html element and 
+    	the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
+    	the percentage of the height of its parent container, which has to be set explicitly.  Initially, 
+    	don't display flashContent div so it won't show if JavaScript disabled.
   	-->
   	<style type="text/css" media="screen"> 
-  		html, body	{ height:100%; background-color:#ccc;}
   		body { margin:0; padding:0; overflow:auto; text-align:center; 
   		background-color: #fff; /*#f9e4ca;*/ }   
   		#flashContent { display:none; }
@@ -106,56 +106,47 @@
       <a href="${createLink(controller:'create')}" class="span-7" id="subh2Active"></a>
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
-  
-    <g:render template="/snippets/flashMessageTemplate" />
-  
   	<div class="span-24" id="content">
+  	  <g:render template="/snippets/flashMessageTemplate" />  	  
   		<div class="span-7 prepend-1" id="leftContent">
   			<div class="span-7 pull-1" id="pickYrR"><span class="hidden">Pick Your Redneck</span></div>
   			<div class="pics">
+  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '00.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '00.png')}" /></a></div>
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '01.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '01.png')}" /></a></div>
+  			</div>  			
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '02.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '02.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '03.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '03.png')}" /></a></div>
+  			</div>
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '04.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '04.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '05.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '05.png')}" /></a></div>
+  			</div>
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '06.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '06.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '07.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '07.png')}" /></a></div>
+  			</div>
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '08.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '08.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '09.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '09.png')}" /></a></div>
+  			</div>
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '10.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '10.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '11.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '11.png')}" /></a></div>
+  			</div>
+  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '12.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '12.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
   				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '13.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '13.png')}" /></a></div>
-  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '14.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '14.png')}" /></a></div>
   			</div>
-  			<div class="pics">
-  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '15.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '15.png')}" /></a></div>
-  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '16.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '16.png')}" /></a></div>
-  			</div>
-  			<div class="pics">
-  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '17.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '17.png')}" /></a></div>
-  				<div class="span-3"><a href="#" onclick='SetOverlayImage("${resource(dir:'images/rednecks', file: '18.png')}");return false;'><img width=100 height=100 src="${resource(dir:'images/rednecks', file: '18.png')}" /></a></div>
-  			</div>						
   		</div>
 		
       <div class="span-14  prepend-1 last" id="rightContent">
         <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
 
-  			<!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
-  			JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
-  			when JavaScript is disabled.
+  			<!-- 
+    			SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+    			JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+    			when JavaScript is disabled.
   			-->
   			<div id="flashContent">
   				<p>

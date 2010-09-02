@@ -39,11 +39,13 @@
   		</div>
 
   	  <div class="span-14  prepend-1 last" id="rightContent">
-  	    <p>Redneckify.me was put together by a trio of fun-lovin' country boys. The intent was always to have fun and never to offend. If ya got somethin' to say, good or bad, don't hold back. Send us one of them there emails and we'll be sure to get back to you faster than a '72 Ford burnin' through a gallon of gas.</p>
-
-        <p><a href="mailto:redneckify@gmail.com">Git in touch on the email</a></p>
+  	    <h3>Redneckify.me was put together by a trio of fun-lovin' country boys. The intent was always to have fun and never to offend. If ya got somethin' to say, good or bad, don't hold back. Send us one of them there emails and we'll be sure to get back to you faster than a '72 Ford burnin' through a gallon of gas.</h3>
+  	    
+        <h3><a href="mailto:redneckify@gmail.com">Git in touch on the email</a></h3>
+        <h3>Or</h3>
   	    <p><span id="follow-placeholder"></span></p>
-  	    <p>Head on over to the Redneckify! Facebook Page</p>
+  	    <h3>Or</h3>
+  	    <h3>Head on over to the Redneckify! <a href="http://www.facebook.com/redneckify" target="_blank" class="blue">Facebook Page</a></h3>
   	  </div>
   	</div>
    <script type="text/javascript">

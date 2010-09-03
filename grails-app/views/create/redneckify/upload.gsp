@@ -272,23 +272,29 @@
 		</div>
 		
 	  <div class="span-14 prepend-1 last" id="rightContent">
-	    <p>Already been redneckified? Need to git at yer pic? <a href="${createLink(controller:'shop')}" class="blue">Head on over to the shop!</a></p>
-	     
-	    <h2>To git started redneckifyin' yer picture, upload it to the site by pushin' the big button down yonder.</h2> 
+	    <p>
+	      Already been redneckified? Need to git at yer pic? <a href="${createLink(controller:'shop')}"
+        class="blue">Head on over to the shop!</a>
+	    </p>
+
+	    <h2>
+	      To git started redneckifyin' yer picture, upload it to the site by pickin' a photo from the
+        Facebook or yer hard drive then push the big brown button down yonder.
+	    </h2> 
       
-      <div id="facebook-photos">
-        <button onclick="getLoginStatus()">Find Images on Facebook</button>
-      </div>
-      <div class="span-14 last"><h3>Or</h3></div>
-   		<div id="upload">
+      <div class="span-12 last" id="facebook-photos">
          <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
-             <input type="file" name="file"/>
-             <input type="hidden" id="externalfile" name="externalfile" />
-      	     <div id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             
-             <g:submitButton id="goOnbtn" name="submit" value=""></g:submitButton>
+           <div class="span-12 last inline">
+             <div class="span-4"><button id="facebook" onclick="getLoginStatus()"></button></div>
+             <div class="span-2">or</div>
+             <div class="span-6 last"><input id="browse" type="file" name="file"/></div>
+           </div>
+           <input type="hidden" id="externalfile" name="externalfile" />
+    	     <div class="span-12 last" id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             
+           <g:submitButton class="span-12 last" id="goOnbtn" name="submit" value=""></g:submitButton>
          </g:form>
-   		</div>
+     	</div>
 	   </div>	  
-	</div>
+	 </div>
   </body>
 </html>

@@ -86,6 +86,7 @@ div.rate img {float: left; margin-right: 20px;}
 div#yepBubba{ height: 113px; width: 323px; margin-top: 20px; background: url(../images/yepBubba.jpg) no-repeat; }
 input#goOnbtn{ border: none; display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
 input:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
+button#facebook{ border: none; height: 40px; width: 105px; background: url(../images/btn_facebook.png) no-repeat; margin: 5px 0 5px 0;}
 
 ul.rating { list-style-type: none; margin: 0; padding: 0;}
 ul.rating li{ float: left; margin: 0 1px;}
@@ -116,4 +117,4 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #selectable { list-style-type: none; margin: 0; padding: 0; }
 #selectable li { margin: 3px; padding: 1px; float: left; width: 140px; height: 140px; font-size: 4em; text-align: center; }
 
-#facebook-photos { margin-bottom: 20px;}
+#facebook-photos { display: inline; margin-bottom: 20px;}

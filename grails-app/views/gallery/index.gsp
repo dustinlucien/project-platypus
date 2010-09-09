@@ -2,6 +2,7 @@
     <head>
         <title>Redneckify!</title>
 		    <meta name="layout" content="main" />
+		    <g:twitterWidgetResources />
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">

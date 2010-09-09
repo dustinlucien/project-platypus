@@ -29,13 +29,15 @@
     <a href="${createLink(controller:'share')}" class="span-6" id="subh3Active"></a>
   </div>
   <div class="span-24" id="content">
+    
     <g:render template="/snippets/flashMessageTemplate" />
+    
     <div class="span-10 prepend-1">
       <div>
         <img width="400" src="${image.getImageUrl()}" />
       </div>
       <div>
-          <fb:like href="${longUrl}" show_faces="false" />
+        <fb:like href="${longUrl}" show_faces="false" />
       </div>
     </div>
 
@@ -51,6 +53,7 @@
     </div>
   </div>
   <script type="text/javascript">
+  
     twttr.anywhere(function (T) {
       T("#tweet-box").tweetBox({
          height: 100,

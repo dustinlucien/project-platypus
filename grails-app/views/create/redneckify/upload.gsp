@@ -279,15 +279,15 @@
 
 	    <h2>
 	      To git started redneckifyin' yer picture, upload it to the site by pickin' a photo from the
-        Facebook or yer hard drive then push the big brown button down yonder.
+        Facebook or yer hard drive,<br/> then push the big brown button down yonder.
 	    </h2> 
       
       <div class="span-12 last" id="facebook-photos">
          <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
            <div class="span-12 last inline">
              <div class="span-4"><button id="facebook" onclick="getLoginStatus()"></button></div>
-             <div class="span-2">or</div>
-             <div class="span-6 last"><input id="browse" type="file" name="file"/></div>
+             <div class="span-2" style="font-size: 2em">or</div>
+             <div class="span-6 last" id="browse"><input type="file" name="file"/></div>
            </div>
            <input type="hidden" id="externalfile" name="externalfile" />
     	     <div class="span-12 last" id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             

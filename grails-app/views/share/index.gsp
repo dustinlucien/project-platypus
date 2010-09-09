@@ -76,7 +76,6 @@
       
       <g:renderZazzleProductBanner image="${image}" />
 
-      <a href="">Check out more gear to Redneckify here!</a>
     </div>
   </div>
   <script type="text/javascript">

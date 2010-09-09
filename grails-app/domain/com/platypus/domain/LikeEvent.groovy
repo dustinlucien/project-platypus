@@ -6,7 +6,7 @@ class LikeEvent {
   
   Date dateCreated
   static constraints = {
-    	id visible:false
-    	target nullable:true
-	}
+    id visible:false
+    target nullable:true
+  }
 }

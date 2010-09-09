@@ -120,4 +120,8 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #facebook-photos { display: inline; margin-bottom: 20px;}
 
 #zazzle { padding-top: 20px}
-#browse { margin-top: 10px}
+#file-input { margin-top: 10px}
+#prev-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_previouspage.png) }
+#next-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_nextpage.png) }
+#select-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_selectalbum.png) }
+.image-detail { padding-top: 40px }

@@ -30,7 +30,7 @@ class CreateController {
           def file = request.getFile('file')
           def oParams = [:]
           
-          if (!file.empty) {
+          if (file && !file.empty) {
             def results = imageService.saveUploadedFile(request.getFile('file'))
             
             if (results) {

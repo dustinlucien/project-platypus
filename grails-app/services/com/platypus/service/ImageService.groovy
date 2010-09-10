@@ -58,21 +58,53 @@ class ImageService {
     return Image.findAllByOwner(user, params)
   }
   
-  def listForMerchandisePage(def user = null, def atLeast = 15, def atMost = 30) {
+  def listForShop(def user = null, def limit = 20) {
+    def images = []
     if (user) {
-      
+      def userImages = listMostRecentByOwner(user, [limit : limit])
+      if (userImages) {
+        images.addAll(userImages)
+      }
     }
+    
+    if (images.size() > limit) {
+      return images
+    }
+    
+    def recentImages = listMostRecent([limit : (limit - images.size())])
+    
+    recentImages.removeAll(images)
+    
+    images.addAll(recentImages)
+    
+    return images
   }
   
-  def listForGallery() {
+  def listForGallery(def limit = 20) {
     def c = LikeEvent.createCriteria();
-    def images = c.list {
+    
+    def totalImages = 0
+    def images = []
+               
+    def likeImages = c.list {
       projections {
         count 'id', 'myCount'
         groupProperty 'target'
       }
       order 'myCount'
     }
+    
+    images.addAll(likeImages)
+    
+    if (images.size() > limit) {
+      return out
+    }
+    
+    images.addAll(this.listMostRecent([limit : (limit - images.size())]))
+    
+    log.debug "list from criteria ${images}"
+    
+    return images
   }
   
   def getMostRecentImage(def user) {

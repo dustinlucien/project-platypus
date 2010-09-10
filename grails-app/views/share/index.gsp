@@ -74,8 +74,13 @@
         <li><span id="follow-placeholder"></span></li>
       </ul>
       
-      <g:renderZazzleProductBanner image="${image}" />
-
+      <g:render template="/snippets/getYerRedneckOnAnythingTemplate" />
+          
+	    <div class="span-11 prepend-1 last" id="get">
+	      <g:renderZazzleProductBanner image="${image}" count="3"/>
+	    </div>
+      <g:render template="/snippets/zazzleStoreTemplate" />
+      
     </div>
   </div>
   <script type="text/javascript">

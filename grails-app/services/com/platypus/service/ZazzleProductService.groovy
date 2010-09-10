@@ -51,6 +51,13 @@ class ZazzleProductService {
     return zazzleServer;
   }
   
+  def getRandomProduct() {
+    def random = new Random()
+    int numProducts = this.products.size()
+    
+    return random.nextInt(numProducts)
+  }
+  
   def getRandomProductList(int limit = 3) {
     
     def random = new Random()
@@ -60,11 +67,9 @@ class ZazzleProductService {
     
     for (int i = 0; i < limit; i++) {
       def next = random.nextInt(numProducts)
-      log.debug "next int from random ${next}"
       def unique = true
       for (int j = 0; j < indices.size(); j++) {
         if (indices[j] == this.products[next]) {
-          log.debug "not unique.  getting a new one"
           unique = false
           break
         }

@@ -23,7 +23,7 @@
 	  <div class="span-24" id="content">
 	      <g:render template="/snippets/flashMessageTemplate" />
     		<div class="span-24 prepend-1 inline">
-          <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
+          <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
         </div>
   	</div>
   </body>

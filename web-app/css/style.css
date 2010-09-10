@@ -119,6 +119,7 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 
 #facebook-photos { display: inline; margin-bottom: 20px;}
 
+.zazzle-product {border: 1px solid #BBBBBB;position:relative; padding: 6px}
 #zazzle { padding-top: 20px}
 #file-input { margin-top: 10px}
 #prev-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_previouspage.png) }

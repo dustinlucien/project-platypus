@@ -247,21 +247,21 @@
       </div>
     </div>
 
-    <div id="midNav" class="span-24">
-      <a href="${createLink(controller:'create')}" class="span-10" id="subh1Active"></a>
-      <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
-      <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
-    </div>
-
-    <g:render template="/snippets/flashMessageTemplate" />
-
+	  <div id="midNav" class="span-24">
+	    <a href="${createLink(controller:'create')}" class="span-10" id="subh1Active"></a>
+	    <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
+	    <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
+	  </div>
+  <g:render template="/snippets/flashMessageTemplate" />
 	<div class="span-24" id="content">
 		<div class="span-7 prepend-1" id="leftContent">
 		  <div class="span-7 pull-1" id="latestR">
 		    <span class="hidden">Latest Rednecks</span>
 		  </div>  
-		  <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
-      <div class="span-7 last"><p><a href="${createLink(controller:'gallery')}" class="blue" >See all them there rednecks</a></p></div>		  
+		  <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
+      <div class="span-7 last">
+        <p><a href="${createLink(controller:'gallery')}" class="blue" >See all them there rednecks</a></p>
+      </div>		  
 		</div>
 		
 	  <div class="span-14 prepend-1 last" id="rightContent">

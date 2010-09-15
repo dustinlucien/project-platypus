@@ -58,7 +58,7 @@ class ZazzleProductService {
     return random.nextInt(numProducts)
   }
   
-  def getRandomProductList(int limit = 3) {
+  def getRandomProductList(def limit = 3) {
     
     def random = new Random()
     def indices = []
@@ -66,6 +66,7 @@ class ZazzleProductService {
     int numProducts = this.products.size()
     
     for (int i = 0; i < limit; i++) {
+      log.debug "looking for another random product"
       def next = random.nextInt(numProducts)
       def unique = true
       for (int j = 0; j < indices.size(); j++) {

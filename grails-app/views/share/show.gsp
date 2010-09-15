@@ -48,7 +48,10 @@
         <li><span id="follow-placeholder"></span></li>
       </ul>
       
-      <g:renderZazzleProductBanner image="${image}" />
+	    <div class="span-11 prepend-1 last" id="get">
+	      <g:renderZazzleProductList image="${image}" count="3"/>
+	    </div>
+      <g:render template="/snippets/zazzleStoreTemplate" />
 
     </div>
   </div>

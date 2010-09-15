@@ -24,7 +24,9 @@
     <div class="span-24" id="content">
 	      <g:render template="/snippets/flashMessageTemplate" />
 	      
-        <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
+        <div class="span-24 inline prepend-1">
+          <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
+        </div>
   	</div>
   </body>
 </html>

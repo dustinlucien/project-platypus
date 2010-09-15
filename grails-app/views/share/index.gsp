@@ -77,7 +77,7 @@
       <g:render template="/snippets/getYerRedneckOnAnythingTemplate" />
           
 	    <div class="span-11 prepend-1 last" id="get">
-	      <g:renderZazzleProductBanner image="${image}" count="3"/>
+	      <g:renderZazzleProductList image="${image}" count="3"/>
 	    </div>
       <g:render template="/snippets/zazzleStoreTemplate" />
       

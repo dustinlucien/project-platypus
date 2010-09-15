@@ -79,7 +79,7 @@ span.hidden{ visibility: hidden; }
 
 /************************ home *********************** */
 div#latestR{ height: 51px; background: url(../images/latestR_bg.jpg) no-repeat; margin-bottom: 10px; }
-div.rate{ width: 240px; height: 100px; background: #E0C6A7; display: block; margin: 10px 0 10px -20px; padding: 5px;  }
+div.rate{ width: 240px; background: #E0C6A7; display: block; margin-bottom: 10px; padding: 5px;}
 
 div.rate p{ color: #371d00; font-size: 12px;}
 div.rate img {float: left; margin-right: 20px;}
@@ -126,3 +126,5 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #next-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_nextpage.png) }
 #select-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_selectalbum.png) }
 .image-detail { padding-top: 40px }
+.social-btn { padding-top: 20px;}
+.tweet-btn { padding-left: 20px;}

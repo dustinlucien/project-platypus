@@ -24,7 +24,7 @@
     <div class="span-24" id="content">
 	      <g:render template="/snippets/flashMessageTemplate" />
 	      
-        <div class="span-23 inline prepend-2">
+        <div class="span-23 inline prepend-1">
           <g:renderZazzleProductGallery images="${images}" />
         </div>
   	</div>

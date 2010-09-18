@@ -1,8 +1,8 @@
-<div class="span-3 zazzle-product" >
+<div class="${spanClass} zazzle-product" >
   <div>
-    <a target="_blank" href="${linkUrl}"><img width="90%" src="${imageUrl}" /></a>
+    <a target="_blank" href="${linkUrl}"><img src="${imageUrl}" /></a>
   </div>
-  <div style="text-align: center">
+  <div>
     ${title}<br/>
     <a target="_blank" href="${linkUrl}">Git it now</a>
   </div>

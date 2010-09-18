@@ -4,6 +4,7 @@ class ZazzleProductService {
   static transactional = false
   
   def associateId = "238983239304996873"
+  //def zazzleServer = "http://rlv.zcache.com/img/imt-prd/"
   def zazzleServer = "http://rlv.zazzle.com/img/imt-prd/"
   def products = []
   
@@ -33,14 +34,14 @@ class ZazzleProductService {
   
   public ZazzleProductService() {
     products.add(new Product("217970687045164850", "Stickers", 15.0))
-    products.add(new Product("146190001601409777", "Keychains", 15.0))
+    products.add(new Product("146190001601409777", "Keychain", 15.0))
     products.add(new Product("155281159257729079", "Dog Coat", 15.0))
     products.add(new Product("128124261718836322", "Bumper Sticker", 15.0))
     products.add(new Product("235729169986527554", "T-Shirts", 15.0))
     products.add(new Product("148639800638635303", "Trucker Hat", 15.0))
     products.add(new Product("235827913634227605", "Tank Top", 15.0))
     products.add(new Product("168040314455684141", "Coffee Mug", 15.0))
-    products.add(new Product("144022018299821725", "MousePad", 10.95))
+    products.add(new Product("144022018299821725", "Mouse Pad", 10.95))
   }
   
   def getAssociateId() {
@@ -55,7 +56,7 @@ class ZazzleProductService {
     def random = new Random()
     int numProducts = this.products.size()
     
-    return random.nextInt(numProducts)
+    return products.get(random.nextInt(numProducts))
   }
   
   def getRandomProductList(def limit = 3) {

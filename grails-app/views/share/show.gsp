@@ -33,22 +33,20 @@
     <g:render template="/snippets/flashMessageTemplate" />
     
     <div class="span-10 prepend-1">
-      <div>
-        <img width="400" src="${image.getImageUrl()}" />
-      </div>
+      <g:render template="/snippets/woodFrameImageTemplate" bean="${image}" />
       <div>
         <fb:like href="${longUrl}" show_faces="false" />
       </div>
     </div>
 
-    <div class="span-11 prepend-1 last" id="rightContent">
+    <div class="span-10 prepend-2 last" id="rightContent">
       <h5>Let the whole trailer park know you found a picture of your long lost cousin!</h5>
       <ul id="icons">
         <li><span id="tweet-box"></span></li>
         <li><span id="follow-placeholder"></span></li>
       </ul>
       
-	    <div class="span-11 prepend-1 last" id="get">
+	    <div class="span-11 last" id="get">
 	      <g:renderZazzleProductList image="${image}" />
 	    </div>
       <g:render template="/snippets/zazzleStoreTemplate" />

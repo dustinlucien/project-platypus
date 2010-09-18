@@ -24,10 +24,8 @@
   	<div class="span-24" id="content">
       <g:render template="/snippets/flashMessageTemplate" />
   	  <div class="span-23 prepend-6 last" id="image">
-  	    <div class="image-detail">
-  	      <img width="55%" src="${image.getImageUrl()}" />
-  	    </div>
-  	    <div class="span-18 prepend-1" id="image-info-form">
+        <g:render template="/snippets/woodFrameImageTemplate" bean="${image}" />
+  	    <div class="span-18 prepend-1 margin-top-10">
     	    <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
             <label for="title" style="font-size:2em;">What's yer handle?</label>
             <div>

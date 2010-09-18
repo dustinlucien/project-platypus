@@ -54,29 +54,27 @@
   <div class="span-24" id="content">
     <g:render template="/snippets/flashMessageTemplate" />
     <div class="span-10 prepend-1" id="leftContent">
-      <div>
-        <img width="375" src="${image.getImageUrl()}" />
-      </div>
-      <div>
+      <g:render template="/snippets/woodFrameImageTemplate" bean="${image}" />
+      <div class="margin-top-10">
         <fb:like href="${longUrl}" show_faces="false" />
       </div>
-      <div>
-        <p><a href="${createLink(controller:'create')}">Redneckify another pic.</a></p>
-        <p><strong>Go on. Do it.</strong> You know you want to!</p>
+      <div class="margin-top-10">
+        <p><a href="${createLink(controller:'create')}">Redneckify another pic</a>
+        <br/><strong>Go on. Do it.</strong> You know you want to!</p>
       </div>
     </div>
 
-    <div class="span-11 prepend-1 last" id="rightContent">
+    <div class="span-10 prepend-2 last" id="rightContent">
       <h5>Ya happy now? Does it look good? Go and tell yer huntin' buddies!</h5>
       <ul id="icons">
-        <li><button onclick="postTheImage()" id="facebook-post-button">Post this image to Facebook</button></li>
+        <li><h5><span>Save this image to </span><button onclick="postTheImage()" id="facebook" /></h5></li>
         <li><span id="tweet-box"></span></li>
         <li><span id="follow-placeholder"></span></li>
       </ul>
       
       <g:render template="/snippets/getYerRedneckOnAnythingTemplate" />
           
-	    <div class="span-11 prepend-1 last" id="get">
+	    <div class="span-11 last" id="get">
 	      <g:renderZazzleProductList image="${image}" />
 	    </div>
       <g:render template="/snippets/zazzleStoreTemplate" />
@@ -90,7 +88,7 @@
          height: 100,
          width: 400,
          defaultContent: "Check out my Redneck self.  Made with @redneckify.  ${shortUrl} ",
-         label: "Git it on with the lil' birdie"
+         label: "Shout out to all them tweeters"
        });
       
       T("#follow-placeholder").followButton("${grailsApplication.config.twitter.username}");

@@ -15,7 +15,7 @@ class CreateController {
     def redneckifyFlow = {
       home {
         action {
-          [ images : imageService.listMostRecent([limit:5]) ]
+          [ images : imageService.listMostRecent([max:5]) ]
         }
         
         on("success").to("upload")

@@ -38,40 +38,48 @@ class ImageService {
     return key;
   }
   
-  def listMostRecent(def params = [limit : 20]) {
+  def listMostRecent(def params = [max : 20]) {
     assert params != null
     
     params["sort"] = "dateCreated"
     params["order"] = "desc"
+    
+    if (log.isDebugEnabled()) {
+      log.debug "params going into Image.list : ${params}"
+    }
     
     return Image.list(params)
   }
   
-  def listMostRecentByOwner(def user, def params = [limit:5,offset:0,page:1]) {
+  def listMostRecentByOwner(def user, def params = [max:5,offset:0,page:1]) {
     assert user != null
     assert params != null
-    assert params.limit > 0
+    assert params.max > 0
     
     params["sort"] = "dateCreated"
     params["order"] = "desc"
-    
+
+    if (log.isDebugEnabled()) {
+      log.debug "params going into Image.findAllByOwner : ${params}"
+    }
+        
     return Image.findAllByOwner(user, params)
   }
   
-  def listForShop(def user = null, def limit = 20) {
+  def listForShop(def user = null, def max = 20) {
     def images = []
     if (user) {
-      def userImages = listMostRecentByOwner(user, [limit : limit])
+      def userImages = listMostRecentByOwner(user, [max : max])
       if (userImages) {
         images.addAll(userImages)
       }
     }
     
-    if (images.size() > limit) {
+    if (images.size() > max) {
       return images
     }
     
-    def recentImages = listMostRecent([limit : (limit - images.size())])
+    def recentImages = listMostRecent([max : (max - images.size())])
     
     recentImages.removeAll(images)
     
@@ -80,7 +88,7 @@ class ImageService {
     return images
   }
   
-  def listForGallery(def limit = 20) {
+  def listForGallery(def max = 20) {
     def c = LikeEvent.createCriteria();
     
     def totalImages = 0
@@ -96,11 +104,11 @@ class ImageService {
     
     images.addAll(likeImages)
     
-    if (images.size() > limit) {
+    if (images.size() > max) {
       return out
     }
     
-    images.addAll(this.listMostRecent([limit : (limit - images.size())]))
+    images.addAll(this.listMostRecent([max : (max - images.size())]))
     
     log.debug "list from criteria ${images}"
     

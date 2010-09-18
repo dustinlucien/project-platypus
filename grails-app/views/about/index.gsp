@@ -39,7 +39,7 @@
   		</div>
 
   	  <div class="span-14  prepend-1 last" id="rightContent">
-  	    <h3>Redneckify.me was put together by a trio of fun-lovin' country boys. The intent was always to have fun and never to offend. If ya got somethin' to say, good or bad, don't hold back. Send us one of them there emails and we'll be sure to get back to you faster than a '72 Ford burnin' through a gallon of gas.</h3>
+  	    <h3>Redneckify was put together by a trio of fun-lovin' country boys. The intent was always to have fun and never to offend. If ya got somethin' to say, good or bad, don't hold back. Send us one of them there emails and we'll be sure to get back to you faster than a '72 Ford burnin' through a gallon of gas.</h3>
   	    
         <h3><a href="mailto:redneckify@gmail.com">Git in touch on the email</a></h3>
         <h3>Or</h3>

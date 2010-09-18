@@ -279,7 +279,7 @@
          <div id="facebook-photos" class="span-3"><button id="facebook" onclick="getLoginStatus()"></button></div>
          <g:form controller="create" action="redneckify" name="uploadForm" method="post" enctype="multipart/form-data">
            <div class="span-8 last inline" id="browse">
-             <div class="span-1" style="font-size: 2em">or</div>
+             <div class="span-1" style="font-size: 2em; margin-left: 20px; margin-right:20px;">or</div>
              <div class="span-6 last" id="file-input">
                <input id="file" type="file" name="file"/>
              </div>

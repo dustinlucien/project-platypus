@@ -19,7 +19,7 @@ class ShopController {
     
     if (!images) {
       log.info "no images returned. redirecting to gallery"
-      redirect(action:'index')
+      redirect(controller:'create')
     }
     
     return [ images : images ]
@@ -29,7 +29,7 @@ class ShopController {
   def index = {
     def user = userService.getCurrentUser(request)
     
-    def images = imageService.listForShop(user, 20);
+    def images = imageService.listForShop(user, 40);
     
     if (log.isDebugEnabled()) {
       if (images) {
@@ -41,7 +41,7 @@ class ShopController {
     
     if (!images) {
       log.info "no images returned. redirecting to gallery"
-      redirect(action:'index')
+      redirect(controller:'create')
     }
         
     return [ images : images ]

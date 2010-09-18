@@ -109,11 +109,11 @@
       }
       
       twitter {
-        username = "platypusdev"
-        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        username = "redneckify"
+        apiKey = "4DWQFnQxzAsVbOLVKHNTlA"
         apiVersion = "1"
-        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
-        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
+        oAuthAccessToken = "133405786-hikbelIdIlFGzBWeTcaJ1vNLOyauvP83uMxMt1J2"
+        oAuthAccessTokenSecret = "BjZZ4iUk8R6hO5vGfUq9Dj6b9xCNzO1RXpfyJCOj7Q"
       }
       
       oauth {
@@ -121,8 +121,8 @@
           requestTokenUrl = "https://api.twitter.com/oauth/request_token"
           accessTokenUrl = "https://api.twitter.com/oauth/access_token"
           authUrl = "https://api.twitter.com/oauth/authorize"
-          consumerKey = "l5ISiphqMnhQ5S57FWwrA"
-          consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+          consumerKey = "4DWQFnQxzAsVbOLVKHNTlA"
+          consumerSecret = "KRrQoBmroO3oi48adA9pD9gukwMrdAzmpMWBrH0zsY"
         }
       }
 

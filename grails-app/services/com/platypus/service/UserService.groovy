@@ -7,7 +7,6 @@ import com.platypus.domain.LikeEvent
 import com.platypus.domain.Image
 
 class UserService {
-
   static transactional = false
 
   def imageService

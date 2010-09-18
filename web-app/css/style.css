@@ -1,8 +1,7 @@
 body{background: url(../images/bg_body.jpg); }
 
-
 /************************ header *********************** */
-#header{background: url(../images/bg_header.jpg) no-repeat;  height: 149px;}
+#header{background: url(../images/bg_header.jpg) no-repeat;  height: 162px;}
 #header a{ text-decoration: none; height: 36px;}
 
 /************************ mainNav *********************** */
@@ -40,17 +39,17 @@ a#aboutUsActive{ background: url(../images/aboutUs_bg_h.png) no-repeat top right
 *html a#aboutUsActive{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='../images/aboutUs_bg_h.png', sizingMethod='image');}
 
 /************************ midNav *********************** */
-#midNav{background: #371d00; height: 94px;}
-#midNav a {height: 94px;}
-a#subh1{background: url(../images/subh1.jpg);}
-a#subh2{background: url(../images/subh2.jpg);}
-a#subh3{background: url(../images/subh3.jpg);}
-a#subh1:hover{background: url(../images/subh1_hover.jpg);}
-a#subh2:hover{background: url(../images/subh2_hover.jpg);}
-a#subh3:hover{background: url(../images/subh3_hover.jpg);}
-a#subh1Active{background: url(../images/subh1_hover.jpg);}
-a#subh2Active{background: url(../images/subh2_hover.jpg);}
-a#subh3Active{background: url(../images/subh3_hover.jpg);}
+#midNav{background: #371d00; height: 80px;}
+#midNav a {height: 80px;}
+a#subh1{background: url(../images/subh1.jpg) no-repeat bottom right;}
+a#subh2{background: url(../images/subh2.jpg) no-repeat bottom right;}
+a#subh3{background: url(../images/subh3.jpg) no-repeat bottom right;}
+a#subh1:hover{background: url(../images/subh1_hover.jpg) no-repeat bottom right;}
+a#subh2:hover{background: url(../images/subh2_hover.jpg) no-repeat bottom right;}
+a#subh3:hover{background: url(../images/subh3_hover.jpg) no-repeat bottom right;}
+a#subh1Active{background: url(../images/subh1_hover.jpg) no-repeat bottom right;}
+a#subh2Active{background: url(../images/subh2_hover.jpg) no-repeat bottom right;}
+a#subh3Active{background: url(../images/subh3_hover.jpg) no-repeat bottom right;}
 
 /************************ content *********************** */
 div#content{background: #f9e4ca; min-height: 624px;  padding: 20px 0;  font-size: 14px; }
@@ -80,13 +79,16 @@ span.hidden{ visibility: hidden; }
 
 /************************ home *********************** */
 div#latestR{ height: 51px; background: url(../images/latestR_bg.jpg) no-repeat; margin-bottom: 10px; }
-div.rate{ width: 240px; height: 100px; background: #E0C6A7; display: block; margin: 10px 0 10px -20px; padding: 5px;  }
+div.rate{ width: 240px; background: #E0C6A7; display: block; margin-bottom: 25px; margin-right: 20px; padding: 5px;}
 
 div.rate p{ color: #371d00; font-size: 12px;}
 div.rate img {float: left; margin-right: 20px;}
-div#yepBubba{ height: 113px; width: 323px; background: url(../images/yepBubba.jpg) no-repeat; }
-input#goOnbtn{ display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
+div#yepBubba{ height: 113px; width: 323px; margin-top: 20px; background: url(../images/yepBubba.jpg) no-repeat; }
+input#goOnbtn{ border: none; display: block; height: 90px; width: 398px; background: url(../images/goOnbtn.jpg) no-repeat; margin: 20px 0 20px 60px !important;}
 input:hover#goOnbtn{ background: url(../images/goOnbtn-over.jpg) no-repeat;}
+
+button#facebook{ border: 2px solid #00549E; height: 42px; width: 107px; background: url(../images/btn_facebook.png) no-repeat; margin: 5px 0px 5px 10px;}
+button:hover#facebook { border: 2px solid #FFFFFF; }
 
 ul.rating { list-style-type: none; margin: 0; padding: 0;}
 ul.rating li{ float: left; margin: 0 1px;}
@@ -106,7 +108,9 @@ a#fb{ background: url(../images/bg_fb.jpg); }
 a#tw{ background: url(../images/bg_tw.jpg); }
 a#gt{ background: url(../images/bg_g.jpg); }
 a#ym{ background: url(../images/bg_ym.jpg); }
-div#sl1{ background: url(../images/sl1.jpg) no-repeat; display: block; height: 19px; width: 435px; margin-bottom: 20px;}
+div#sl1{ display: block; height: 19px; width: 435px; margin-bottom: 20px;}
+span#sl1-brown { font-size: 1.1em; font-weight: bold; color: #333300;}
+span#sl1-blue  { font-size: 1.0em; font-weight: bold; color: #006F86;}
 #get img{ background: url(../images/bg_img.jpg) no-repeat; padding: 5px;}
 #get p{ width: 140px; float:left; text-align: center; }
 input.savebtn{ display: block; background: url(../images/savebtn.jpg) no-repeat; width: 391; height: 64px;}
@@ -116,3 +120,19 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #selectable .ui-selected { background: #F39814; color: white; }
 #selectable { list-style-type: none; margin: 0; padding: 0; }
 #selectable li { margin: 3px; padding: 1px; float: left; width: 140px; height: 140px; font-size: 4em; text-align: center; }
+
+#facebook-photos { display: inline; margin-bottom: 20px;}
+
+.zazzle-product { border: 1px solid #BBBBBB; position:relative; padding: 6px; margin-bottom: 20px; text-align: center; }
+#zazzle { padding-top: 20px}
+#file-input { margin-top: 11px}
+#prev-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_previouspage.png) }
+#next-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_nextpage.png) }
+#select-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_selectalbum.png) }
+
+.social-btn { padding-top: 20px;}
+.tweet-btn { padding-left: 20px;}
+
+.image400 {position:relative;margin-bottom:45px;}
+.wframe {position:absolute;left:-35px;top:-36px;background-image:url(../images/wframe.png);width:470px;height:406px;overflow:hidden;z-index:2;}
+.margin-top-10 { margin-top: 10px; }

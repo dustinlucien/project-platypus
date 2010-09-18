@@ -21,17 +21,20 @@
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
 
-    <g:render template="/snippets/flashMessageTemplate" />
-
   	<div class="span-24" id="content">
-  		<div class="span-7 prepend-1" id="leftContent" />
-    	  <div class="span-14  prepend-1 last" id="rightContent">
-    	    <img width="95%" src="${image.getImageUrl()}" />
+      <g:render template="/snippets/flashMessageTemplate" />
+  	  <div class="span-23 prepend-6 last" id="image">
+        <g:render template="/snippets/woodFrameImageTemplate" bean="${image}" />
+  	    <div class="span-18 prepend-1 margin-top-10">
     	    <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
-            <label for="title">What's yer handle</label><g:textField class="title" name="title" value="My Redneck Self" />
-            <g:submitButton name="submit" value="10-4 Good Buddy"></g:submitButton>
+            <label for="title" style="font-size:2em;">What's yer handle?</label>
+            <div>
+              <g:textField class="title" name="title" value="My Redneck Self" />
+              <br><g:submitButton name="submit" value="10-4 Good Buddy"></g:submitButton>
+            </div>
           </g:form>
-    	  </div>
+        </div>
+  	  </div>
 	    </div>
 	  </div>
   </body>

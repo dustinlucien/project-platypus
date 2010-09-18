@@ -25,7 +25,7 @@ import java.net.URL;
 
 class FacebookConnectService implements InitializingBean {
   
-  boolean transactional = false
+  static transactional = false
   
   def imageService
   
@@ -155,24 +155,38 @@ class FacebookConnectService implements InitializingBean {
   def publishImage(def image, def message) {
     assert this.isLoggedIn()
     
+    log.debug("Publishing an image to ${this.cachedUid} news feed")
+    
     def imageStream = imageService.openStream(image)
     
     FacebookType response = client.publish("${this.cachedUid}/photos", 
                                             FacebookType.class, imageStream, 
                                             Parameter.with("message", message));
 
-    log.debug("Published photo ID: " + response.getId());
-    
-    return true
+    if (!response) {
+      log.error("Error publishing message to Facebook feed")
+      return false
+    } else {
+      log.debug("Published photo ID: " + response.getId());
+      return true
+    }
   }
   
   def publishMessageToFeed(def message) {
     assert this.isLoggedIn()
+    log.debug("Publishing a message to ${this.cachedUid} news feed")
     
     FacebookType response = client.publish("${this.cachedUid}/feed", 
                                             FacebookType.class, 
                                             Parameter.with("message", message));
-    
+                                            
+    if (!response) {
+      log.error("Error publishing message to Facebook feed")
+      return false
+    } else {
+      log.debug("Published feed message ID: " + response.getId());
+      return true
+    }
   }
   
   def populateUserWithFacebookProfile(def user) {
@@ -185,7 +199,7 @@ class FacebookConnectService implements InitializingBean {
       user.firstname = fbUser.getFirstName()
       user.lastname = fbUser.getLastName()
       user.email = fbUser.getEmail()
-      user.location = fbUser.getLocation().getName()
+      user.location = fbUser.getLocation()?.getName()
       user.gender = fbUser.getGender()
     }
   }
@@ -202,7 +216,7 @@ class FacebookConnectService implements InitializingBean {
       params.firstname = fbUser.getFirstName()
       params.lastname = fbUser.getLastName()
       params.email = fbUser.getEmail()
-      params.location = fbUser.getLocation().getName()
+      params.location = fbUser.getLocation()?.getName()
       params.gender = fbUser.getGender()
     }
     

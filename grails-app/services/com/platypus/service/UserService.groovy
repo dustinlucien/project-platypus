@@ -8,7 +8,7 @@ import com.platypus.domain.Image
 
 class UserService {
 
-  boolean transactional = false
+  static transactional = false
 
   def imageService
 	def facebookConnectService
@@ -89,7 +89,7 @@ class UserService {
 				log.error "wtf? unkown user in session.  cleaning session."
 			} else {
 				if (user.facebookUid == -1) {
-				  facebookConnectService(parseCookies(request))
+				  facebookConnectService.parseCookies(request)
 				  if (facebookConnectService.isLoggedIn()) {
   					/*
   						Update existing user with facebookUid

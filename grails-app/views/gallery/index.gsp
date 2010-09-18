@@ -2,6 +2,7 @@
     <head>
         <title>Redneckify!</title>
 		    <meta name="layout" content="main" />
+		    <g:twitterWidgetResources />
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -19,12 +20,10 @@
       <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
-    
-    <g:render template="/snippets/flashMessageTemplate" />
-    
 	  <div class="span-24" id="content">
-    		<div class="span-7 prepend-1" id="leftContent">
-          <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
+	      <g:render template="/snippets/flashMessageTemplate" />
+    		<div class="span-23 prepend-2 inline">
+          <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
         </div>
   	</div>
   </body>

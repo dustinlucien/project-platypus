@@ -6,7 +6,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 
 class UrlShortenerService implements InitializingBean {
-  
+  static transactional = false
+    
   def restClientService
   
   def bitlyLogin

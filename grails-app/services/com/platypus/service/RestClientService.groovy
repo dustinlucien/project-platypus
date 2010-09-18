@@ -1,26 +1,28 @@
 package com.platypus.service
 
-import com.platypus.rest.RestClient;
+import com.platypus.rest.RestClient
 
 import org.apache.http.HttpEntity
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.ResponseHandler
 import org.apache.http.impl.client.DefaultHttpClient
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.Map;
+import java.io.InputStream
+import java.util.Collections
+import java.util.Map
 
+import org.apache.http.protocol.HTTP
 import org.apache.http.impl.client.BasicResponseHandler
 import org.apache.http.client.methods.HttpUriRequest
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.client.HttpResponseException
 import org.apache.http.client.entity.UrlEncodedFormEntity
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.http.message.BasicNameValuePair
+import org.apache.commons.lang.NotImplementedException
 
 
 class RestClientService implements RestClient {
-
+  static transactional = false
+  
 	def httpClientService
 
 	public Map get(String url, Map params, ResponseHandler handler = null) {
@@ -70,7 +72,7 @@ class RestClientService implements RestClient {
 				postParams.add(new BasicNameValuePair(it.key, it.value))
 			}
 			
-			method.setEntity(new UrlEncodedFormEntity(postParams))
+			method.setEntity(new UrlEncodedFormEntity(postParams, HTTP.UTF_8))
 		}
 
 		return execute(method, handler)
@@ -88,7 +90,7 @@ class RestClientService implements RestClient {
 		throw new NotImplementedException("HTTP HEAD not yet implemeneted");		
 	}
 	
-	private Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
+	protected Map execute(HttpUriRequest method, ResponseHandler handler = null) throws IOException {
 		return httpClientService.execute(method, (handler == null) ? new BasicResponseHandler() : handler);
 	}
 }

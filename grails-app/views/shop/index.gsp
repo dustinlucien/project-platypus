@@ -2,6 +2,7 @@
     <head>
 		<meta name="layout" content="main" />
 		<!--<link rel="target_url" href=""/>-->
+		<g:twitterWidgetResources />
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -19,6 +20,13 @@
       <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
       <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
     </div>
-    <g:render template="/snippets/flashMessageTemplate" />
+
+    <div class="span-24" id="content">
+	      <g:render template="/snippets/flashMessageTemplate" />
+	      
+        <div class="span-23 inline prepend-1">
+          <g:renderZazzleProductGallery images="${images}" />
+        </div>
+  	</div>
   </body>
 </html>

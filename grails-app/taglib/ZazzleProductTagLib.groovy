@@ -3,6 +3,7 @@ import com.platypus.service.ImageService;
 class ZazzleProductTagLib {
   
   def zazzleProductService
+  
   def renderZazzleProductList = { attrs, body ->
     
     def serverUrl = zazzleProductService.getZazzleServerUrl()

@@ -21,7 +21,7 @@ class Image implements Serializable {
 	
 	static constraints = {
     	id visible:false
-    	pkey nullable:true
+    	pkey (nullable:true, unique:true)
     	title nullable:true
 	}
 	

@@ -141,8 +141,6 @@
   		</div>
 		
       <div class="span-14  prepend-1 last" id="rightContent">
-        <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
-
   			<!-- 
     			SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
     			JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show

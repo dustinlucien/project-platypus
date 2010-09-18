@@ -65,22 +65,34 @@ class ImageService {
         
     return Image.findAllByOwner(user, params)
   }
-  
+
+  def listMostLiked(def params = [max : 20]) {
+    assert params != null
+    
+    params["sort"] = "liked"
+    params["order"] = "desc"
+    
+    if (log.isDebugEnabled()) {
+      log.debug "params going into Image.list : ${params}"
+    }
+    
+    return Image.list(params)
+  }
+    
   def listForShop(def user = null, def max = 20) {
     def images = []
     if (user) {
-      def userImages = listMostRecentByOwner(user, [max : max])
+      def userImages = this.listMostRecentByOwner(user, [max : max])
       if (userImages) {
         images.addAll(userImages)
       }
     }
     
-    if (images.size() > max) {
+    if (images.size() >= max) {
       return images
     }
     
-    def recentImages = listMostRecent([max : (max - images.size())])
-    
+    def recentImages = this.listMostRecent([max : (max - images.size())])
     recentImages.removeAll(images)
     
     images.addAll(recentImages)
@@ -88,29 +100,17 @@ class ImageService {
     return images
   }
   
-  def listForGallery(def max = 20) {
-    def c = LikeEvent.createCriteria();
-    
-    def totalImages = 0
-    def images = []
-               
-    def likeImages = c.list {
-      projections {
-        count 'id', 'myCount'
-        groupProperty 'target'
-      }
-      order 'myCount'
+  def listForGallery(def max = 40) {
+    def images = this.listMostLiked([max : max])
+        
+    if (images.size() >= max) {
+      return images
     }
     
-    images.addAll(likeImages)
+    def recentImages = this.listMostRecent([max : (max - images.size())])
+    recentImages.removeAll(images)
     
-    if (images.size() > max) {
-      return out
-    }
-    
-    images.addAll(this.listMostRecent([max : (max - images.size())]))
-    
-    log.debug "list from criteria ${images}"
+    images.addAll(recentImages)
     
     return images
   }

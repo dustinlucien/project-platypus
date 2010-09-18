@@ -14,6 +14,8 @@ class Image implements Serializable {
 	
 	String title
 	
+	Integer liked = 0
+	
 	Date dateCreated
 	Date lastUpdated
 	

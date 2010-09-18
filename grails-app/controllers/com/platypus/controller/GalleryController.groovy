@@ -12,7 +12,7 @@ class GalleryController {
       redirect(controller:'create')
     }
 
-    return images
+    return [ images : images ]
   }
   
 }

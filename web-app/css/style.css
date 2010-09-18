@@ -130,8 +130,8 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #next-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_nextpage.png) }
 #select-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_selectalbum.png) }
 
-.social-btn { padding-top: 20px;}
-.tweet-btn { padding-left: 20px;}
+.social-btn { }
+.tweet-btn { }
 
 .image400 {position:relative;margin-bottom:45px;}
 .wframe {position:absolute;left:-35px;top:-36px;background-image:url(../images/wframe.png);width:470px;height:406px;overflow:hidden;z-index:2;}

@@ -1,9 +1,6 @@
 package com.platypus.controller
 
 class UserController {
-  static layout = 'admin'
-	static scaffold = com.platypus.domain.User
-	
 	def userService
 	
 	def sajaxsessionevent = {
@@ -14,8 +11,13 @@ class UserController {
 	}
 	
 	def sajaxedgeevent = {
-	  log.debug "handling a Like event"
-	  userService.handleLikeEvent(request, params?.pkey)
+	  log.debug "handling a Like event with params ${params}"
+	  if (params.pkey) {
+	    userService.handleLikeEvent(request, params.pkey)
+	  } else {
+	    userService.handleLikeEvent(request)
+	  }
+	  
 	  response.status = 200
 	  render ""
 	  return

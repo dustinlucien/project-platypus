@@ -26,28 +26,32 @@ class UserService {
 	  }
 	}
 	
-	def handleLikeEvent(def request, def pkey) {
+	def handleLikeEvent(def request, def pkey = null) {
 	  if (log.isDebugEnabled()) {
 	    log.debug "Handling a Like event for Image ${pkey}"
 	    log.debug "Incoming request : ${request}"
 	  }
 	  
-	  def user = this.getCurrentUser(request)
-	  
+	  def user = this.getCurrentUser(request)	  
 	  if (!user) {
-	    log.error "could not create a LikeEvent because user : ${user}"
 	    return false
 	  }
 	  
 	  def image = null
 	  if (pkey) {
-	    image = Image.findByPKey(pkey)
+	    image = Image.findByPkey(pkey)
 	  }
     
     def event = null
-    
     if (image) {
       event = new LikeEvent([owner : user, target : image])
+      
+      image.liked++
+      if (!image.save()) {
+  	    image.errors.allErrors.each {
+  	      log.error "${it}"
+  	    }
+  	  }
     } else {
       event = new LikeEvent([owner : user])
     }

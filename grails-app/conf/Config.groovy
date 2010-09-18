@@ -73,8 +73,7 @@
         }
 
         debug  'com.platypus',
-        'grails.app',
-        'org.hibernate'
+        'grails.app'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
         'org.codehaus.groovy.grails.commons', // core / classloading
@@ -137,7 +136,7 @@
     }
 
     development {
-      grails.serverURL = "http://localhost:8080/${appName}"
+      grails.serverURL = "http://ohioinbrooklyn.dyndns.org:8080/${appName}"
 
       log4j = {
         // Example of changing the log pattern for the default console
@@ -155,7 +154,8 @@
 
         debug  'com.platypus',
         'grails.app',
-        'com.restfb'
+        'com.restfb',
+        'org.hibernate'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
                 'org.codehaus.groovy.grails.commons', // core / classloading

@@ -19,6 +19,7 @@ class ShopController {
     
     if (!images) {
       log.info "no images returned. redirecting to gallery"
+      flash.message = "There aren't any Rednecks yet.  Make one dammit!"
       redirect(controller:'create')
     }
     
@@ -41,6 +42,7 @@ class ShopController {
     
     if (!images) {
       log.info "no images returned. redirecting to gallery"
+      flash.message = "There aren't any Rednecks yet.  Make one dammit!"
       redirect(controller:'create')
     }
         

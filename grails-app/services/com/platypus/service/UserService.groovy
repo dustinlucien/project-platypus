@@ -27,6 +27,11 @@ class UserService {
 	}
 	
 	def handleLikeEvent(def request, def pkey) {
+	  if (log.isDebugEnabled()) {
+	    log.debug "Handling a Like event for Image ${pkey}"
+	    log.debug "Incoming request : ${request}"
+	  }
+	  
 	  def user = this.getCurrentUser(request)
 	  
 	  if (!user) {

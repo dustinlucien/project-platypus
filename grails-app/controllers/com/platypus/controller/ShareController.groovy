@@ -32,11 +32,12 @@ class ShareController {
       def taglib = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
 
       def longUrl = taglib.createLink(controller:'share', action:'show', id:"${image.pkey}", absolute:'true')
+      
       def shortUrl = urlShortenerService.shortenUrl(longUrl)
       
       log.debug "shortUrl back from shortening service : ${shortUrl}"
       
-      return [ image : image, longUrl : longUrl, shortUrl : shortUrl, stoken : session.stoken]
+      return [ image : image, longUrl : longUrl, shortUrl : shortUrl]
     }
     
     def show = {
@@ -67,7 +68,7 @@ class ShareController {
       return [image : image, longUrl : longUrl, shortUrl : shortUrl, facebookAppId : grailsApplication.config.facebook.appId]
     }
     
-    def pubtofb = {
+    def sajaxpubtofb = {
       if (!params?.st || (params.st != session.stoken)) {
         response.status = 403
         render "Incorrect security token"
@@ -112,7 +113,7 @@ class ShareController {
       }
       
       if (!facebookConnectService.publishMessageToFeed(message)) {
-        
+        log.error "Had trouble posting the message to Facebook"
       }
       response.status = 200
       render ""

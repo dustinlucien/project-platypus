@@ -6,7 +6,7 @@ import javax.crypto.spec.SecretKeySpec
 
 class SecurityService {
 
-    boolean transactional = false
+    static transactional = false
 
     def signPolicy(def stringToSign, def secret) {
       def stringToSignBase64 = (new BASE64Encoder()).encode(

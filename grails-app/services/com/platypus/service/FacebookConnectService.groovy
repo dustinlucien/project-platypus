@@ -3,6 +3,8 @@ package com.platypus.service
 import org.springframework.beans.factory.InitializingBean;
 import java.security.MessageDigest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
@@ -23,7 +25,7 @@ import java.net.URL;
 
 class FacebookConnectService implements InitializingBean {
   
-  boolean transactional = false
+  static transactional = false
   
   def imageService
   
@@ -53,7 +55,7 @@ class FacebookConnectService implements InitializingBean {
     return this.appId
   }
   
-  public void handleAuthEvent(def request) {
+  public void parseCookies(def request) {
     log.debug "cookies:"
     
     request.cookies.each { log.debug "name : ${it.name} value: ${it.value}" }
@@ -87,7 +89,7 @@ class FacebookConnectService implements InitializingBean {
       log.debug "cachedAccessToken ${this.cachedAccessToken}"
       
       this.client = new DefaultFacebookClient(this.cachedAccessToken)
-      //this.client = new DefaultFacebookClient('2227470867|2.8UReIc1M3huqe0lt1f6xKA__.3600.1277791200-621241239|CKqQu6RdqDR87bQ8aeO22mtgHEA.')
+
       log.debug "setting facebookconnectservice.loggedIn to true"
       this.loggedIn = true
     } else {
@@ -101,17 +103,23 @@ class FacebookConnectService implements InitializingBean {
   }
   
   public Long getUid() {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     return this.cachedUid
   }
   
   public boolean isLoggedIn() {
+    if (!this.loggedIn) {
+      //give it the old college try
+      def request = RequestContextHolder.currentRequestAttributes().getRequest()
+      this.parseCookies(request)
+    }
+    
     return this.loggedIn
   }
-  
+    
   def listPhotos(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
         
     Connection<Photo> photos = client.fetchConnection("${this.cachedUid}/photos", Photo.class)
 
@@ -119,7 +127,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def listAlbums(def offset=0, def limit=-1) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     Connection<Album> albums = client.fetchConnection("${this.cachedUid}/albums", Album.class)
     
@@ -127,7 +135,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def getProfilePicture() {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     User user = client.fetchObject("${this.cachedUid}", User.class)
     
@@ -135,7 +143,7 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def getPhotoDetails(def objectId) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
     
     Photo photo = client.fetchObject("${objectId}", Photo.class)
     
@@ -145,7 +153,9 @@ class FacebookConnectService implements InitializingBean {
   }
   
   def publishImage(def image, def message) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
+    
+    log.debug("Publishing an image to ${this.cachedUid} news feed")
     
     def imageStream = imageService.openStream(image)
     
@@ -153,17 +163,63 @@ class FacebookConnectService implements InitializingBean {
                                             FacebookType.class, imageStream, 
                                             Parameter.with("message", message));
 
-    log.debug("Published photo ID: " + response.getId());
-    
-    return true
+    if (!response) {
+      log.error("Error publishing message to Facebook feed")
+      return false
+    } else {
+      log.debug("Published photo ID: " + response.getId());
+      return true
+    }
   }
   
   def publishMessageToFeed(def message) {
-    assert this.loggedIn
+    assert this.isLoggedIn()
+    log.debug("Publishing a message to ${this.cachedUid} news feed")
     
-    FacebookType response = facebookClient.publish("${this.cachedUid}/feed", 
-                                                    FacebookType.class, 
-                                                    Parameter.with("message", message));
+    FacebookType response = client.publish("${this.cachedUid}/feed", 
+                                            FacebookType.class, 
+                                            Parameter.with("message", message));
+                                            
+    if (!response) {
+      log.error("Error publishing message to Facebook feed")
+      return false
+    } else {
+      log.debug("Published feed message ID: " + response.getId());
+      return true
+    }
+  }
+  
+  def populateUserWithFacebookProfile(def user) {
+    assert this.isLoggedIn()
     
+    User fbUser = client.fetchObject("${this.cachedUid}", User.class);
+    
+    if (fbUser) {
+      user.facebookUid = this.cachedUid
+      user.firstname = fbUser.getFirstName()
+      user.lastname = fbUser.getLastName()
+      user.email = fbUser.getEmail()
+      user.location = fbUser.getLocation()?.getName()
+      user.gender = fbUser.getGender()
+    }
+  }
+  
+  def getFacebookProfileParams() {
+    assert this.isLoggedIn()
+    
+    User fbUser = client.fetchObject("${this.cachedUid}", User.class);
+    
+    def params = [:]
+   
+    if (fbUser) {
+      params.facebookUid = this.cachedUid
+      params.firstname = fbUser.getFirstName()
+      params.lastname = fbUser.getLastName()
+      params.email = fbUser.getEmail()
+      params.location = fbUser.getLocation()?.getName()
+      params.gender = fbUser.getGender()
+    }
+    
+    return params
   }
 }

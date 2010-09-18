@@ -2,6 +2,7 @@
     <head>
 		<meta name="layout" content="main" />
 		<!--<link rel="target_url" href=""/>-->
+    <g:twitterWidgetResources />		
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">

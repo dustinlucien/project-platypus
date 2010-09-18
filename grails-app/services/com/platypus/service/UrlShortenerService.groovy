@@ -6,7 +6,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 
 class UrlShortenerService implements InitializingBean {
-  
+  static transactional = false
+    
   def restClientService
   
   def bitlyLogin
@@ -30,6 +31,6 @@ class UrlShortenerService implements InitializingBean {
     assert response != null
     assert response.code == 200
     
-    return response.response
+    return response.response.trim()
   }
 }

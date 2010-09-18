@@ -49,7 +49,7 @@
   tomcat.deploy.username="tomcat"
   tomcat.deploy.password="pl@typu5"
   tomcat.deploy.url="http://project-platypus.dyndns.org/manager"
-
+  
   // set per-environment serverURL stem for creating absolute links
   environments {
     production {
@@ -92,6 +92,11 @@
         secretKey = "eXngZaPMhnwhACEHevUQFP7dwY2/jw6tGK/K5Hod"
       }
 
+      google {
+        accountCode = "UA-17797647-3"
+        domainName = "redneckify.me"
+      }
+      
       facebook {
         //These two values need to be grabbed from facebook when you create your application there.	
         apiKey = "e46cdaab4a2eb1dfb3614045db7ad73e"
@@ -104,12 +109,30 @@
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
       }
       
+      twitter {
+        username = "platypusdev"
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        apiVersion = "1"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
+      }
+      
+      oauth {
+        twitter {
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
+          consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+          consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        }
+      }
+
       platypus {
         imageBucket = "project-platypus"
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 
@@ -135,16 +158,21 @@
         'com.restfb'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-        'org.codehaus.groovy.grails.commons', // core / classloading
-        'org.codehaus.groovy.grails.web.pages', //  GSP
-        'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-        'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-        'org.codehaus.groovy.grails.web.mapping', // URL mapping
-        'org.codehaus.groovy.grails.plugins', // plugins
-        'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-        'org.springframework'
+                'org.codehaus.groovy.grails.commons', // core / classloading
+                'org.codehaus.groovy.grails.web.pages', //  GSP
+                'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+                'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+                'org.codehaus.groovy.grails.web.mapping', // URL mapping
+                'org.codehaus.groovy.grails.plugins', // plugins
+                'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+                'org.springframework'
       }
 
+      google {
+        accountCode = "UA-17797647-3"
+        domainName = "localhost"
+      }
+      
       amazonaws {
         apiKey = "AKIAJUJNIBYO3FIT77MQ"
         secretKey = "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"
@@ -161,12 +189,30 @@
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
       }
       
+      twitter {
+        username = "platypusdev"
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        apiVersion = "1"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
+      }
+      
+      oauth {
+        twitter {
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
+          consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+          consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        }
+      }
+      
       platypus {
         imageBucket = "project-platypus-development"
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 
@@ -189,12 +235,30 @@
         apiKey = "R_0ea3eb123496c37782a78c303c43edb1"
       }
       
+      twitter {
+        username = "platypusdev"
+        apiKey = "l5ISiphqMnhQ5S57FWwrA"
+        apiVersion = "1"
+        oAuthAccessToken = "174473475-CYdeBsKoufiz3GmVLtDLRMMs5vj69bpgRxj7xy0A"
+        oAuthAccessTokenSecret = "DLZwBdXdWABdFDgzLFKGBeNVS8RHzG5cL7FH3qndc"
+      }
+      
+      oauth {
+        twitter {
+          requestTokenUrl = "https://api.twitter.com/oauth/request_token"
+          accessTokenUrl = "https://api.twitter.com/oauth/access_token"
+          authUrl = "https://api.twitter.com/oauth/authorize"
+          consumerKey = "l5ISiphqMnhQ5S57FWwrA"
+          consumerSecret = "TaYRL4sZR5ORzaXQi9GkNSnINK6r8EnseZTIwRP1BMU"
+        }
+      }
+            
       platypus {
         imageBucket = "project-platypus-development"
       }
       
       buffers {
-        imageStreamingBufferSize = 1024
+        imageStreamingBufferSize = 8096
       }
     }
 

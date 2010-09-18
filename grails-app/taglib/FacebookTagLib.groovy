@@ -1,9 +1,4 @@
-import com.platypus.service.FacebookConnectService
-
 class FacebookTagLib {
-	
-	def facebookConnectService
-	
 	def facebookConnectJavascript = { attrs, body ->
 		out << '''\n'''
 		out << '''\n'''
@@ -16,10 +11,26 @@ class FacebookTagLib {
 		
 		out << """<script>
 		      window.fbAsyncInit = function() {
-		          FB.init({appId: '${facebookConnectService.getAppId()}', status: true, cookie: true, xfbml: true});
-	                  //FB.Event.subscribe('auth.sessionChange', function(response) {
-		          //   window.location.reload();
-		          //});
+		        FB.init({appId: '${grailsApplication.config.facebook.appId}', status: true, cookie: true, xfbml: true});
+	          FB.Event.subscribe('auth.sessionChange', function(response) {
+		           console.log('session changed')
+		           var ajaxurl = '${createLink(controller:'user', action:'sajaxsessionevent', params : [st : attrs.stoken])}'
+		           
+		           if (response.perms) {
+		             ajaxurl += '&fbperms=' + response.perms
+		           }
+		           
+		           \$.get(ajaxurl, function(data){
+                   console.log('response from sajaxsessionevent' + data)
+                 });    
+		        });
+		        FB.Event.subscribe('edge.create', function(response) {
+		           var ajaxurl = '${createLink(controller:'user', action:'sajaxedgeevent', params : [st : attrs.stoken])}'
+		          
+		           \$.get(ajaxurl, function(data){
+                  console.log('response from sajaxedgeevent' + data)
+                });
+		        });
 		      };
 		      (function() {
 		        var e = document.createElement('script');

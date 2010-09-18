@@ -7,13 +7,8 @@
       <link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'screen.css')}" media="screen, projection" type="text/css"/>
       <link rel="stylesheet" href="${resource(dir:'css/blueprint/src',file:'print.css')}" type="text/css" media="print">	
       <!--[if lt IE 8]><link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'ie.css')}" type="text/css" media="screen, projection"><![endif]-->
-      
-      <g:javascript library="application" />
-      <g:javascript library="jquery" plugin="jquery"/>
-      <jqui:resources/>
-      
       <g:layoutHead />
-     
+      <g:googleAnalytics />
     </head>
     <body>
       <div class="container">
@@ -28,11 +23,11 @@
             <li><a href="${createLink(controller:'create')}">Redneckify Me</a></li>
             <li><a href="${createLink(controller:'gallery')}">Gallery</a></li>
             <li><a href="${createLink(controller:'shop')}">Merch</a></li>
-            <li><a href="#">About us</a></li>
+            <li><a href="${createLink(controller:'about')}">About us</a></li>
           </ul>
           <ul class="span-3">
             <li><a href="http://twitter.com/redneckify">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+            <li><a href="http://www.facebook.com/redneckify">Facebook</a></li>
           </ul>
           <ul class="span-3">
             <li>Terms of Service</li>
@@ -44,6 +39,6 @@
           </ul>
         </div>
       </div>
-      <g:facebookConnectJavascript />
+	    <g:facebookConnectJavascript stoken="${flash.stoken}" />      
     </body>
 </html>

@@ -2,15 +2,16 @@
     <head>
         <title>Git Yer Pitcher On In There</title>
 		    <meta name="layout" content="main" />
-		    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		    
+        
+        <g:javascript library="jquery" plugin="jquery"/>
+        <jqui:resources/>
+        <g:twitterWidgetResources />
+        
 		    <script type="text/javascript">
   		    function loginToFacebook() {
             FB.login(function(response) {
               if (response.session) {
-                if (response.perms) {
                   getAlbumsToDisplay(15, 0)
-                }
               }
             }, {perms:'user_photos, friends_photos, user_photo_video_tags'});
           }
@@ -31,10 +32,7 @@
             });
           }
           
-          function buildSelectable(imgUrl, liId, liText) {
-            //var e = document.createElement('img')
-            //e.src = imgUrl
-                        
+          function buildSelectable(imgUrl, liId, liText) {                        
             var li = document.createElement('li')
             li.className = 'ui-state-default'
             
@@ -53,19 +51,28 @@
               li.innerHTML = liText
               li.style.fontSize = "1em"
             }
-            
-            //li.appendChild(e)            
             return li
           }
 
           function replaceAndEnableAlbumSelectable(parent) {
             $('#facebook-photos').replaceWith(parent);
-
+            $('#browse').remove()
+            
             $(function() {
           		$('#selectable').selectable({
-                 selected: function(event, ui) {
-                   $('#select-album').attr('disabled', false).attr('value', ui.selected.id);
-                 }
+          		  selecting: function(event, ui) {
+         		      ui.selecting.style.backgroundColor = '#FECA40';
+         		    },
+                selected: function(event, ui) {
+                  ui.selected.style.backgroundColor = '#F39814';
+                  $('#select-btn').attr('disabled', false).attr('value', ui.selected.id);
+                },
+                unselecting: function(event, ui) {
+                  ui.unselecting.style.backgroundColor = '#FECA40';
+                },
+                unselected: function(event, ui) {
+                  ui.unselected.style.backgroundColor = '#FFFFFF'
+                }                
               });
           	});
           }
@@ -108,31 +115,20 @@
 
 
           function buildSelectablePagingContainer(fbLimit, fbOffset, enableNextButton, selectableList, getSelectableClosure) {
-              
               var parent = document.createElement('div')
               parent.id ="facebook-photos"
               parent.className = "span-12 last"
-            
-              var tempDiv = document.createElement('div')
-              tempDiv.className = 'photos'
-              
-              tempDiv.appendChild(selectableList)
-              
-              parent.appendChild(tempDiv)
               
               tempDiv = document.createElement('div')
               tempDiv.className = 'span-12 last'
-              tempDiv.id = 'controls'
-                            
+              tempDiv.id = 'controls'         
               var prevButton = document.createElement('button')
               if ((fbOffset - fbLimit) >= 0) {
                prevButton.onclick = function(){getSelectableClosure(fbLimit, fbOffset - fbLimit);};
               } else {
                 prevButton.disabled = true
               }
-              
-              prevButton.innerHTML = '<< Previous'
-              
+              prevButton.id = 'prev-btn'
               tempDiv.appendChild(prevButton)
               
               var nextButton = document.createElement('button')
@@ -141,10 +137,13 @@
               } else {
                 nextButton.onclick = function(){getSelectableClosure(fbLimit, fbLimit + fbOffset);};                
               }
-              nextButton.innerHTML = 'Next >>'
-              
+              nextButton.id = 'next-btn'
               tempDiv.appendChild(nextButton)
+              parent.appendChild(tempDiv)
               
+              tempDiv = document.createElement('div')
+              tempDiv.className = 'photos'
+              tempDiv.appendChild(selectableList)
               parent.appendChild(tempDiv)
               
               return parent;            
@@ -152,8 +151,7 @@
 
           function buildAlbumSelectButton() {
             var selectButton = document.createElement('button')
-            selectButton.id = 'select-album'
-            selectButton.innerHTML = 'Select Album'
+            selectButton.id = 'select-btn'
             selectButton.disabled = true
             selectButton.onclick = function() {
               getImagesToDisplay(this.value, 15, 0)
@@ -183,6 +181,7 @@
               var selectableList = document.createElement('ul')
               selectableList.id = 'selectable'
               
+              /*
               if (fbOffset == 0) {
                 var taggedAlbum = new Object()
                 taggedAlbum.id = 'tagged'
@@ -190,6 +189,7 @@
                 
                 FB.api('/me/photos', { limit:1, offset:0 }, buildClosureForPhotosResponse(selectableList, taggedAlbum));
               }
+              */
               
               for (var i=0, l=albums.data.length; i<l; i++) {
                 var album = albums.data[i]
@@ -199,24 +199,16 @@
               var parent = buildSelectablePagingContainer(fbLimit, fbOffset, (albums.data.length < fbLimit), 
                                                           selectableList, buildGetAlbumsToDisplayClosure())
                                                           
-
               jQuery('#controls', parent).append(buildAlbumSelectButton())
 
               replaceAndEnableAlbumSelectable(parent);
-              
-              //add a button to select a folder
             });
           }
           
 
           function getImagesToDisplay(albumId, fbLimit, fbOffset) {
-            var apiMethod = ''
-            if (albumId == 'tagged') {
-              apiMethod = '/me/photos'
-            } else {
-              apiMethod = '/' + albumId + '/photos'
-            }
-            
+
+            var apiMethod = '/' + albumId + '/photos'
             FB.api(apiMethod, { limit: fbLimit, offset: fbOffset }, function(photos) {
               if (!photos || photos.error) {
                 alert ("Problem with Facebook API request: " + photos.error)
@@ -237,13 +229,12 @@
             	replaceAndEnableImageSelectable(parent)
             });
           }
+
+          function submitForm() {
+              document.uploadForm.submit();
+          }
+          
         </script>
-        <style type="text/css">
-        	#selectable .ui-selecting { background: #FECA40; }
-        	#selectable .ui-selected { background: #F39814; color: white; }
-        	#selectable .ui-state-default { background: #FFFFFF; color: white;}
-        </style>
-        
     </head>
   <body>
     <div id="header" class="span-23 prepend-1">
@@ -256,42 +247,54 @@
       </div>
     </div>
 
-    <div id="midNav" class="span-24">
-      <a href="${createLink(controller:'create')}" class="span-10" id="subh1Active"></a>
-      <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
-      <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
-    </div>
-
-    <g:render template="/snippets/flashMessageTemplate" />
-
+	  <div id="midNav" class="span-24">
+	    <a href="${createLink(controller:'create')}" class="span-10" id="subh1Active"></a>
+	    <a href="${createLink(controller:'create')}" class="span-7" id="subh2"></a>
+	    <a href="${createLink(controller:'share')}" class="span-6" id="subh3"></a>
+	  </div>
+	  
 	<div class="span-24" id="content">
+    <g:render template="/snippets/flashMessageTemplate" bean="${flash}"/>
 		<div class="span-7 prepend-1" id="leftContent">
 		  <div class="span-7 pull-1" id="latestR">
 		    <span class="hidden">Latest Rednecks</span>
 		  </div>  
-		  <g:render template="/snippets/rateableImageThumbnailTemplate" var="image" collection="${images}" />
-      <p><a href="${createLink(controller:'gallery')}"class="blue" >See all them there rednecks</a></p> 		  
+		  <g:render template="/snippets/redneckThumbnailTemplate" var="image" collection="${images}" />
+      <div class="span-7 last">
+        <p><a href="${createLink(controller:'gallery')}" class="blue" >See all them there rednecks</a></p>
+      </div>		  
 		</div>
 		
-	  <div class="span-14  prepend-1 last" id="rightContent">
-	     <!--
-	     <p>Already been redneckkified? Need to git at yer pic?<a href="#" class="blue"> Sign on in right here, Billy Bob</a></p>
-	     -->
-	    <p class="bigP">To git started redneckifyin' yer picture, upload it to the site by pushin the big button down yonder.</p> 
-         
-      <div id="facebook-photos" class="span-12 last">
-        <button onclick="getLoginStatus()">Find Images on Facebook</button>
-      </div>
-         
-   		<div class="span-12 last" id="upload">
-         <g:form controller="create" action="redneckify" method="post" enctype="multipart/form-data">
-             <input type="file" name="file"/>
-             <input type="hidden" id="externalfile" name="externalfile" />
-      	     <div id="yepBubba"><span class="hidden">Yep, that one, Bubba!</span></div>             
-             <g:submitButton id="goOnbtn" name="submit" value=""></g:submitButton>
+	  <div class="span-14 prepend-1 last" id="rightContent">
+	    <p>
+	      Already been redneckified? Need to git at yer pic? <a href="${createLink(controller:'shop')}"
+        class="blue">Head on over to the shop!</a>
+	    </p>
+
+	    <h2>
+	      To git started redneckifyin' yer picture, upload it to the site by pickin' a photo from the
+        Facebook or yer hard drive, then push the big brown button down yonder.
+	    </h2> 
+      
+      <div class="span-12 last">
+         <div id="facebook-photos" class="span-3"><button id="facebook" onclick="getLoginStatus()"></button></div>
+         <g:form controller="create" action="redneckify" name="uploadForm" method="post" enctype="multipart/form-data">
+           <div class="span-8 last inline" id="browse">
+             <div class="span-1" style="font-size: 2em; margin-left: 20px; margin-right:20px;">or</div>
+             <div class="span-6 last" id="file-input">
+               <input id="file" type="file" name="file"/>
+             </div>
+           </div>
+           <input type="hidden" id="externalfile" name="facebookfile" />
+	         <div class="span-12 last">
+	           <div id="yepBubba">
+	             <span class="hidden">Yep, that one, Bubba!</span>
+	           </div>
+	           <g:submitButton id="goOnbtn" name="submit" value=""></g:submitButton>
+	         </div>           
          </g:form>
-   		</div>
+     	</div>
 	   </div>	  
-	</div>
+	 </div>
   </body>
 </html>

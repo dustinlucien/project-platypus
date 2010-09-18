@@ -27,7 +27,12 @@ class FacebookTagLib {
 		        FB.Event.subscribe('edge.create', function(response) {
 		           var ajaxurl = '${createLink(controller:'user', action:'sajaxedgeevent', params : [st : attrs.stoken])}'
 		           
-		           var pkey = response.slice(response.lastIndexOf('/') + 1, response.length)
+		           var lastIndex = response.indexOf('?')
+		           if (lastIndex <= 0) {
+		             lastIndex = response.length
+		           }
+		           
+		           var pkey = response.slice(response.lastIndexOf('/') + 1, lastIndex)
 		           
 		           if (ajaxurl.indexOf('?') >= 0) {
 		             ajaxurl += '&pkey=' + pkey

@@ -102,7 +102,8 @@ class ImageService {
   
   def listForGallery(def max = 40) {
     def images = this.listMostLiked([max : max])
-        
+    
+    log.debug "most liked images ${images}"
     if (images.size() >= max) {
       return images
     }

@@ -154,8 +154,7 @@
 
         debug  'com.platypus',
         'grails.app',
-        'com.restfb',
-        'org.hibernate'
+        'com.restfb'
 
         error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
                 'org.codehaus.groovy.grails.commons', // core / classloading

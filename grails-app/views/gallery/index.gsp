@@ -2,6 +2,7 @@
     <head>
         <title>Redneckify!</title>
 		    <meta name="layout" content="main" />
+        <g:javascript library="jquery" plugin="jquery"/>		    
 		    <g:twitterWidgetResources />
     </head>
   <body>

@@ -11,19 +11,12 @@ class FacebookTagLib {
 		
 		out << """<script>
 		      window.fbAsyncInit = function() {
-		        FB.init({appId: '${grailsApplication.config.facebook.appId}', status: true, cookie: true, xfbml: true});
-	          FB.Event.subscribe('auth.sessionChange', function(response) {
-		           console.log('session changed')
-		           var ajaxurl = '${createLink(controller:'user', action:'sajaxsessionevent', params : [st : attrs.stoken])}'
-		           
-		           if (response.perms) {
-		             ajaxurl += '&fbperms=' + response.perms
-		           }
-		           
-		           \$.get(ajaxurl, function(data){
-                   console.log('response from sajaxsessionevent' + data)
-                 });    
-		        });
+		        FB.init({appId: '${grailsApplication.config.facebook.appId}', 
+		          status: true, 
+		          cookie: true, 
+		          xfbml: true}
+		        );
+		        
 		        FB.Event.subscribe('edge.create', function(response) {
 		           var ajaxurl = '${createLink(controller:'user', action:'sajaxedgeevent', params : [st : attrs.stoken])}'
 		           

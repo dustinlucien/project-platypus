@@ -1,12 +1,13 @@
 package com.platypus.filters
 
-class SessionFilter {
+class SessionFilters {
 
   def filters = {
-    removeSessionId(url:".*;jsessionid=.*") {
+    removeSessionId(controller:'*', action:'*') {
       before = {
           def url = request.forwardURI
-          log.trace("sessionFilter: URL is: ${url}")
+          log.debug("sessionFilter: URL is: ${url}")
+          log.debug("params ${params}")
           // Double-check the url pattern, the filter matching doesn't seem to work
           if(url.matches(".*;jsessionid=.*")) {
               log.debug("URL ${url} has a jsessionid parameter")

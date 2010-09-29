@@ -1,5 +1,5 @@
 <div class="span-6 rate"> 
-    <a href="${createLink(controller:'share', action:'show', id:image.pkey)}"><img width=100 height=100 src="${image.getImageUrl()}" /></a>
+    <a href="${createLink(controller:'share', action:'show', id:image.pkey)}"><img width=100 src="${image.getImageUrl()}" /></a>
     <p><a href="${createLink(controller:'share', action:'show', id:image.pkey)}"><strong>${image.getDisplayName()}</strong></a><br />by ${image.owner.getDisplayName()}</p>
     <div class="span-3 social-btn">
       <div class="span-2 fb-like-btn">

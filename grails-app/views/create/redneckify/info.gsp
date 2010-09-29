@@ -1,8 +1,8 @@
 <html>
   <head>
       <title>Put Yer Mark On It</title>
-	    <meta name="layout" content="main" />
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="layout" content="main" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
     <div id="header" class="span-23 prepend-1">

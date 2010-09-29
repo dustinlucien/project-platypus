@@ -3,7 +3,7 @@
     <head>
 		  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
       <title><g:layoutTitle default="Redneckify Me!" /></title>
-		  <link rel="stylesheet" href="${resource(dir:'css',file:'style.css')}" media="screen" type="text/css"/>
+      <link rel="stylesheet" href="${resource(dir:'css',file:'style.css')}" media="screen" type="text/css"/>
       <link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'screen.css')}" media="screen, projection" type="text/css"/>
       <link rel="stylesheet" href="${resource(dir:'css/blueprint/src',file:'print.css')}" type="text/css" media="print">	
       <!--[if lt IE 8]><link rel="stylesheet" href="${resource(dir:'css/blueprint',file:'ie.css')}" type="text/css" media="screen, projection"><![endif]-->
@@ -39,6 +39,6 @@
           </ul>
         </div>
       </div>
-	    <g:facebookConnectJavascript stoken="${flash.stoken}" />      
+      <g:facebookConnectJavascript stoken="${flash.stoken}" />      
     </body>
 </html>

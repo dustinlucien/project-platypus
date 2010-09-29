@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>Git Yer Pitcher On In There</title>
-		    <meta name="layout" content="main" />
+	<meta name="layout" content="main" />
         
         <g:javascript library="jquery" plugin="jquery"/>
         <jqui:resources/>

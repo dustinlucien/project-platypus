@@ -44,16 +44,12 @@
   //use jquery instead of prototype
   grails.views.javascript.library="jquery"
   //disable the jsessionid on the url.  security risk
-  grails.views.enable.jsessionid=false
-  
-  tomcat.deploy.username="tomcat"
-  tomcat.deploy.password="pl@typu5"
-  tomcat.deploy.url="http://project-platypus.dyndns.org/manager"
+  grails.views.enable.jsessionid = false
   
   // set per-environment serverURL stem for creating absolute links
   environments {
     production {
-      grails.serverURL = "http://project-platypus.dyndns.org"
+      grails.serverURL = "http://redneckify.me"
 
       def catalinaBase = System.properties.getProperty('catalina.base')
       if (!catalinaBase) catalinaBase = '.'   // just in case

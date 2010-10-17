@@ -131,6 +131,7 @@ input:hover#savebtn{ background: url(../images/savebtn-over.jpg) no-repeat; widt
 #select-btn { width: 133px; height: 36px; border: none; background: url(../images/btn_selectalbum.png) }
 
 .social-btn { }
+.fb-like-btn { width: 90px;height: 20px; }
 .tweet-btn { }
 
 .image400 {position:relative;margin-bottom:45px;}

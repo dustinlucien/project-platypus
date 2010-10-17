@@ -31,11 +31,13 @@ class UserService {
 	    log.debug "Incoming request : ${request}"
 	  }
 	  
-	  def user = this.getCurrentUser(request)	  
+	  def user = this.getCurrentUser(request)
 	  if (!user) {
+	    log.error "didn't get a current user for like event.  aborting."
 	    return false
 	  }
 	  
+	  log.debug "current user for like event: ${user}"
 	  def image = null
 	  if (pkey) {
 	    image = Image.findByPkey(pkey)
@@ -43,6 +45,7 @@ class UserService {
     
     def event = null
     if (image) {
+      log.debug "like event was for an image"
       event = new LikeEvent([owner : user, target : image])
       
       image.liked++
@@ -52,6 +55,7 @@ class UserService {
   	    }
   	  }
     } else {
+      log.debug "like event was NOT for an image"
       event = new LikeEvent([owner : user])
     }
     
@@ -97,8 +101,10 @@ class UserService {
 				log.error "wtf? unkown user in session.  cleaning session."
 			} else {
 				if (user.facebookUid == -1) {
+				  log.debug "our current user isn't connected to facebook"
 				  facebookConnectService.parseCookies(request)
 				  if (facebookConnectService.isLoggedIn()) {
+				    log.debug "our current user isn't connected to facebook, but is logged in to facebook.  trying to link accounts"
   					/*
   						Update existing user with facebookUid
   					*/
@@ -110,9 +116,10 @@ class UserService {
   						user.delete(flush:true)
   						user = existingUser
   					} else {
-  					  
+  				    log.debug "linking facebook accounts.  user before -> ${user}" 					  
   					  facebookConnectService.populateUserWithFacebookProfile(user)
-  					  
+  				    log.debug "user after -> ${user}"
+  				    
   						if (!user.save()) {
   							user.errors.allErrors.each {
   								log.error "${it}"

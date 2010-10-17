@@ -59,12 +59,18 @@ class ZazzleProductService {
     return products.get(random.nextInt(numProducts))
   }
   
-  def getRandomProductList(def limit = 3) {
+  def getRandomUniqueProductList(def limit = 3) {
     
     def random = new Random()
     def indices = []
     
     int numProducts = this.products.size()
+    
+    def shortCircuit = false
+    if (numProducts <= limit) {
+      log.error "can't enforce uniqueness.  you're asking for more product variation than you have"
+      shortCircuit = true
+    }
     
     for (int i = 0; i < limit; i++) {
       log.debug "looking for another random product"
@@ -77,12 +83,29 @@ class ZazzleProductService {
         }
       }
       
-      if (unique) {
+      if (unique || shortCircuit) {
         indices.add(this.products[next])
       } else {
         //try again
         i--
       }
+    }
+    
+    return indices
+
+  }
+  
+  def getRandomProductList(def limit = 3) {
+    
+    def random = new Random()
+    def indices = []
+    
+    int numProducts = this.products.size()
+    
+    for (int i = 0; i < limit; i++) {
+      log.debug "looking for a random product"
+      def next = random.nextInt(numProducts)
+      indices.add(this.products[next])
     }
     
     return indices

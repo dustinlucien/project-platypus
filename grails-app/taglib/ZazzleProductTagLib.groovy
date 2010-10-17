@@ -9,7 +9,7 @@ class ZazzleProductTagLib {
     def serverUrl = zazzleProductService.getZazzleServerUrl()
     def associateId = zazzleProductService.getAssociateId()
     
-    def products = zazzleProductService.getRandomProductList(3)
+    def products = zazzleProductService.getRandomUniqueProductList(3)
 
     products.each {
       def imageUrl =  serverUrl + "pd-" + it.getTemplateId() + "/isz-xs" + "/at-" + associateId + "/tl-productImage.png?image1_url=" + attrs.image.getImageUrl().encodeAsURL()

@@ -17,6 +17,16 @@ environments {
 			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
 			url = "jdbc:hsqldb:mem:devDB"
 		}
+		/*
+		dataSource {
+			pooled = false
+			dbCreate = "update"
+			driverClassName = "com.mysql.jdbc.Driver"
+			username ="tomcat"
+			password = "pl@typu5"
+			url = "jdbc:mysql://184.106.207.184:3306/platypus"
+		}
+		*/	
 	}
 	test {
 		dataSource {
@@ -26,12 +36,12 @@ environments {
 	}
 	production {
 		dataSource {
-			pooled = false
+			pooled = true
 			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			username ="tomcat"
 			password = "pl@typu5"
-			url = "jdbc:mysql://localhost/platypus"
+			url = "jdbc:mysql://184.106.207.184:3306/platypus"
 		}
 	}
 }

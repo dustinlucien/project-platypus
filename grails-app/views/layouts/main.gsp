@@ -27,7 +27,7 @@
           </ul>
           <ul class="span-3">
             <li><a href="http://twitter.com/redneckify">Twitter</a></li>
-            <li><a href="http://www.facebook.com/redneckify">Facebook</a></li>
+            <li><a href="http://www.facebook.com/pages/Redneckify">Facebook</a></li>
           </ul>
           <ul class="span-3">
             <li>Terms of Service</li>

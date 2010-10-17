@@ -45,7 +45,7 @@
         <h3>Or</h3>
   	    <p><span id="follow-placeholder"></span></p>
   	    <h3>Or</h3>
-  	    <h3>Head on over to the Redneckify! <a href="http://www.facebook.com/redneckify" target="_blank" class="blue">Facebook Page</a></h3>
+  	    <h3>Head on over to the Redneckify! <a href="http://www.facebook.com/pages/Redneckify" target="_blank" class="blue">Facebook Page</a></h3>
   	  </div>
   	</div>
    <script type="text/javascript">

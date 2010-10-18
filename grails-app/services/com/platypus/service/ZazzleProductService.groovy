@@ -37,6 +37,7 @@ class ZazzleProductService {
     products.add(new Product("146190001601409777", "Keychain", 15.0))
     products.add(new Product("155281159257729079", "Dog Coat", 15.0))
     products.add(new Product("128124261718836322", "Bumper Sticker", 15.0))
+    products.add(new Product("235807312128788259", "T-Shirts", 19.0))
     products.add(new Product("235729169986527554", "T-Shirts", 15.0))
     products.add(new Product("148639800638635303", "Trucker Hat", 15.0))
     products.add(new Product("235827913634227605", "Tank Top", 15.0))

@@ -37,6 +37,7 @@ environments {
 	production {
 		dataSource {
 			pooled = true
+			autoreconnect = true
 			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			username ="tomcat"
